@@ -78,8 +78,8 @@ export default function Home() {
       </div>
 
       {/* Right Side - Information */}
-      <div className="relative hidden w-0 flex-1 lg:block bg-primary-900">
-        <div className="absolute inset-0 flex flex-col justify-center items-start px-20 xl:px-32 bg-gradient-to-br from-primary-900 to-primary-800 text-white">
+      <div className="relative hidden w-0 flex-1 lg:block bg-[#18bc9c]">
+        <div className="absolute inset-0 flex flex-col justify-center items-start px-20 xl:px-32 bg-[#18bc9c] text-white">
           <h2 className="text-4xl font-extrabold mb-8 text-primary-50">
             About CTAF
           </h2>
