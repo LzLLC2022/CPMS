@@ -77,6 +77,10 @@ export default function RootLayout({
                   </div>
                 </div>
               </div>
+              <div className="flex items-center gap-8">
+                <Image src="/logo-gggi.png" alt="GGGI Logo" width={96} height={96} className="h-12 w-auto object-contain" />
+                <Image src="/logo-mofa.png" alt="MOFA Logo" width={96} height={96} className="h-12 w-auto object-contain" />
+              </div>
             </div>
             <div className="flex flex-col gap-4 border-t border-black/10 pt-6 md:flex-row md:items-end md:gap-6">
               <span className="text-sm text-gray-500">©All Rights Reserved</span>
