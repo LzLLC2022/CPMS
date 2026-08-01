@@ -1,4 +1,11 @@
+"use client";
+
 export default function Home() {
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Coming Soon");
+  };
+
   return (
     <div className="flex flex-1 w-full">
       {/* Left Side - Login Form */}
@@ -14,7 +21,7 @@ export default function Home() {
           </div>
 
           <div className="mt-10">
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-6">
               <div>
                 <label
                   htmlFor="email-prefix"
