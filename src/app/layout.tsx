@@ -61,8 +61,12 @@ export default function RootLayout({
                 </div>
               </div>
               <div className="flex items-center gap-8">
-                <Image src="/logo-gggi.png" alt="GGGI Logo" width={96} height={96} className="h-12 w-auto object-contain" />
-                <Image src="/logo-mofa.png" alt="MOFA Logo" width={96} height={96} className="h-12 w-auto object-contain" />
+                <a href="https://gggi.org/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                  <Image src="/logo-gggi.png" alt="GGGI Logo" width={96} height={96} className="h-12 w-auto object-contain" />
+                </a>
+                <a href="https://www.mofa.go.kr/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                  <Image src="/logo-mofa.png" alt="MOFA Logo" width={96} height={96} className="h-12 w-auto object-contain" />
+                </a>
               </div>
             </div>
             <div className="flex flex-col gap-4 border-t border-black/10 pt-6 md:flex-row md:items-end md:gap-6">
