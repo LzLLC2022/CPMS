@@ -231,7 +231,7 @@ export default function ProposalRegistrationPage() {
             <div className="flex items-center gap-4">
               <h3 className="text-lg font-bold text-gray-900 whitespace-nowrap">Security PIN Code<span className="text-red-500 ml-1">*</span></h3>
               <div className="w-48">
-                <input type="password" maxLength={6} className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none tracking-widest font-mono" name="pin" placeholder="****" required />
+                <input type="password" maxLength={6} className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none tracking-widest font-mono" name="pin" defaultValue={formData?.pin || ""} placeholder="****" required />
               </div>
             </div>
             <p className="text-sm text-gray-500">Please enter a PIN code. You will need this PIN to view or edit this proposal later.</p>
@@ -244,15 +244,15 @@ export default function ProposalRegistrationPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">Contact Person<span className="text-red-500 ml-1">*</span></label>
-              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactPerson" placeholder="John Doe" required />
+              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactPerson" defaultValue={formData?.contactPerson || ""} placeholder="John Doe" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Title<span className="text-red-500 ml-1">*</span></label>
-              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactTitle" placeholder="Project Manager" required />
+              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactTitle" defaultValue={formData?.contactTitle || ""} placeholder="Project Manager" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Email<span className="text-red-500 ml-1">*</span></label>
-              <input type="email" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="email" placeholder="johndoe@example.com" required />
+              <input type="email" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="email" defaultValue={formData?.email || ""} placeholder="johndoe@example.com" required />
             </div>
           </div>
         </div>
@@ -265,7 +265,7 @@ export default function ProposalRegistrationPage() {
           <div className="p-6 space-y-6">
             <div>
               <label className="block text-sm font-bold text-gray-700">Title<span className="text-red-500 ml-1">*</span></label>
-              <input type="text" name="projectTitle" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+              <input type="text" name="projectTitle" defaultValue={formData?.projectTitle || ""} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
             </div>
             
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6">
@@ -275,15 +275,15 @@ export default function ProposalRegistrationPage() {
                 <label className="block text-sm font-bold text-gray-700 mb-3">Window<span className="text-red-500 ml-1">*</span></label>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3">
-                    <input type="checkbox" name="window" value="bankable" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
+                    <input type="checkbox" name="window" value="bankable" defaultChecked={formData?.window?.includes("bankable")} className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
                     <span className="text-sm text-gray-700">Bankable / Sustainable Project Development</span>
                   </label>
                   <label className="flex items-center gap-3">
-                    <input type="checkbox" name="window" value="gcf" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
+                    <input type="checkbox" name="window" value="gcf" defaultChecked={formData?.window?.includes("gcf")} className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
                     <span className="text-sm text-gray-700">GCF or Equivalent Project Development</span>
                   </label>
                   <label className="flex items-center gap-3">
-                    <input type="checkbox" name="window" value="policy" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
+                    <input type="checkbox" name="window" value="policy" defaultChecked={formData?.window?.includes("policy")} className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
                     <span className="text-sm text-gray-700">Policy / Regulatory, Capacity Building, Fund Internationalization</span>
                   </label>
                 </div>
@@ -366,7 +366,7 @@ export default function ProposalRegistrationPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex flex-col h-full">
                   <label className="block text-sm font-bold text-gray-700 mb-2">TRL (Technology Readiness Level)<span className="text-red-500 ml-1">*</span></label>
-                  <select name="trl" className="mt-auto block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
+                  <select name="trl" defaultValue={formData?.trl || ""} className="mt-auto block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
                     <option value="">Select 1~9</option>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
                       <option key={n} value={n}>{n}</option>
@@ -375,7 +375,7 @@ export default function ProposalRegistrationPage() {
                 </div>
                 <div className="flex flex-col h-full">
                   <label className="block text-sm font-bold text-gray-700 mb-2">CRL (Commercial Readiness Level)<span className="text-red-500 ml-1">*</span></label>
-                  <select name="crl" className="mt-auto block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
+                  <select name="crl" defaultValue={formData?.crl || ""} className="mt-auto block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
                     <option value="">Select 1~9</option>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
                       <option key={n} value={n}>{n}</option>
@@ -386,10 +386,10 @@ export default function ProposalRegistrationPage() {
                   <label className="block text-sm font-bold text-gray-700 mb-2">Pilot experience<span className="text-red-500 ml-1">*</span></label>
                   <div className="flex gap-4 mt-auto py-2">
                     <label className="flex items-center gap-2">
-                      <input type="radio" name="pilot" value="Y" className="h-4 w-4 text-primary-600" required /> Yes
+                      <input type="radio" name="pilot" value="Y" defaultChecked={formData?.pilot === "Y"} className="h-4 w-4 text-primary-600" required /> Yes
                     </label>
                     <label className="flex items-center gap-2">
-                      <input type="radio" name="pilot" value="N" className="h-4 w-4 text-primary-600" /> No
+                      <input type="radio" name="pilot" value="N" defaultChecked={formData?.pilot === "N"} className="h-4 w-4 text-primary-600" /> No
                     </label>
                   </div>
                 </div>
@@ -397,26 +397,26 @@ export default function ProposalRegistrationPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives if applicable.<span className="text-red-500 ml-1">*</span></label>
-                <textarea name="problem" rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                <textarea name="problem" defaultValue={formData?.problem || ""} rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Distinctive features and linkages to existing climate technology initiatives in the region.</p>
-              <textarea name="uniqueness" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="uniqueness" defaultValue={formData?.uniqueness || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
             
             <div>
               <label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential use cases, target beneficiaries, technology adoption, job creation, and socioeconomic benefits.</p>
-              <textarea name="localApp" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="localApp" defaultValue={formData?.localApp || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
               <label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential for expansion, policy adoption, market development, or replication across countries or regions.</p>
-              <textarea name="scaleUp" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="scaleUp" defaultValue={formData?.scaleUp || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
@@ -433,7 +433,7 @@ export default function ProposalRegistrationPage() {
                 <div className="flex-1">
                   <span className="text-sm text-gray-700 font-bold">GGGI or international cooperation programs</span>
                   {financingOpts.gggi && (
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    <input type="text" name="financing_gggi_spec" defaultValue={formData?.financing_gggi_spec || ""} placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
                   )}
                 </div>
               </label>
@@ -443,7 +443,7 @@ export default function ProposalRegistrationPage() {
                 <div className="flex-1">
                   <span className="text-sm text-gray-700 font-bold">Climate finance or MDB/development finance opportunities</span>
                   {financingOpts.climate && (
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    <input type="text" name="financing_climate_spec" defaultValue={formData?.financing_climate_spec || ""} placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
                   )}
                 </div>
               </label>
@@ -453,7 +453,7 @@ export default function ProposalRegistrationPage() {
                 <div className="flex-1">
                   <span className="text-sm text-gray-700 font-bold">Government or ODA-supported programs</span>
                   {financingOpts.gov && (
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    <input type="text" name="financing_gov_spec" defaultValue={formData?.financing_gov_spec || ""} placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
                   )}
                 </div>
               </label>
@@ -463,7 +463,7 @@ export default function ProposalRegistrationPage() {
                 <div className="flex-1">
                   <span className="text-sm text-gray-700 font-bold">Private investment or commercialization opportunities</span>
                   {financingOpts.private && (
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    <input type="text" name="financing_private_spec" defaultValue={formData?.financing_private_spec || ""} placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
                   )}
                 </div>
               </label>
@@ -473,7 +473,7 @@ export default function ProposalRegistrationPage() {
                 <div className="flex-1">
                   <span className="text-sm text-gray-700 font-bold">Carbon market opportunities</span>
                   {financingOpts.carbon && (
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    <input type="text" name="financing_carbon_spec" defaultValue={formData?.financing_carbon_spec || ""} placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
                   )}
                 </div>
               </label>
@@ -483,7 +483,7 @@ export default function ProposalRegistrationPage() {
                 <div className="flex-1">
                   <span className="text-sm text-gray-700 font-bold">Others</span>
                   {financingOpts.others && (
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    <input type="text" name="financing_others_spec" defaultValue={formData?.financing_others_spec || ""} placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
                   )}
                 </div>
               </label>
@@ -492,7 +492,7 @@ export default function ProposalRegistrationPage() {
             <div>
               <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Plan to obtain larger-scale funding, investment, or proposal development after completion of CTAF support.</p>
-              <textarea name="financingRationale" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="financingRationale" defaultValue={formData?.financingRationale || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
@@ -509,11 +509,11 @@ export default function ProposalRegistrationPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-gray-700">Regulatory Risk<span className="text-red-500 ml-1">*</span></label>
-                  <textarea name="riskRegulatory" rows={2} className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                  <textarea name="riskRegulatory" defaultValue={formData?.riskRegulatory || ""} rows={2} className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-700">Climate Risk<span className="text-red-500 ml-1">*</span></label>
-                  <textarea name="riskClimate" rows={2} className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                  <textarea name="riskClimate" defaultValue={formData?.riskClimate || ""} rows={2} className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
                 </div>
               </div>
             </div>
@@ -521,13 +521,13 @@ export default function ProposalRegistrationPage() {
             <div>
               <label className="block text-sm font-bold text-gray-700">Utilization of existing patents & New Patent Opportunities<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential utilization of existing patents and development of new patent applications during project implementation (including indicative patent keywords).</p>
-              <textarea name="patents" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="patents" defaultValue={formData?.patents || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
               <label className="block text-sm font-bold text-gray-700">Communication & Visibility Strategy<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Preliminary approach for local promotion, communication channels, showcases and visibility activities.</p>
-              <textarea name="commStrategy" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="commStrategy" defaultValue={formData?.commStrategy || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
