@@ -11,9 +11,9 @@ export default function ProposalLayout({
   const pathname = usePathname();
 
   const tabs = [
-    { name: "메인", href: "/proposal" },
-    { name: "등록", href: "/proposal/registration" },
-    { name: "진행현황", href: "/proposal/status" },
+    { name: "Main", href: "/proposal" },
+    { name: "Registration", href: "/proposal/registration" },
+    { name: "Status", href: "/proposal/status" },
   ];
 
   return (

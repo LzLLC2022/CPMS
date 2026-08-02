@@ -76,18 +76,18 @@ export default function Header() {
           </Link>
           
           {/* Dropdown Menu */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-32 z-50">
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-36 z-50">
             <Link 
               href="/proposal/registration" 
               className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
             >
-              등록
+              Registration
             </Link>
             <Link 
               href="/proposal/status" 
               className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
             >
-              진행현황
+              Status
             </Link>
           </div>
         </div>
