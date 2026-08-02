@@ -108,7 +108,7 @@ export default function ProposalRegistrationPage() {
           </div>
         </div>
       ) : (
-
+        <>
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-extrabold text-gray-900">CTAF One-Page Proposal</h2>
         <p className="mt-3 text-sm text-gray-600 max-w-2xl mx-auto">
@@ -442,6 +442,7 @@ export default function ProposalRegistrationPage() {
           </button>
         </div>
       </form>
+        </>
       )}
     </div>
   );
