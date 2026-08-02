@@ -44,7 +44,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center px-6 py-4 border-b border-gray-200 bg-white shadow-sm z-10 shrink-0">
+    <header className="flex items-center px-6 py-4 border-b border-gray-200 bg-white shadow-sm z-10 shrink-0 print:hidden">
       {/* Left - Logo & Title */}
       <div className="flex flex-1 items-center justify-start">
         <Link href="/" className="flex items-center gap-4">

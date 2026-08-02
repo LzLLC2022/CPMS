@@ -39,7 +39,7 @@ export default function RootLayout({
         </main>
 
         {/* Footer Layer */}
-        <footer className="w-full bg-gray-50 px-10 py-10 shrink-0 border-t border-gray-200">
+        <footer className="w-full bg-gray-50 px-10 py-10 shrink-0 border-t border-gray-200 print:hidden">
           <div className="mx-auto max-w-[1728px]">
             <div className="flex flex-col gap-8 pb-6 md:flex-row md:items-center md:justify-between">
               <div className="flex w-full flex-col gap-6 md:w-auto md:flex-row md:items-center md:gap-10">
