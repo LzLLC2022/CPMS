@@ -8,6 +8,18 @@ export default function ProposalRegistrationPage() {
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [countrySearch, setCountrySearch] = useState("");
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [financingOpts, setFinancingOpts] = useState<Record<string, boolean>>({
+    gggi: false,
+    climate: false,
+    gov: false,
+    private: false,
+    carbon: false,
+    others: false,
+  });
+
+  const handleFinancingChange = (key: string) => {
+    setFinancingOpts((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const toggleCountry = (country: string) => {
     if (selectedCountries.includes(country)) {
@@ -238,60 +250,71 @@ export default function ProposalRegistrationPage() {
             <h3 className="text-white font-bold text-lg">C. FUTURE FINANCING OPPORTUNITIES</h3>
           </div>
           <div className="p-6 space-y-6">
-            <p className="text-sm text-gray-600 font-medium italic">※ Multiple selections allowed</p>
             <div className="space-y-4">
               <label className="flex items-start gap-3">
-                <input type="checkbox" className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                <input type="checkbox" checked={financingOpts.gggi} onChange={() => handleFinancingChange("gggi")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
                 <div className="flex-1">
-                  <span className="text-sm text-gray-700 font-medium">GGGI or international cooperation programs</span>
-                  <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" />
+                  <span className="text-sm text-gray-700 font-bold">GGGI or international cooperation programs</span>
+                  {financingOpts.gggi && (
+                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                  )}
                 </div>
               </label>
 
               <label className="flex items-start gap-3">
-                <input type="checkbox" className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                <input type="checkbox" checked={financingOpts.climate} onChange={() => handleFinancingChange("climate")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
                 <div className="flex-1">
-                  <span className="text-sm text-gray-700 font-medium">Climate finance or MDB/development finance opportunities</span>
-                  <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" />
+                  <span className="text-sm text-gray-700 font-bold">Climate finance or MDB/development finance opportunities</span>
+                  {financingOpts.climate && (
+                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                  )}
                 </div>
               </label>
 
               <label className="flex items-start gap-3">
-                <input type="checkbox" className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                <input type="checkbox" checked={financingOpts.gov} onChange={() => handleFinancingChange("gov")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
                 <div className="flex-1">
-                  <span className="text-sm text-gray-700 font-medium">Government or ODA-supported programs</span>
-                  <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" />
+                  <span className="text-sm text-gray-700 font-bold">Government or ODA-supported programs</span>
+                  {financingOpts.gov && (
+                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                  )}
                 </div>
               </label>
 
               <label className="flex items-start gap-3">
-                <input type="checkbox" className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                <input type="checkbox" checked={financingOpts.private} onChange={() => handleFinancingChange("private")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
                 <div className="flex-1">
-                  <span className="text-sm text-gray-700 font-medium">Private investment or commercialization opportunities</span>
-                  <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" />
+                  <span className="text-sm text-gray-700 font-bold">Private investment or commercialization opportunities</span>
+                  {financingOpts.private && (
+                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                  )}
                 </div>
               </label>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                  <input type="checkbox" checked={financingOpts.carbon} onChange={() => handleFinancingChange("carbon")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
                   <div className="flex-1">
-                    <span className="text-sm text-gray-700 font-medium">Carbon market opportunities</span>
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" />
+                    <span className="text-sm text-gray-700 font-bold">Carbon market opportunities</span>
+                    {financingOpts.carbon && (
+                      <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    )}
                   </div>
                 </label>
                 <label className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                  <input type="checkbox" checked={financingOpts.others} onChange={() => handleFinancingChange("others")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
                   <div className="flex-1">
-                    <span className="text-sm text-gray-700 font-medium">Others</span>
-                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" />
+                    <span className="text-sm text-gray-700 font-bold">Others</span>
+                    {financingOpts.others && (
+                      <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                    )}
                   </div>
                 </label>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Rationale for Future Financing Opportunities</label>
+              <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities</label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Plan to obtain larger-scale funding, investment, or proposal development after completion of CTAF support.</p>
               <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
