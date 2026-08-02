@@ -8,12 +8,15 @@ import { useRouter } from "next/navigation";
 export default function Header() {
   const router = useRouter();
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
   
   // We use useEffect to check localStorage only on the client side to prevent hydration mismatch
   useEffect(() => {
     const checkLoginStatus = () => {
       const email = localStorage.getItem("mockUserEmail");
+      const role = localStorage.getItem("mockUserRole");
       setUserEmail(email);
+      setUserRole(role);
     };
 
     checkLoginStatus();
@@ -35,6 +38,7 @@ export default function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("mockUserEmail");
+    localStorage.removeItem("mockUserRole");
     window.dispatchEvent(new Event("authStateChange"));
     router.push("/");
   };
@@ -63,7 +67,7 @@ export default function Header() {
       {/* Center - Main Menu */}
       <nav className="hidden sm:flex flex-1 items-center justify-center gap-8">
         <button onClick={handleComingSoon} className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors">
-          Submission
+          {userRole === "Regional Director" || userRole === "Secretariat" ? "Proposal List" : "Proposal"}
         </button>
         <button onClick={handleComingSoon} className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors">
           Notice
