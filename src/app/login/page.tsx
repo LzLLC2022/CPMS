@@ -1,9 +1,21 @@
 "use client";
 
-export default function Home() {
+import { useRouter } from "next/navigation";
+
+export default function Login() {
+  const router = useRouter();
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Coming Soon");
+    
+    // Set a mock login state
+    localStorage.setItem("mockUserEmail", "test@gggi.org");
+    
+    // Dispatch custom event to notify Header component in the same tab
+    window.dispatchEvent(new Event("authStateChange"));
+    
+    // Redirect to home page
+    router.push("/");
   };
 
   return (
@@ -35,6 +47,7 @@ export default function Home() {
                     name="email-prefix"
                     id="email-prefix"
                     autoComplete="username"
+                    defaultValue="test"
                     required
                     className="block w-full min-w-0 flex-1 rounded-none rounded-l-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 outline-none"
                     placeholder="email"
@@ -58,6 +71,7 @@ export default function Home() {
                     name="password"
                     type="password"
                     autoComplete="current-password"
+                    defaultValue="password123"
                     required
                     className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 outline-none"
                   />
@@ -100,4 +114,5 @@ export default function Home() {
       </div>
     </div>
   );
+}  );
 }

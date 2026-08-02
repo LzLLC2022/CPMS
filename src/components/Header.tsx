@@ -2,11 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  
+  // We use useEffect to check localStorage only on the client side to prevent hydration mismatch
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const email = localStorage.getItem("mockUserEmail");
+      setUserEmail(email);
+    };
+
+    checkLoginStatus();
+    
+    // Listen for storage changes in case of cross-tab logins, or custom events in same tab
+    window.addEventListener("storage", checkLoginStatus);
+    window.addEventListener("authStateChange", checkLoginStatus);
+    
+    return () => {
+      window.removeEventListener("storage", checkLoginStatus);
+      window.removeEventListener("authStateChange", checkLoginStatus);
+    };
+  }, []);
+
   const handleComingSoon = (e: React.MouseEvent) => {
     e.preventDefault();
     alert("Coming Soon");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("mockUserEmail");
+    window.dispatchEvent(new Event("authStateChange"));
+    router.push("/");
   };
 
   return (
@@ -40,11 +70,28 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Right - Login */}
-      <div className="flex flex-1 items-center justify-end">
-        <Link href="/login" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors">
-          Login
-        </Link>
+      {/* Right - Login/Logout */}
+      <div className="flex flex-1 items-center justify-end gap-4">
+        {userEmail ? (
+          <>
+            <span className="text-sm text-gray-600 font-medium hidden sm:block">
+              {userEmail}
+            </span>
+            <button 
+              onClick={handleLogout}
+              className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link 
+            href="/login" 
+            className="px-4 py-2 text-sm font-semibold text-white bg-primary-600 hover:bg-primary-500 rounded-md transition-colors shadow-sm"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </header>
   );
