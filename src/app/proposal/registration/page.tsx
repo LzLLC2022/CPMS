@@ -11,15 +11,28 @@ export default function ProposalRegistrationPage() {
 
   return (
     <div className="max-w-4xl mx-auto py-8">
-      <div className="mb-8">
-        <h2 className="text-3xl font-extrabold text-gray-900">CTAF One-Page Proposal Registration</h2>
-        <p className="mt-2 text-sm text-gray-600">
+      <div className="mb-10 text-center">
+        <h2 className="text-3xl font-extrabold text-gray-900">CTAF (Climate Technology Accelerator Fund) One-Page Proposal</h2>
+        <p className="mt-3 text-sm text-gray-600 max-w-2xl mx-auto">
           The One-Page Proposal is intended to reduce administrative burden and encourage diverse early-stage ideas; therefore, please be concise.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-10">
         
+        {/* Verification PIN */}
+        <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6 border-l-4 border-l-primary-600">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900">Security PIN Code</h3>
+              <p className="text-sm text-gray-500 mt-1">Please enter a PIN code. You will need this PIN to view or edit this proposal later.</p>
+            </div>
+            <div className="w-full sm:w-64">
+              <input type="password" maxLength={6} className="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none text-center tracking-widest font-mono" placeholder="****" required />
+            </div>
+          </div>
+        </div>
+
         {/* Contact Info */}
         <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5">Contact Information</h3>
