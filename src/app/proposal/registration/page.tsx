@@ -342,13 +342,13 @@ export default function ProposalRegistrationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Utilization of existing patents & New Patent Opportunities</label>
+              <label className="block text-sm font-bold text-gray-700">Utilization of existing patents & New Patent Opportunities</label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential utilization of existing patents and development of new patent applications during project implementation (including indicative patent keywords).</p>
               <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Communication & Visibility Strategy</label>
+              <label className="block text-sm font-bold text-gray-700">Communication & Visibility Strategy</label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Preliminary approach for local promotion, communication channels, showcases and visibility activities.</p>
               <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
