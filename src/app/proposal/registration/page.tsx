@@ -23,10 +23,14 @@ export default function ProposalRegistrationPage() {
         {/* Contact Info */}
         <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
           <h3 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5">Contact Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Contact Person / Title</label>
-              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" placeholder="John Doe / Project Manager" required />
+              <label className="block text-sm font-medium text-gray-700">Contact Person</label>
+              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" placeholder="John Doe" required />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Title</label>
+              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" placeholder="Project Manager" required />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Email</label>
