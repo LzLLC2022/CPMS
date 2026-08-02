@@ -69,13 +69,13 @@ export default function ProposalRegistrationPage() {
         </div>
 
         {/* SECTION A: PROJECT OVERVIEW */}
-        <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
-          <div className="bg-primary-700 px-6 py-3">
+        <div className="bg-white shadow-sm border border-gray-200 rounded-lg">
+          <div className="bg-primary-700 px-6 py-3 rounded-t-lg">
             <h3 className="text-white font-bold text-lg">A. PROJECT OVERVIEW</h3>
           </div>
           <div className="p-6 space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Title</label>
+              <label className="block text-sm font-bold text-gray-700">Title</label>
               <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
             </div>
             
@@ -166,8 +166,8 @@ export default function ProposalRegistrationPage() {
         </div>
 
         {/* SECTION B: PROJECT RATIONALE */}
-        <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
-          <div className="bg-primary-700 px-6 py-3">
+        <div className="bg-white shadow-sm border border-gray-200 rounded-lg">
+          <div className="bg-primary-700 px-6 py-3 rounded-t-lg">
             <h3 className="text-white font-bold text-lg">B. PROJECT RATIONALE & VALUE PROPOSITION</h3>
           </div>
           <div className="p-6 space-y-6">
@@ -222,8 +222,8 @@ export default function ProposalRegistrationPage() {
         </div>
 
         {/* SECTION C: FUTURE FINANCING */}
-        <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
-          <div className="bg-primary-700 px-6 py-3">
+        <div className="bg-white shadow-sm border border-gray-200 rounded-lg">
+          <div className="bg-primary-700 px-6 py-3 rounded-t-lg">
             <h3 className="text-white font-bold text-lg">C. FUTURE FINANCING OPPORTUNITIES</h3>
           </div>
           <div className="p-6 space-y-6">
@@ -288,8 +288,8 @@ export default function ProposalRegistrationPage() {
         </div>
 
         {/* SECTION D: RISK ASSESSMENT */}
-        <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
-          <div className="bg-primary-700 px-6 py-3">
+        <div className="bg-white shadow-sm border border-gray-200 rounded-lg">
+          <div className="bg-primary-700 px-6 py-3 rounded-t-lg">
             <h3 className="text-white font-bold text-lg">D. RISK ASSESSMENT, NEW PATENT OPPORTUNITIES & COMMUNICATION PLAN</h3>
           </div>
           <div className="p-6 space-y-6">
