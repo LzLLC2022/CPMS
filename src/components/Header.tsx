@@ -107,9 +107,30 @@ export default function Header() {
           </button>
         )}
 
-        <button onClick={handleComingSoon} className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2">
-          Notice
-        </button>
+        <div className="relative group">
+          <Link 
+            href="/notice" 
+            className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
+          >
+            Notice
+          </Link>
+          
+          {/* Dropdown Menu */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-32 z-50">
+            <Link 
+              href="/notice/notices" 
+              className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+            >
+              Notices
+            </Link>
+            <Link 
+              href="/notice/news" 
+              className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+            >
+              News
+            </Link>
+          </div>
+        </div>
       </nav>
 
       {/* Right - Login/Logout */}
