@@ -83,7 +83,7 @@ export default function ProposalRegistrationPage() {
               <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Sector / Technology Area</h4>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">Window</label>
+                <label className="block text-sm font-bold text-gray-700 mb-3">Window</label>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3">
                     <input type="checkbox" name="window" value="bankable" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
@@ -101,7 +101,7 @@ export default function ProposalRegistrationPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">International Partnerships</label>
+                <label className="block text-sm font-bold text-gray-700">International Partnerships</label>
                 <p className="text-xs text-gray-500 mt-1 mb-2">Indicate Y if planned cross-country or regional cooperation, N if otherwise.</p>
                 <div className="flex gap-4">
                   <label className="flex items-center gap-2">
@@ -115,7 +115,8 @@ export default function ProposalRegistrationPage() {
 
               {intlPartnership === "Y" && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Applicable Country(ies)</label>
+                  <label className="block text-sm font-bold text-gray-700">Applicable Country(ies)</label>
+                  <p className="text-xs text-gray-500 mt-1 mb-2">Rationale for country selection</p>
                   <div className="relative mt-2">
                     <div 
                       className="min-h-[38px] w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-white cursor-text sm:text-sm flex flex-wrap gap-2 items-center"
@@ -160,11 +161,6 @@ export default function ProposalRegistrationPage() {
                   </div>
                 </div>
               )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Rationale for country selection</label>
-              <textarea rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
