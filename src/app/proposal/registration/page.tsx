@@ -3,6 +3,22 @@
 import React, { useState } from "react";
 
 export default function ProposalRegistrationPage() {
+  const ALL_COUNTRIES = ["South Korea", "United States", "Japan", "Vietnam", "Indonesia", "Philippines", "Fiji", "Mongolia", "Senegal", "Uganda", "Rwanda"];
+  const [intlPartnership, setIntlPartnership] = useState("N");
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+
+  const toggleCountry = (country: string) => {
+    if (selectedCountries.includes(country)) {
+      setSelectedCountries(selectedCountries.filter((c) => c !== country));
+    } else {
+      setSelectedCountries([...selectedCountries, country]);
+    }
+  };
+
+  const filteredCountries = ALL_COUNTRIES.filter((c) => c.toLowerCase().includes(countrySearch.toLowerCase()));
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Proposal submitted successfully!");
@@ -59,49 +75,91 @@ export default function ProposalRegistrationPage() {
           </div>
           <div className="p-6 space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Project Title</label>
-              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Sector / Technology Area</label>
+              <label className="block text-sm font-medium text-gray-700">Title</label>
               <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
             </div>
             
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">Window</label>
-              <div className="space-y-3">
-                <label className="flex items-center gap-3">
-                  <input type="radio" name="window" value="1" className="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-600" required />
-                  <span className="text-sm text-gray-700">1. Bankable / Sustainable Project Development</span>
-                </label>
-                <label className="flex items-center gap-3">
-                  <input type="radio" name="window" value="2" className="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-600" />
-                  <span className="text-sm text-gray-700">2. GCF or Equivalent Project Development</span>
-                </label>
-                <label className="flex items-center gap-3">
-                  <input type="radio" name="window" value="3" className="h-4 w-4 text-primary-600 border-gray-300 focus:ring-primary-600" />
-                  <span className="text-sm text-gray-700">3. Policy / Regulatory, Capacity Building, Fund Internationalization</span>
-                </label>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6">
+              <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Sector / Technology Area</h4>
+              
               <div>
-                <label className="block text-sm font-medium text-gray-700">International Partnerships</label>
-                <p className="text-xs text-gray-500 mt-1 mb-2">Planned cross-country or regional cooperation?</p>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="intl-partnership" value="Y" className="h-4 w-4 text-primary-600" required /> Yes
+                <label className="block text-sm font-medium text-gray-700 mb-3">Window</label>
+                <div className="space-y-3">
+                  <label className="flex items-center gap-3">
+                    <input type="checkbox" name="window" value="bankable" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
+                    <span className="text-sm text-gray-700">Bankable / Sustainable Project Development</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="intl-partnership" value="N" className="h-4 w-4 text-primary-600" /> No
+                  <label className="flex items-center gap-3">
+                    <input type="checkbox" name="window" value="gcf" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
+                    <span className="text-sm text-gray-700">GCF or Equivalent Project Development</span>
+                  </label>
+                  <label className="flex items-center gap-3">
+                    <input type="checkbox" name="window" value="policy" className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600" />
+                    <span className="text-sm text-gray-700">Policy / Regulatory, Capacity Building, Fund Internationalization</span>
                   </label>
                 </div>
               </div>
+
               <div>
-                <label className="block text-sm font-medium text-gray-700">Applicable Country(ies)</label>
-                <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                <label className="block text-sm font-medium text-gray-700">International Partnerships</label>
+                <p className="text-xs text-gray-500 mt-1 mb-2">Indicate Y if planned cross-country or regional cooperation, N if otherwise.</p>
+                <div className="flex gap-4">
+                  <label className="flex items-center gap-2">
+                    <input type="radio" name="intl-partnership" value="Y" checked={intlPartnership === "Y"} onChange={(e) => setIntlPartnership(e.target.value)} className="h-4 w-4 text-primary-600" required /> Yes
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input type="radio" name="intl-partnership" value="N" checked={intlPartnership === "N"} onChange={(e) => setIntlPartnership(e.target.value)} className="h-4 w-4 text-primary-600" /> No
+                  </label>
+                </div>
               </div>
+
+              {intlPartnership === "Y" && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Applicable Country(ies)</label>
+                  <div className="relative mt-2">
+                    <div 
+                      className="min-h-[38px] w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-white cursor-text sm:text-sm flex flex-wrap gap-2 items-center"
+                      onClick={() => setShowCountryDropdown(true)}
+                    >
+                      {selectedCountries.map((c) => (
+                        <span key={c} className="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-md text-xs flex items-center gap-1">
+                          {c}
+                          <button type="button" onClick={(e) => { e.stopPropagation(); toggleCountry(c); }} className="hover:text-primary-900">&times;</button>
+                        </span>
+                      ))}
+                      <input 
+                        type="text" 
+                        className="flex-1 outline-none bg-transparent min-w-[100px] text-sm" 
+                        placeholder={selectedCountries.length === 0 ? "Select countries..." : ""}
+                        value={countrySearch}
+                        onChange={(e) => setCountrySearch(e.target.value)}
+                        onFocus={() => setShowCountryDropdown(true)}
+                        onBlur={() => setTimeout(() => setShowCountryDropdown(false), 200)}
+                      />
+                    </div>
+                    {showCountryDropdown && (
+                      <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto sm:text-sm">
+                        {filteredCountries.length > 0 ? filteredCountries.map((c) => (
+                          <div 
+                            key={c} 
+                            className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-primary-50 text-gray-900"
+                            onClick={() => { toggleCountry(c); setCountrySearch(""); }}
+                          >
+                            <span className="block truncate">{c}</span>
+                            {selectedCountries.includes(c) && (
+                              <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-primary-600">
+                                ✓
+                              </span>
+                            )}
+                          </div>
+                        )) : (
+                          <div className="py-2 px-3 text-gray-500">No matches found.</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div>
