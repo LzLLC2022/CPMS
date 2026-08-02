@@ -5,11 +5,19 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const prefix = formData.get("email-prefix") as string;
+    const email = `${prefix}@gggi.org`;
     
-    // Set a mock login state
-    localStorage.setItem("mockUserEmail", "test@gggi.org");
+    let role = "User";
+    if (prefix === "test_rd") role = "Regional Director";
+    if (prefix === "test_sec") role = "Secretariat";
+    
+    // Set mock login state and role
+    localStorage.setItem("mockUserEmail", email);
+    localStorage.setItem("mockUserRole", role);
     
     // Dispatch custom event to notify Header component in the same tab
     window.dispatchEvent(new Event("authStateChange"));
@@ -47,10 +55,10 @@ export default function Login() {
                     name="email-prefix"
                     id="email-prefix"
                     autoComplete="username"
-                    defaultValue="test"
+                    defaultValue="test_rd"
                     required
                     className="block w-full min-w-0 flex-1 rounded-none rounded-l-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 outline-none"
-                    placeholder="email"
+                    placeholder="email prefix (e.g. test_rd)"
                   />
                   <span className="inline-flex items-center rounded-r-md border border-l-0 border-gray-300 px-3 text-gray-500 sm:text-sm bg-gray-50 select-none">
                     @gggi.org
@@ -72,7 +80,6 @@ export default function Login() {
                     type="password"
                     autoComplete="current-password"
                     defaultValue="password123"
-                    required
                     className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 outline-none"
                   />
                 </div>
