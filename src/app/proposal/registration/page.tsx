@@ -355,21 +355,13 @@ export default function ProposalRegistrationPage() {
           </div>
         </div>
 
-        {/* Supporting Materials */}
-        <div className="bg-gray-50 shadow-sm border border-gray-200 rounded-lg overflow-hidden border-dashed border-2">
-          <div className="p-6 text-center">
-            <h3 className="text-lg font-bold text-gray-900">Supporting Materials</h3>
-            <p className="text-sm text-gray-500 mt-1 mb-6">
-              Upload PROJECT PROCESS FLOW/DIAGRAM/IMAGES, RELEVANT DATA AND EVIDENCE, and VISUAL REFERENCES.
-            </p>
-            <div className="flex justify-center">
-              <label className="cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500">
-                <span>Upload a file</span>
-                <input type="file" className="sr-only" multiple />
-              </label>
-            </div>
-            <p className="text-xs text-gray-400 mt-3">PDF, PNG, JPG up to 10MB each</p>
-          </div>
+        {/* Submission Info */}
+        <div className="bg-gray-50 shadow-sm border border-gray-200 rounded-lg p-6 text-center">
+          <p className="text-sm text-gray-700 font-medium leading-relaxed">
+            Completed proposals should be submitted to the designated CTAF focal point at GGGI.
+            <br />
+            For enquiries, please contact <a href="mailto:CTAF@gggi.org" className="text-primary-600 hover:underline font-bold">CTAF@gggi.org</a>
+          </p>
         </div>
 
         {/* Submit Actions */}
