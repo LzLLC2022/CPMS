@@ -74,61 +74,136 @@ export default function ProposalRegistrationPage() {
           </div>
           
           <div className="space-y-8">
-            <section>
-              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">Contact Information</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div><span className="text-sm text-gray-500 block">Contact Person</span><span className="font-medium">{formData.contactPerson}</span></div>
-                <div><span className="text-sm text-gray-500 block">Title</span><span className="font-medium">{formData.contactTitle}</span></div>
-                <div className="col-span-2"><span className="text-sm text-gray-500 block">Email</span><span className="font-medium">{formData.email}</span></div>
+            {/* Contact Info */}
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6 print:border-none print:shadow-none print:p-0">
+              <h3 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 print:border-b-2 print:border-gray-800">Contact Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div><label className="block text-sm font-medium text-gray-500">Contact Person</label><span className="mt-1 block text-gray-900 font-medium">{formData.contactPerson}</span></div>
+                <div><label className="block text-sm font-medium text-gray-500">Title</label><span className="mt-1 block text-gray-900 font-medium">{formData.contactTitle}</span></div>
+                <div><label className="block text-sm font-medium text-gray-500">Email</label><span className="mt-1 block text-gray-900 font-medium">{formData.email}</span></div>
               </div>
-            </section>
+            </div>
             
-            <section>
-              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">A. Project Overview</h3>
-              <div className="space-y-4">
-                <div><span className="text-sm text-gray-500 block">Title</span><span className="font-medium">{formData.projectTitle}</span></div>
-                <div><span className="text-sm text-gray-500 block">Sector / Technology Area (Window)</span><span className="font-medium capitalize">{formData.window ? formData.window.replace(/,/g, ', ') : 'None'}</span></div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div><span className="text-sm text-gray-500 block">International Partnerships</span><span className="font-medium">{formData.intlPartnership}</span></div>
-                  {formData.intlPartnership === 'Y' && <div><span className="text-sm text-gray-500 block">Applicable Country(ies)</span><span className="font-medium">{formData.selectedCountries}</span></div>}
+            {/* SECTION A */}
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg print:border-none print:shadow-none">
+              <div className="bg-primary-700 px-6 py-3 rounded-t-lg print:bg-transparent print:text-black print:px-0 print:border-b-2 print:border-gray-800">
+                <h3 className="text-white font-bold text-lg print:text-gray-900">A. PROJECT OVERVIEW</h3>
+              </div>
+              <div className="p-6 space-y-6 print:px-0">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Title</label>
+                  <div className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm bg-gray-50 print:bg-white print:ring-0 print:p-0">{formData.projectTitle}</div>
+                </div>
+                
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6 print:bg-white print:border-none print:p-0">
+                  <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Sector / Technology Area</h4>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">Window</label>
+                    <div className="text-sm text-gray-900 capitalize">{formData.window ? formData.window.replace(/,/g, ', ') : 'None'}</div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700">International Partnerships</label>
+                    <div className="mt-1 text-sm text-gray-900">{formData.intlPartnership}</div>
+                  </div>
+                  {formData.intlPartnership === 'Y' && (
+                    <div>
+                      <label className="block text-sm font-bold text-gray-700">Applicable Country(ies)</label>
+                      <div className="mt-1 text-sm text-gray-900">{formData.selectedCountries}</div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </section>
+            </div>
 
-            <section>
-              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">B. Project Rationale & Value Proposition</h3>
-              <div className="space-y-4">
-                <div className="grid grid-cols-3 gap-4 bg-gray-50 p-3 rounded-md">
-                  <div><span className="text-xs text-gray-500 block uppercase font-bold">TRL</span><span className="font-medium">{formData.trl}</span></div>
-                  <div><span className="text-xs text-gray-500 block uppercase font-bold">CRL</span><span className="font-medium">{formData.crl}</span></div>
-                  <div><span className="text-xs text-gray-500 block uppercase font-bold">Pilot Experience</span><span className="font-medium">{formData.pilot}</span></div>
+            {/* SECTION B */}
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg print:border-none print:shadow-none">
+              <div className="bg-primary-700 px-6 py-3 rounded-t-lg print:bg-transparent print:text-black print:px-0 print:border-b-2 print:border-gray-800">
+                <h3 className="text-white font-bold text-lg print:text-gray-900">B. PROJECT RATIONALE & VALUE PROPOSITION</h3>
+              </div>
+              <div className="p-6 space-y-6 print:px-0">
+                <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6 print:bg-white print:border-none print:p-0">
+                  <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Problem / Gap Addressed</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                      <label className="block text-sm font-bold text-gray-700 mb-2">TRL</label>
+                      <div className="text-sm text-gray-900">{formData.trl}</div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold text-gray-700 mb-2">CRL</label>
+                      <div className="text-sm text-gray-900">{formData.crl}</div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-bold text-gray-700 mb-2">Pilot experience</label>
+                      <div className="text-sm text-gray-900">{formData.pilot}</div>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives</label>
+                    <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.problem}</div>
+                  </div>
                 </div>
-                <div><span className="text-sm text-gray-500 block font-bold">Problem / Gap Addressed</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.problem}</p></div>
-                <div><span className="text-sm text-gray-500 block font-bold">Project Uniqueness / Differentiation</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.uniqueness}</p></div>
-                <div><span className="text-sm text-gray-500 block font-bold">Local Application & Expected Benefits</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.localApp}</p></div>
-                <div><span className="text-sm text-gray-500 block font-bold">Scale-Up / Replication Potential</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.scaleUp}</p></div>
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">C. Future Financing Opportunities</h3>
-              <div className="space-y-4">
-                <div><span className="text-sm text-gray-500 block font-bold">Selected Options</span><div className="mt-1 text-sm text-gray-900 leading-relaxed">{formData.financingOptions ? formData.financingOptions.split(' | ').map((opt: string, i: number) => <span key={i} className="block mb-1">• {opt}</span>) : 'None selected'}</div></div>
-                <div><span className="text-sm text-gray-500 block font-bold">Rationale for Future Financing Opportunities</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.financingRationale}</p></div>
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">D. Risk Assessment & Patents</h3>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div><span className="text-sm text-gray-500 block font-bold">Regulatory Risk</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskRegulatory}</p></div>
-                  <div><span className="text-sm text-gray-500 block font-bold">Climate Risk</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskClimate}</p></div>
+                
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.uniqueness}</div>
                 </div>
-                <div><span className="text-sm text-gray-500 block font-bold">Utilization of existing patents & New Patent Opportunities</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.patents}</p></div>
-                <div><span className="text-sm text-gray-500 block font-bold">Communication & Visibility Strategy</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.commStrategy}</p></div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.localApp}</div>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.scaleUp}</div>
+                </div>
               </div>
-            </section>
+            </div>
+
+            {/* SECTION C */}
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg print:border-none print:shadow-none">
+              <div className="bg-primary-700 px-6 py-3 rounded-t-lg print:bg-transparent print:text-black print:px-0 print:border-b-2 print:border-gray-800">
+                <h3 className="text-white font-bold text-lg print:text-gray-900">C. FUTURE FINANCING OPPORTUNITIES</h3>
+              </div>
+              <div className="p-6 space-y-6 print:px-0">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Selected Options</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap leading-relaxed">{formData.financingOptions ? formData.financingOptions.split(' | ').map((opt: string, i: number) => <div key={i}>✓ {opt}</div>) : 'None selected'}</div>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.financingRationale}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION D */}
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg print:border-none print:shadow-none">
+              <div className="bg-primary-700 px-6 py-3 rounded-t-lg print:bg-transparent print:text-black print:px-0 print:border-b-2 print:border-gray-800">
+                <h3 className="text-white font-bold text-lg print:text-gray-900">D. RISK ASSESSMENT, NEW PATENT OPPORTUNITIES & COMMUNICATION PLAN</h3>
+              </div>
+              <div className="p-6 space-y-6 print:px-0">
+                <div>
+                  <label className="block text-sm font-bold text-gray-800">Key Risks</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700">Regulatory Risk</label>
+                      <div className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskRegulatory}</div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700">Climate Risk</label>
+                      <div className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskClimate}</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Utilization of existing patents & New Patent Opportunities</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.patents}</div>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Communication & Visibility Strategy</label>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.commStrategy}</div>
+                </div>
+              </div>
+            </div>
             
             <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 mt-8 print:hidden">
               <button onClick={() => setPreviewMode(false)} className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 shadow-sm">
