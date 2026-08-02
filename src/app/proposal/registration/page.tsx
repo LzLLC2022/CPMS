@@ -291,26 +291,25 @@ export default function ProposalRegistrationPage() {
                 </div>
               </label>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <label className="flex items-start gap-3">
-                  <input type="checkbox" checked={financingOpts.carbon} onChange={() => handleFinancingChange("carbon")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
-                  <div className="flex-1">
-                    <span className="text-sm text-gray-700 font-bold">Carbon market opportunities</span>
-                    {financingOpts.carbon && (
-                      <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
-                    )}
-                  </div>
-                </label>
-                <label className="flex items-start gap-3">
-                  <input type="checkbox" checked={financingOpts.others} onChange={() => handleFinancingChange("others")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
-                  <div className="flex-1">
-                    <span className="text-sm text-gray-700 font-bold">Others</span>
-                    {financingOpts.others && (
-                      <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
-                    )}
-                  </div>
-                </label>
-              </div>
+              <label className="flex items-start gap-3">
+                <input type="checkbox" checked={financingOpts.carbon} onChange={() => handleFinancingChange("carbon")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                <div className="flex-1">
+                  <span className="text-sm text-gray-700 font-bold">Carbon market opportunities</span>
+                  {financingOpts.carbon && (
+                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                  )}
+                </div>
+              </label>
+
+              <label className="flex items-start gap-3">
+                <input type="checkbox" checked={financingOpts.others} onChange={() => handleFinancingChange("others")} className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded" />
+                <div className="flex-1">
+                  <span className="text-sm text-gray-700 font-bold">Others</span>
+                  {financingOpts.others && (
+                    <input type="text" placeholder="Please specify" className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+                  )}
+                </div>
+              </label>
             </div>
 
             <div>
