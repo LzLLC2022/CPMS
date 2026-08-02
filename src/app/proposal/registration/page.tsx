@@ -56,6 +56,10 @@ export default function ProposalRegistrationPage() {
 
   const handleFinalSubmit = () => {
     alert("Proposal submitted successfully!");
+    setFormData(null);
+    setIntlPartnership("N");
+    setSelectedCountries([]);
+    setFinancingOpts({ gggi: false, climate: false, gov: false, private: false, carbon: false, others: false });
     setPreviewMode(false);
   };
 
