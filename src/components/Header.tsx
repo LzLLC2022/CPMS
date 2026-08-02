@@ -66,31 +66,40 @@ export default function Header() {
       
       {/* Center - Main Menu */}
       <nav className="hidden sm:flex flex-1 items-center justify-center gap-8">
-        {/* Proposal Menu with Dropdown */}
-        <div className="relative group">
+        {/* Proposal / Proposal List Menu */}
+        {userRole === "Regional Director" || userRole === "Secretariat" ? (
           <Link 
-            href="/proposal" 
+            href="/proposal-list" 
             className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
           >
-            {userRole === "Regional Director" || userRole === "Secretariat" ? "Proposal List" : "Proposal"}
+            Proposal List
           </Link>
-          
-          {/* Dropdown Menu */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-36 z-50">
+        ) : (
+          <div className="relative group">
             <Link 
-              href="/proposal/registration" 
-              className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+              href="/proposal" 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
             >
-              Registration
+              Proposal
             </Link>
-            <Link 
-              href="/proposal/status" 
-              className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-            >
-              Status
-            </Link>
+            
+            {/* Dropdown Menu */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-36 z-50">
+              <Link 
+                href="/proposal/registration" 
+                className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+              >
+                Registration
+              </Link>
+              <Link 
+                href="/proposal/status" 
+                className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+              >
+                Status
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
 
         <button onClick={handleComingSoon} className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2">
           Notice
