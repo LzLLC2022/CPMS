@@ -103,7 +103,7 @@ export default function Header() {
 
         {userRole === "Secretariat" && (
           <button onClick={handleComingSoon} className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2">
-            Category
+            Classification
           </button>
         )}
 
