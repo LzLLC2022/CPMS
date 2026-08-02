@@ -171,50 +171,61 @@ export default function ProposalRegistrationPage() {
             <h3 className="text-white font-bold text-lg">B. PROJECT RATIONALE & VALUE PROPOSITION</h3>
           </div>
           <div className="p-6 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Problem / Gap Addressed</label>
-              <p className="text-xs text-gray-500 mt-1 mb-2">Relevant background, baseline conditions, or existing initiatives if applicable.</p>
-              <textarea rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">TRL (1~9)</label>
-                <p className="text-xs text-gray-500 mt-1">Technology Readiness Level</p>
-                <input type="number" min="1" max="9" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">CRL (1~9)</label>
-                <p className="text-xs text-gray-500 mt-1">Commercial Readiness Level</p>
-                <input type="number" min="1" max="9" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Pilot experience</label>
-                <div className="flex gap-4 mt-4">
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="pilot" value="Y" className="h-4 w-4 text-primary-600" required /> Yes
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="pilot" value="N" className="h-4 w-4 text-primary-600" /> No
-                  </label>
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6">
+              <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Problem / Gap Addressed</h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">TRL (Technology Readiness Level)</label>
+                  <select className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
+                    <option value="">Select 1~9</option>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">CRL (Commercial Readiness Level)</label>
+                  <select className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
+                    <option value="">Select 1~9</option>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Pilot experience</label>
+                  <div className="flex gap-4 mt-3">
+                    <label className="flex items-center gap-2">
+                      <input type="radio" name="pilot" value="Y" className="h-4 w-4 text-primary-600" required /> Yes
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input type="radio" name="pilot" value="N" className="h-4 w-4 text-primary-600" /> No
+                    </label>
+                  </div>
                 </div>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives if applicable.</label>
+                <textarea rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Project Uniqueness / Differentiation</label>
+              <label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation</label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Distinctive features and linkages to existing climate technology initiatives in the region.</p>
               <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700">Local Application & Expected Benefits</label>
+              <label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits</label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential use cases, target beneficiaries, technology adoption, job creation, and socioeconomic benefits.</p>
               <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Scale-Up / Replication Potential</label>
+              <label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential</label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential for expansion, policy adoption, market development, or replication across countries or regions.</p>
               <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
