@@ -39,6 +39,7 @@ export default function ProposalRegistrationPage() {
     const obj = Object.fromEntries(data.entries());
     obj.intlPartnership = intlPartnership;
     obj.selectedCountries = selectedCountries.join(", ");
+    obj.window = data.getAll("window").join(", ");
     
     const financing = [];
     if (financingOpts.gggi) financing.push(`GGGI: ${data.get("financing_gggi_spec") || ""}`);
@@ -61,53 +62,84 @@ export default function ProposalRegistrationPage() {
   return (
     <div className="max-w-4xl mx-auto py-8">
       {previewMode ? (
-        <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-4">Preview Proposal</h2>
+        <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-8 print:border-none print:shadow-none print:p-0">
+          <div className="flex justify-between items-center border-b pb-4 mb-6 print:hidden">
+            <h2 className="text-2xl font-bold text-gray-900">Preview Proposal</h2>
+            <button onClick={() => window.print()} className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 flex items-center gap-2">
+              Print / Save as PDF
+            </button>
+          </div>
+          <div className="hidden print:block mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 text-center">CTAF One-Page Proposal</h2>
+          </div>
           
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-sm font-bold text-gray-500 uppercase">Contact Information</h3>
-              <p className="mt-1 text-gray-900">{formData.contactPerson} ({formData.contactTitle}) - {formData.email}</p>
-            </div>
+          <div className="space-y-8">
+            <section>
+              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">Contact Information</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div><span className="text-sm text-gray-500 block">Contact Person</span><span className="font-medium">{formData.contactPerson}</span></div>
+                <div><span className="text-sm text-gray-500 block">Title</span><span className="font-medium">{formData.contactTitle}</span></div>
+                <div className="col-span-2"><span className="text-sm text-gray-500 block">Email</span><span className="font-medium">{formData.email}</span></div>
+              </div>
+            </section>
             
-            <div>
-              <h3 className="text-sm font-bold text-gray-500 uppercase">A. Project Overview</h3>
-              <p className="mt-1 text-gray-900"><span className="font-medium">Title:</span> {formData.projectTitle}</p>
-              <p className="mt-1 text-gray-900"><span className="font-medium">International Partnerships:</span> {formData.intlPartnership}</p>
-              {formData.intlPartnership === 'Y' && <p className="mt-1 text-gray-900"><span className="font-medium">Countries:</span> {formData.selectedCountries}</p>}
-            </div>
+            <section>
+              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">A. Project Overview</h3>
+              <div className="space-y-4">
+                <div><span className="text-sm text-gray-500 block">Title</span><span className="font-medium">{formData.projectTitle}</span></div>
+                <div><span className="text-sm text-gray-500 block">Sector / Technology Area (Window)</span><span className="font-medium capitalize">{formData.window ? formData.window.replace(/,/g, ', ') : 'None'}</span></div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div><span className="text-sm text-gray-500 block">International Partnerships</span><span className="font-medium">{formData.intlPartnership}</span></div>
+                  {formData.intlPartnership === 'Y' && <div><span className="text-sm text-gray-500 block">Applicable Country(ies)</span><span className="font-medium">{formData.selectedCountries}</span></div>}
+                </div>
+              </div>
+            </section>
 
-            <div>
-              <h3 className="text-sm font-bold text-gray-500 uppercase">B. Rationale & Value Proposition</h3>
-              <p className="mt-1 text-gray-900"><span className="font-medium">TRL:</span> {formData.trl} | <span className="font-medium">CRL:</span> {formData.crl} | <span className="font-medium">Pilot:</span> {formData.pilot}</p>
-              <p className="mt-2 text-gray-900 whitespace-pre-wrap">{formData.problem}</p>
-            </div>
+            <section>
+              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">B. Project Rationale & Value Proposition</h3>
+              <div className="space-y-4">
+                <div className="grid grid-cols-3 gap-4 bg-gray-50 p-3 rounded-md">
+                  <div><span className="text-xs text-gray-500 block uppercase font-bold">TRL</span><span className="font-medium">{formData.trl}</span></div>
+                  <div><span className="text-xs text-gray-500 block uppercase font-bold">CRL</span><span className="font-medium">{formData.crl}</span></div>
+                  <div><span className="text-xs text-gray-500 block uppercase font-bold">Pilot Experience</span><span className="font-medium">{formData.pilot}</span></div>
+                </div>
+                <div><span className="text-sm text-gray-500 block font-bold">Problem / Gap Addressed</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.problem}</p></div>
+                <div><span className="text-sm text-gray-500 block font-bold">Project Uniqueness / Differentiation</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.uniqueness}</p></div>
+                <div><span className="text-sm text-gray-500 block font-bold">Local Application & Expected Benefits</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.localApp}</p></div>
+                <div><span className="text-sm text-gray-500 block font-bold">Scale-Up / Replication Potential</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.scaleUp}</p></div>
+              </div>
+            </section>
 
-            <div>
-              <h3 className="text-sm font-bold text-gray-500 uppercase">C. Future Financing</h3>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap">{formData.financingOptions || 'None selected'}</p>
-              <p className="mt-2 text-gray-900 whitespace-pre-wrap">{formData.financingRationale}</p>
-            </div>
+            <section>
+              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">C. Future Financing Opportunities</h3>
+              <div className="space-y-4">
+                <div><span className="text-sm text-gray-500 block font-bold">Selected Options</span><div className="mt-1 text-sm text-gray-900 leading-relaxed">{formData.financingOptions ? formData.financingOptions.split(' | ').map((opt: string, i: number) => <span key={i} className="block mb-1">• {opt}</span>) : 'None selected'}</div></div>
+                <div><span className="text-sm text-gray-500 block font-bold">Rationale for Future Financing Opportunities</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.financingRationale}</p></div>
+              </div>
+            </section>
 
-            <div>
-              <h3 className="text-sm font-bold text-gray-500 uppercase">D. Risk Assessment & Patents</h3>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap"><span className="font-medium">Regulatory Risk:</span> {formData.riskRegulatory}</p>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap"><span className="font-medium">Climate Risk:</span> {formData.riskClimate}</p>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap"><span className="font-medium">Patents:</span> {formData.patents}</p>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap"><span className="font-medium">Communication:</span> {formData.commStrategy}</p>
-            </div>
+            <section>
+              <h3 className="text-sm font-bold text-primary-700 uppercase border-b-2 border-primary-100 pb-2 mb-4">D. Risk Assessment & Patents</h3>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div><span className="text-sm text-gray-500 block font-bold">Regulatory Risk</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskRegulatory}</p></div>
+                  <div><span className="text-sm text-gray-500 block font-bold">Climate Risk</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskClimate}</p></div>
+                </div>
+                <div><span className="text-sm text-gray-500 block font-bold">Utilization of existing patents & New Patent Opportunities</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.patents}</p></div>
+                <div><span className="text-sm text-gray-500 block font-bold">Communication & Visibility Strategy</span><p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.commStrategy}</p></div>
+              </div>
+            </section>
             
-            <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 mt-8">
-              <button onClick={() => setPreviewMode(false)} className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+            <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 mt-8 print:hidden">
+              <button onClick={() => setPreviewMode(false)} className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 shadow-sm">
                 Back to Edit
               </button>
-              <button onClick={handleFinalSubmit} className="px-6 py-2.5 text-sm font-semibold text-white bg-primary-600 rounded-md hover:bg-primary-500">
+              <button onClick={handleFinalSubmit} className="px-6 py-2.5 text-sm font-semibold text-white bg-primary-600 rounded-md hover:bg-primary-500 shadow-sm">
                 Confirm & Submit
               </button>
             </div>
           </div>
-        </div>
-      ) : (
+        </div>      ) : (
         <>
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-extrabold text-gray-900">CTAF One-Page Proposal</h2>
@@ -297,19 +329,19 @@ export default function ProposalRegistrationPage() {
             <div>
               <label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Distinctive features and linkages to existing climate technology initiatives in the region.</p>
-              <textarea name="financingRationale" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="uniqueness" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
             
             <div>
               <label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential use cases, target beneficiaries, technology adoption, job creation, and socioeconomic benefits.</p>
-              <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="localApp" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
               <label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential for expansion, policy adoption, market development, or replication across countries or regions.</p>
-              <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="scaleUp" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
@@ -385,7 +417,7 @@ export default function ProposalRegistrationPage() {
             <div>
               <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Plan to obtain larger-scale funding, investment, or proposal development after completion of CTAF support.</p>
-              <textarea rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <textarea name="financingRationale" rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
