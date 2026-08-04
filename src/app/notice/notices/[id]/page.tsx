@@ -2,8 +2,9 @@ import Link from "next/link";
 import { mockNotices } from "@/lib/mockData";
 import { notFound } from "next/navigation";
 
-export default function NoticeDetail({ params }: { params: { id: string } }) {
-  const notice = mockNotices.find((n) => n.id === params.id);
+export default async function NoticeDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const notice = mockNotices.find((n) => n.id === id);
 
   if (!notice) {
     notFound();

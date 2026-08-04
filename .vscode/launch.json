@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Next.js: Run Full Stack",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "npm.cmd run dev",
+            "serverReadyAction": {
+                "pattern": "Local:\\s+(https?://localhost:[0-9]+)",
+                "uriFormat": "%s",
+                "action": "debugWithChrome"
+            }
+        }
+    ]
+}
