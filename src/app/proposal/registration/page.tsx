@@ -5,10 +5,10 @@ import React, { useState } from "react";
 export default function ProposalRegistrationPage() {
   const ALL_COUNTRIES = ["South Korea", "United States", "Japan", "Vietnam", "Indonesia", "Philippines", "Fiji", "Mongolia", "Senegal", "Uganda", "Rwanda"];
 const [step, setStep] = useState<1 | 2>(1);
-  const [supportData, setSupportData] = useState<Record<'section1'|'section2'|'section3', {file: File | null; desc: string}[]>>({
-    section1: [{ file: null, desc: "" }],
-    section2: [{ file: null, desc: "" }],
-    section3: [{ file: null, desc: "" }]
+  const [supportData, setSupportData] = useState<Record<'section1'|'section2'|'section3', {file: File | null; preview: string | null; desc: string}[]>>({
+    section1: [{ file: null, preview: null, desc: "" }],
+    section2: [{ file: null, preview: null, desc: "" }],
+    section3: [{ file: null, preview: null, desc: "" }]
   });
   const [intlPartnership, setIntlPartnership] = useState("N");
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
@@ -94,13 +94,16 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
     if (supportData[section].length >= 3) return;
     setSupportData((prev) => ({
       ...prev,
-      [section]: [...prev[section], { file: null, desc: "" }]
+      [section]: [...prev[section], { file: null, preview: null, desc: "" }]
     }));
   };
 
   const removeSupportItem = (section: 'section1' | 'section2' | 'section3', index: number) => {
     setSupportData((prev) => {
       const newSec = [...prev[section]];
+      if (newSec[index].preview) {
+        URL.revokeObjectURL(newSec[index].preview as string);
+      }
       newSec.splice(index, 1);
       return { ...prev, [section]: newSec };
     });
@@ -133,19 +136,25 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                 &times; Remove
               </button>
             )}
-            <div className="mb-4">
-              <label className="block text-sm font-bold text-gray-700 mb-2">Image Attachment</label>
-              <input type="file" accept="image/*" onChange={(e) => handleSupportFileChange(sectionKey, index, e)} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 transition-colors cursor-pointer" />
-            </div>
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
-              <textarea 
-                value={item.desc}
-                onChange={(e) => handleSupportDescChange(sectionKey, index, e.target.value)}
-                rows={2} 
-                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white resize-y" 
-                placeholder="Enter description here..."
-              ></textarea>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1 flex flex-col">
+                <label className="block text-sm font-bold text-gray-700 mb-2">Image Attachment</label>
+                <input type="file" accept="image/*" onChange={(e) => handleSupportFileChange(sectionKey, index, e)} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 transition-colors cursor-pointer mb-4" />
+                {item.preview && (
+                  <div className="relative flex-1 w-full min-h-[12rem] border border-gray-200 rounded-md overflow-hidden bg-white mt-auto">
+                    <img src={item.preview} alt="Preview" className="absolute inset-0 w-full h-full object-contain p-2" />
+                  </div>
+                )}
+              </div>
+              <div className="flex-1 flex flex-col">
+                <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
+                <textarea 
+                  value={item.desc}
+                  onChange={(e) => handleSupportDescChange(sectionKey, index, e.target.value)}
+                  className="block w-full flex-1 min-h-[12rem] rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white resize-none" 
+                  placeholder="Enter description here..."
+                ></textarea>
+              </div>
             </div>
           </div>
         ))}
