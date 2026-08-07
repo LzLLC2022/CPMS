@@ -23,6 +23,8 @@ const [step, setStep] = useState<1 | 2>(1);
   const [countrySearch, setCountrySearch] = useState("");
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedRegNum, setSubmittedRegNum] = useState("");
   const [formData, setFormData] = useState<any>(null);
   const [financingOpts, setFinancingOpts] = useState<Record<string, boolean>>({
     gggi: false,
@@ -73,7 +75,15 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   };
 
   const handleFinalSubmit = () => {
-    alert("Proposal submitted successfully!");
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const nnnn = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+    setSubmittedRegNum(`CTAF-${yyyy}-${mm}-${nnnn}`);
+    setIsSubmitted(true);
+  };
+
+  const resetForm = () => {
     setFormData(null);
     setStep(1);
     setSupportData({
@@ -86,6 +96,8 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     setSelectedCountries([]);
     setFinancingOpts({ gggi: false, climate: false, gov: false, private: false, carbon: false, others: false });
     setPreviewMode(false);
+    setIsSubmitted(false);
+    setSubmittedRegNum("");
   };
 
 const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', index: number, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -200,6 +212,38 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
       </div>
     </div>
   );
+
+  if (isSubmitted) {
+    return (
+      <div className="max-w-2xl mx-auto py-16 px-4">
+        <div className="bg-white shadow-lg border border-gray-100 rounded-2xl p-10 text-center">
+          <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
+            <svg className="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Proposal Registration Completed</h2>
+          <p className="text-gray-500 mb-8">Thank you for submitting your proposal.</p>
+          
+          <div className="bg-gray-50 rounded-lg p-6 mb-8 border border-gray-200">
+            <p className="text-sm font-medium text-gray-500 mb-1">Registration Number</p>
+            <p className="text-2xl font-bold text-primary-700 tracking-wider">{submittedRegNum}</p>
+          </div>
+          
+          <div className="bg-blue-50 text-blue-800 rounded-lg p-4 mb-10 text-sm font-medium border border-blue-100">
+            A confirmation email with your registration number has been sent to your email address.
+          </div>
+          
+          <button 
+            onClick={resetForm}
+            className="w-full sm:w-auto px-8 py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-500 transition-colors shadow-sm"
+          >
+            Submit Another Proposal
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto py-8">
