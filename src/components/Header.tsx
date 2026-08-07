@@ -69,9 +69,9 @@ export default function Header() {
       <nav className="hidden sm:flex flex-1 items-center justify-center gap-8">
         {/* About Menu */}
         <div className="relative group">
-          <button className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
+          <Link href="/about" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
             About
-          </button>
+          </Link>
           
           <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-4 w-80 z-50">
             {/* About CTAF */}
