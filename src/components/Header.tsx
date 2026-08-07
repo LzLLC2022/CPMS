@@ -76,30 +76,12 @@ export default function Header() {
             Proposal List
           </Link>
         ) : (
-          <div className="relative group">
-            <Link 
-              href="/proposal" 
-              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
-            >
-              Proposal
-            </Link>
-            
-            {/* Dropdown Menu */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-36 z-50">
-              <Link 
-                href="/proposal/registration" 
-                className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-              >
-                Registration
-              </Link>
-              <Link 
-                href="/proposal/status" 
-                className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-              >
-                Status
-              </Link>
-            </div>
-          </div>
+          <Link 
+            href="/proposal" 
+            className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
+          >
+            Proposal
+          </Link>
         )}
 
         {userRole === "Secretariat" && (
@@ -184,25 +166,13 @@ export default function Header() {
               Proposal List
             </Link>
           ) : (
-            <div className="flex flex-col gap-2">
-              <span className="text-[15px] font-bold text-gray-900">Proposal</span>
-              <div className="pl-4 flex flex-col gap-2">
-                <Link 
-                  href="/proposal/registration" 
-                  className="text-sm text-gray-700 hover:text-primary-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Registration
-                </Link>
-                <Link 
-                  href="/proposal/status" 
-                  className="text-sm text-gray-700 hover:text-primary-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Status
-                </Link>
-              </div>
-            </div>
+            <Link 
+              href="/proposal" 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Proposal
+            </Link>
           )}
 
           {userRole === "Secretariat" && (
