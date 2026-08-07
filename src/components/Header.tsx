@@ -50,7 +50,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-4">
           <div className="relative h-12 w-32 sm:h-16 sm:w-40">
             <Image
-              src="/logo.png"
+              src="/ctaf_logo2.png"
               alt="CTAF Logo"
               fill
               className="object-contain object-left"
