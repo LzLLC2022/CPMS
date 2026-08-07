@@ -3,8 +3,15 @@
 import React, { useState } from "react";
 
 export default function ProposalRegistrationPage() {
-  const ALL_COUNTRIES = ["South Korea", "United States", "Japan", "Vietnam", "Indonesia", "Philippines", "Fiji", "Mongolia", "Senegal", "Uganda", "Rwanda"];
-const [step, setStep] = useState<1 | 2>(1);
+  const REGION_COUNTRIES: Record<string, string[]> = {
+    "Africa Regional Directorate": ["Cote D'Ivoire", "Senegal", "Uganda", "Rwanda"],
+    "Asia Regional Directorate": ["Republic of Korea", "Japan", "Vietnam", "Indonesia", "Philippines", "Mongolia", "South Korea"],
+    "Latin America and the Caribbean Regional Directorate": ["Mexico"],
+    "Middle East and North Africa Regional Directorate": ["United Arab Emirates"],
+    "Pacific": ["Fiji"]
+  };
+  const REGIONS = Object.keys(REGION_COUNTRIES);
+  const [step, setStep] = useState<1 | 2>(1);
   const [textLengths, setTextLengths] = useState<Record<string, number>>({});
   
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -19,6 +26,7 @@ const [step, setStep] = useState<1 | 2>(1);
     section3: [{ file: null, preview: null, title: "", desc: "" }]
   });
   const [intlPartnership, setIntlPartnership] = useState("N");
+  const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [countrySearch, setCountrySearch] = useState("");
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
@@ -47,7 +55,14 @@ const [step, setStep] = useState<1 | 2>(1);
     }
   };
 
-  const filteredCountries = ALL_COUNTRIES.filter((c) => c.toLowerCase().includes(countrySearch.toLowerCase()));
+  const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedRegion(e.target.value);
+    setSelectedCountries([]);
+  };
+
+  const filteredCountries = selectedRegion 
+    ? REGION_COUNTRIES[selectedRegion].filter((c) => c.toLowerCase().includes(countrySearch.toLowerCase()))
+    : [];
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,6 +70,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       const data = new FormData(e.currentTarget);
       const obj = Object.fromEntries(data.entries());
       obj.intlPartnership = intlPartnership;
+      obj.selectedRegion = selectedRegion;
       obj.selectedCountries = selectedCountries.join(", ");
       obj.window = data.getAll("window").join(", ");
       
@@ -93,6 +109,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     });
     setTextLengths({});
     setIntlPartnership("N");
+    setSelectedRegion("");
     setSelectedCountries([]);
     setFinancingOpts({ gggi: false, climate: false, gov: false, private: false, carbon: false, others: false });
     setPreviewMode(false);
@@ -314,6 +331,9 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                   </div>
                   {formData.intlPartnership === 'Y' && (
                     <div>
+                      <label className="block text-sm font-bold text-gray-700">Region</label>
+                      <div className="mt-2 block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 sm:text-sm bg-gray-50 min-h-[38px] mb-4">{formData.selectedRegion}</div>
+                      
                       <label className="block text-sm font-bold text-gray-700">Applicable Country(ies)</label>
                       <div className="mt-2 block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 sm:text-sm bg-gray-50 min-h-[38px]">{formData.selectedCountries}</div>
                     </div>
@@ -619,51 +639,68 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               </div>
 
               {intlPartnership === "Y" && (
-                <div>
-                  <label className="block text-sm font-bold text-gray-700">Applicable Country(ies)<span className="text-red-500 ml-1">*</span></label>
-                  <p className="text-xs text-gray-500 mt-1 mb-2">Rationale for country selection</p>
-                  <div className="relative mt-2">
-                    <div 
-                      className="min-h-[38px] w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-white cursor-text sm:text-sm flex flex-wrap gap-2 items-center"
-                      onClick={() => setShowCountryDropdown(true)}
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700">Region<span className="text-red-500 ml-1">*</span></label>
+                    <select
+                      className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm bg-white outline-none"
+                      value={selectedRegion}
+                      onChange={handleRegionChange}
+                      required
                     >
-                      {selectedCountries.map((c) => (
-                        <span key={c} className="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-md text-xs flex items-center gap-1">
-                          {c}
-                          <button type="button" onClick={(e) => { e.stopPropagation(); toggleCountry(c); }} className="hover:text-primary-900">&times;</button>
-                        </span>
-                      ))}
-                      <input 
-                        type="text" 
-                        className="flex-1 outline-none bg-transparent min-w-[100px] text-sm" 
-                        placeholder={selectedCountries.length === 0 ? "Select countries..." : ""}
-                        value={countrySearch}
-                        onChange={(e) => setCountrySearch(e.target.value)}
-                        onFocus={() => setShowCountryDropdown(true)}
-                        onBlur={() => setTimeout(() => setShowCountryDropdown(false), 200)}
-                      />
-                    </div>
-                    {showCountryDropdown && (
-                      <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto sm:text-sm">
-                        {filteredCountries.length > 0 ? filteredCountries.map((c) => (
-                          <div 
-                            key={c} 
-                            className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-primary-50 text-gray-900"
-                            onClick={() => { toggleCountry(c); setCountrySearch(""); }}
-                          >
-                            <span className="block truncate">{c}</span>
-                            {selectedCountries.includes(c) && (
-                              <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-primary-600">
-                                ??
-                              </span>
+                      <option value="">Select a region...</option>
+                      {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
+                    </select>
+                  </div>
+                  
+                  {selectedRegion && (
+                    <div>
+                      <label className="block text-sm font-bold text-gray-700">Country(ies)<span className="text-red-500 ml-1">*</span></label>
+                      <p className="text-xs text-gray-500 mt-1 mb-2">Rationale for country selection</p>
+                      <div className="relative mt-2">
+                        <div 
+                          className="min-h-[38px] w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-white cursor-text sm:text-sm flex flex-wrap gap-2 items-center"
+                          onClick={() => setShowCountryDropdown(true)}
+                        >
+                          {selectedCountries.map((c) => (
+                            <span key={c} className="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-md text-xs flex items-center gap-1">
+                              {c}
+                              <button type="button" onClick={(e) => { e.stopPropagation(); toggleCountry(c); }} className="hover:text-primary-900">&times;</button>
+                            </span>
+                          ))}
+                          <input 
+                            type="text" 
+                            className="flex-1 outline-none bg-transparent min-w-[100px] text-sm" 
+                            placeholder={selectedCountries.length === 0 ? "Select countries..." : ""}
+                            value={countrySearch}
+                            onChange={(e) => setCountrySearch(e.target.value)}
+                            onFocus={() => setShowCountryDropdown(true)}
+                            onBlur={() => setTimeout(() => setShowCountryDropdown(false), 200)}
+                          />
+                        </div>
+                        {showCountryDropdown && (
+                          <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto sm:text-sm">
+                            {filteredCountries.length > 0 ? filteredCountries.map((c) => (
+                              <div 
+                                key={c} 
+                                className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-primary-50 text-gray-900"
+                                onClick={() => { toggleCountry(c); setCountrySearch(""); }}
+                              >
+                                <span className="block truncate">{c}</span>
+                                {selectedCountries.includes(c) && (
+                                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-primary-600">
+                                    ✓
+                                  </span>
+                                )}
+                              </div>
+                            )) : (
+                              <div className="py-2 px-3 text-gray-500">No matches found.</div>
                             )}
                           </div>
-                        )) : (
-                          <div className="py-2 px-3 text-gray-500">No matches found.</div>
                         )}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

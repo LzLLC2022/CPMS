@@ -87,7 +87,7 @@ export default function Header() {
             href="/proposal" 
             className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
           >
-            Proposal
+            Submission
           </Link>
         )}
 
@@ -186,7 +186,7 @@ export default function Header() {
               className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Proposal
+              Submission
             </Link>
           )}
 
