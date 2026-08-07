@@ -388,12 +388,12 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactPerson" defaultValue={formData?.contactPerson || ""} placeholder="John Doe" required />
             </div>
             <div>
-              <label className="flex justify-between items-center text-sm font-medium text-gray-700"><span>Title<span className="text-red-500 ml-1">*</span></span><span className="text-xs font-normal text-gray-500">{textLengths['contactTitle'] || (formData?.contactTitle?.length || 0)}</span></label>
-              <input type="text" onChange={handleTextChange} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactTitle" defaultValue={formData?.contactTitle || ""} placeholder="Project Manager" required />
+              <label className="block text-sm font-medium text-gray-700">Title<span className="text-red-500 ml-1">*</span></label>
+              <input type="text" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="contactTitle" defaultValue={formData?.contactTitle || ""} placeholder="Project Manager" required />
             </div>
             <div>
-              <label className="flex justify-between items-center text-sm font-medium text-gray-700"><span>Email<span className="text-red-500 ml-1">*</span></span><span className="text-xs font-normal text-gray-500">{textLengths['email'] || (formData?.email?.length || 0)}</span></label>
-              <input type="email" onChange={handleTextChange} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="email" defaultValue={formData?.email || ""} placeholder="johndoe@example.com" required />
+              <label className="block text-sm font-medium text-gray-700">Email<span className="text-red-500 ml-1">*</span></label>
+              <input type="email" className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" name="email" defaultValue={formData?.email || ""} placeholder="johndoe@example.com" required />
             </div>
           </div>
         </div>
@@ -405,8 +405,9 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
           </div>
           <div className="p-6 space-y-6">
             <div>
-              <label className="flex justify-between items-center text-sm font-bold text-gray-700"><span>Title<span className="text-red-500 ml-1">*</span></span><span className="text-xs font-normal text-gray-500">{textLengths['projectTitle'] || (formData?.projectTitle?.length || 0)}</span></label>
-              <input type="text" onChange={handleTextChange} name="projectTitle" defaultValue={formData?.projectTitle || ""} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
+              <label className="block text-sm font-bold text-gray-700">Title<span className="text-red-500 ml-1">*</span></label>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['projectTitle'] || (formData?.projectTitle?.length || 0)}</div>
+              <input type="text" onChange={handleTextChange} name="projectTitle" defaultValue={formData?.projectTitle || ""} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required />
             </div>
             
             <div>
@@ -538,27 +539,31 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               </div>
 
                 <div>
-                  <label className="flex justify-between items-center text-sm font-medium text-gray-700"><span>Relevant background, baseline conditions, or existing initiatives if applicable.<span className="text-red-500 ml-1">*</span></span><span className="text-xs font-normal text-gray-500">{textLengths['problem'] || (formData?.problem?.length || 0)}</span></label>
-                  <textarea onChange={handleTextChange} name="problem" defaultValue={formData?.problem || ""} rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                  <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives if applicable.<span className="text-red-500 ml-1">*</span></label>
+                  <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['problem'] || (formData?.problem?.length || 0)}</div>
+                  <textarea onChange={handleTextChange} name="problem" defaultValue={formData?.problem || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
                 </div>
               </div>
             </div>
 
             <div>
-              <div className="flex justify-between items-center"><label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation<span className="text-red-500 ml-1">*</span></label><span className="text-xs font-normal text-gray-500">{textLengths['uniqueness'] || (formData?.uniqueness?.length || 0)}</span></div>
+              <label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Distinctive features and linkages to existing climate technology initiatives in the region.</p>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['uniqueness'] || (formData?.uniqueness?.length || 0)}</div>
               <textarea onChange={handleTextChange} name="uniqueness" defaultValue={formData?.uniqueness || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
             
             <div>
-              <div className="flex justify-between items-center"><label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits<span className="text-red-500 ml-1">*</span></label><span className="text-xs font-normal text-gray-500">{textLengths['localApp'] || (formData?.localApp?.length || 0)}</span></div>
+              <label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential use cases, target beneficiaries, technology adoption, job creation, and socioeconomic benefits.</p>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['localApp'] || (formData?.localApp?.length || 0)}</div>
               <textarea onChange={handleTextChange} name="localApp" defaultValue={formData?.localApp || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
-              <div className="flex justify-between items-center"><label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential<span className="text-red-500 ml-1">*</span></label><span className="text-xs font-normal text-gray-500">{textLengths['scaleUp'] || (formData?.scaleUp?.length || 0)}</span></div>
+              <label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential for expansion, policy adoption, market development, or replication across countries or regions.</p>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['scaleUp'] || (formData?.scaleUp?.length || 0)}</div>
               <textarea onChange={handleTextChange} name="scaleUp" defaultValue={formData?.scaleUp || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
