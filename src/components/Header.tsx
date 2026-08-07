@@ -68,9 +68,16 @@ export default function Header() {
       {/* Center - Main Menu */}
       <nav className="hidden sm:flex flex-1 items-center justify-center gap-8">
         {/* Proposal / Proposal List Menu */}
-        {userRole === "Regional Director" || userRole === "Secretariat" ? (
+        {userRole === "Regional Director" ? (
           <Link 
-            href="/proposal-list" 
+            href="/proposal-list/regional-director" 
+            className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
+          >
+            Proposal List
+          </Link>
+        ) : userRole === "Secretariat" ? (
+          <Link 
+            href="/proposal-list/secretariat" 
             className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
           >
             Proposal List
@@ -85,9 +92,9 @@ export default function Header() {
         )}
 
         {userRole === "Secretariat" && (
-          <button onClick={handleComingSoon} className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2">
+          <Link href="/classification" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
             Classification
-          </button>
+          </Link>
         )}
 
         <div className="relative group">
@@ -157,9 +164,17 @@ export default function Header() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg sm:hidden flex flex-col py-4 px-6 gap-4 z-50">
-          {userRole === "Regional Director" || userRole === "Secretariat" ? (
+          {userRole === "Regional Director" ? (
             <Link 
-              href="/proposal-list" 
+              href="/proposal-list/regional-director" 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Proposal List
+            </Link>
+          ) : userRole === "Secretariat" ? (
+            <Link 
+              href="/proposal-list/secretariat" 
               className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -176,12 +191,13 @@ export default function Header() {
           )}
 
           {userRole === "Secretariat" && (
-            <button 
-              onClick={(e) => { handleComingSoon(e); setIsMobileMenuOpen(false); }} 
-              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors text-left"
+            <Link 
+              href="/classification" 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Classification
-            </button>
+            </Link>
           )}
 
           <div className="flex flex-col gap-2">
