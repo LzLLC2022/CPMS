@@ -640,7 +640,8 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
             <div>
               <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Plan to obtain larger-scale funding, investment, or proposal development after completion of CTAF support.</p>
-              <textarea name="financingRationale" defaultValue={formData?.financingRationale || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['financingRationale'] || (formData?.financingRationale?.length || 0)}</div>
+              <textarea onChange={handleTextChange} name="financingRationale" defaultValue={formData?.financingRationale || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
@@ -657,11 +658,13 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-gray-700">Regulatory Risk<span className="text-red-500 ml-1">*</span></label>
-                  <textarea name="riskRegulatory" defaultValue={formData?.riskRegulatory || ""} rows={2} className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                  <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['riskRegulatory'] || (formData?.riskRegulatory?.length || 0)}</div>
+                  <textarea onChange={handleTextChange} name="riskRegulatory" defaultValue={formData?.riskRegulatory || ""} rows={2} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-700">Climate Risk<span className="text-red-500 ml-1">*</span></label>
-                  <textarea name="riskClimate" defaultValue={formData?.riskClimate || ""} rows={2} className="mt-1 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                  <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['riskClimate'] || (formData?.riskClimate?.length || 0)}</div>
+                  <textarea onChange={handleTextChange} name="riskClimate" defaultValue={formData?.riskClimate || ""} rows={2} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
                 </div>
               </div>
             </div>
@@ -669,13 +672,15 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
             <div>
               <label className="block text-sm font-bold text-gray-700">Utilization of existing patents & New Patent Opportunities<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Potential utilization of existing patents and development of new patent applications during project implementation (including indicative patent keywords).</p>
-              <textarea name="patents" defaultValue={formData?.patents || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['patents'] || (formData?.patents?.length || 0)}</div>
+              <textarea onChange={handleTextChange} name="patents" defaultValue={formData?.patents || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
 
             <div>
               <label className="block text-sm font-bold text-gray-700">Communication & Visibility Strategy<span className="text-red-500 ml-1">*</span></label>
               <p className="text-xs text-gray-500 mt-1 mb-2">Preliminary approach for local promotion, communication channels, showcases and visibility activities.</p>
-              <textarea name="commStrategy" defaultValue={formData?.commStrategy || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+              <div className="flex justify-end text-xs text-gray-500 mb-1">{textLengths['commStrategy'] || (formData?.commStrategy?.length || 0)}</div>
+              <textarea onChange={handleTextChange} name="commStrategy" defaultValue={formData?.commStrategy || ""} rows={3} className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
             </div>
           </div>
         </div>
