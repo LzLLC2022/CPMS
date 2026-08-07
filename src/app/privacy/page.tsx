@@ -11,7 +11,7 @@ export default function PrivacyPage() {
         </p>
         <h2 className="text-xl font-semibold text-gray-800 mt-8 mb-4">Contact Us</h2>
         <p>
-          If you have any requests concerning your personal information or any queries with regard to these practices please contact us at <strong>ctaf@gggi.org</strong>.
+          If you have any requests concerning your personal information or any queries with regard to these practices please contact us at <strong><a href="mailto:CTAF@gggi.org" className="text-primary-600 hover:underline">CTAF@gggi.org</a></strong>.
         </p>
       </div>
     </div>
