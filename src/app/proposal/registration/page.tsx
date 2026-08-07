@@ -4,10 +4,10 @@ import React, { useState } from "react";
 
 export default function ProposalRegistrationPage() {
   const REGION_COUNTRIES: Record<string, string[]> = {
-    "Africa Regional Directorate": ["Cote D'Ivoire", "Senegal", "Uganda", "Rwanda"],
-    "Asia Regional Directorate": ["Republic of Korea", "Japan", "Vietnam", "Indonesia", "Philippines", "Mongolia", "South Korea"],
-    "Latin America and the Caribbean Regional Directorate": ["Mexico"],
-    "Middle East and North Africa Regional Directorate": ["United Arab Emirates"],
+    "Africa Region": ["Cote D'Ivoire", "Senegal", "Uganda", "Rwanda"],
+    "Asia Region": ["Republic of Korea", "Japan", "Vietnam", "Indonesia", "Philippines", "Mongolia", "South Korea"],
+    "Latin America and the Caribbean Region": ["Mexico"],
+    "Middle East and North Africa Region": ["United Arab Emirates"],
     "Pacific": ["Fiji"]
   };
   const REGIONS = Object.keys(REGION_COUNTRIES);
@@ -639,28 +639,27 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               </div>
 
               {intlPartnership === "Y" && (
-                <div className="flex flex-col gap-4">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700">Region<span className="text-red-500 ml-1">*</span></label>
-                    <select
-                      className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm bg-white outline-none"
-                      value={selectedRegion}
-                      onChange={handleRegionChange}
-                      required
-                    >
-                      <option value="">Select a region...</option>
-                      {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
-                    </select>
-                  </div>
-                  
-                  {selectedRegion && (
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700">Country(ies)<span className="text-red-500 ml-1">*</span></label>
-                      <p className="text-xs text-gray-500 mt-1 mb-2">Rationale for country selection</p>
-                      <div className="relative mt-2">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700">Country(ies)<span className="text-red-500 ml-1">*</span></label>
+                  <p className="text-xs text-gray-500 mt-1 mb-2">Rationale for country selection</p>
+                  <div className="flex gap-2">
+                    <div className="w-1/3">
+                      <select
+                        className="block w-full rounded-md border-0 py-1.5 px-3 min-h-[38px] text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm bg-white outline-none"
+                        value={selectedRegion}
+                        onChange={handleRegionChange}
+                        required
+                      >
+                        <option value="">Select a region...</option>
+                        {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
+                      </select>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="relative">
                         <div 
-                          className="min-h-[38px] w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-white cursor-text sm:text-sm flex flex-wrap gap-2 items-center"
-                          onClick={() => setShowCountryDropdown(true)}
+                          className={`min-h-[38px] w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 bg-white sm:text-sm flex flex-wrap gap-2 items-center ${!selectedRegion ? 'bg-gray-100 cursor-not-allowed' : 'cursor-text'}`}
+                          onClick={() => selectedRegion && setShowCountryDropdown(true)}
                         >
                           {selectedCountries.map((c) => (
                             <span key={c} className="bg-primary-100 text-primary-700 px-2 py-0.5 rounded-md text-xs flex items-center gap-1">
@@ -670,15 +669,16 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                           ))}
                           <input 
                             type="text" 
-                            className="flex-1 outline-none bg-transparent min-w-[100px] text-sm" 
-                            placeholder={selectedCountries.length === 0 ? "Select countries..." : ""}
+                            className="flex-1 outline-none bg-transparent min-w-[100px] text-sm disabled:cursor-not-allowed" 
+                            placeholder={!selectedRegion ? "Select region first..." : (selectedCountries.length === 0 ? "Select countries..." : "")}
                             value={countrySearch}
                             onChange={(e) => setCountrySearch(e.target.value)}
-                            onFocus={() => setShowCountryDropdown(true)}
+                            onFocus={() => selectedRegion && setShowCountryDropdown(true)}
                             onBlur={() => setTimeout(() => setShowCountryDropdown(false), 200)}
+                            disabled={!selectedRegion}
                           />
                         </div>
-                        {showCountryDropdown && (
+                        {showCountryDropdown && selectedRegion && (
                           <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto sm:text-sm">
                             {filteredCountries.length > 0 ? filteredCountries.map((c) => (
                               <div 
@@ -700,7 +700,7 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                         )}
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               )}
             </div>
