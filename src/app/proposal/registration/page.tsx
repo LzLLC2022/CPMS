@@ -75,9 +75,13 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
 const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
+    const preview = file ? URL.createObjectURL(file) : null;
     setSupportData((prev) => {
       const newSec = [...prev[section]];
-      newSec[index] = { ...newSec[index], file };
+      if (newSec[index].preview) {
+        URL.revokeObjectURL(newSec[index].preview as string);
+      }
+      newSec[index] = { ...newSec[index], file, preview };
       return { ...prev, [section]: newSec };
     });
   };
