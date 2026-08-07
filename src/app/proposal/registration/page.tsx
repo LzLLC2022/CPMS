@@ -75,6 +75,13 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   const handleFinalSubmit = () => {
     alert("Proposal submitted successfully!");
     setFormData(null);
+    setStep(1);
+    setSupportData({
+      section1: [{ file: null, preview: null, title: "", desc: "" }],
+      section2: [{ file: null, preview: null, title: "", desc: "" }],
+      section3: [{ file: null, preview: null, title: "", desc: "" }]
+    });
+    setTextLengths({});
     setIntlPartnership("N");
     setSelectedCountries([]);
     setFinancingOpts({ gggi: false, climate: false, gov: false, private: false, carbon: false, others: false });
