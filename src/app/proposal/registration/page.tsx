@@ -4,6 +4,12 @@ import React, { useState } from "react";
 
 export default function ProposalRegistrationPage() {
   const ALL_COUNTRIES = ["South Korea", "United States", "Japan", "Vietnam", "Indonesia", "Philippines", "Fiji", "Mongolia", "Senegal", "Uganda", "Rwanda"];
+const [step, setStep] = useState<1 | 2>(1);
+  const [supportData, setSupportData] = useState<Record<'section1'|'section2'|'section3', {file: File | null; desc: string}[]>>({
+    section1: [{ file: null, desc: "" }],
+    section2: [{ file: null, desc: "" }],
+    section3: [{ file: null, desc: "" }]
+  });
   const [intlPartnership, setIntlPartnership] = useState("N");
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [countrySearch, setCountrySearch] = useState("");
@@ -33,25 +39,29 @@ export default function ProposalRegistrationPage() {
 
   const filteredCountries = ALL_COUNTRIES.filter((c) => c.toLowerCase().includes(countrySearch.toLowerCase()));
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const obj = Object.fromEntries(data.entries());
-    obj.intlPartnership = intlPartnership;
-    obj.selectedCountries = selectedCountries.join(", ");
-    obj.window = data.getAll("window").join(", ");
-    
-    const financing = [];
-    if (financingOpts.gggi) financing.push(`GGGI: ${data.get("financing_gggi_spec") || ""}`);
-    if (financingOpts.climate) financing.push(`Climate: ${data.get("financing_climate_spec") || ""}`);
-    if (financingOpts.gov) financing.push(`Government: ${data.get("financing_gov_spec") || ""}`);
-    if (financingOpts.private) financing.push(`Private: ${data.get("financing_private_spec") || ""}`);
-    if (financingOpts.carbon) financing.push(`Carbon: ${data.get("financing_carbon_spec") || ""}`);
-    if (financingOpts.others) financing.push(`Others: ${data.get("financing_others_spec") || ""}`);
-    obj.financingOptions = financing.join(" | ");
+    if (step === 1) {
+      const data = new FormData(e.currentTarget);
+      const obj = Object.fromEntries(data.entries());
+      obj.intlPartnership = intlPartnership;
+      obj.selectedCountries = selectedCountries.join(", ");
+      obj.window = data.getAll("window").join(", ");
+      
+      const financing = [];
+      if (financingOpts.gggi) financing.push(`GGGI: ${data.get("financing_gggi_spec") || ""}`);
+      if (financingOpts.climate) financing.push(`Climate: ${data.get("financing_climate_spec") || ""}`);
+      if (financingOpts.gov) financing.push(`Government: ${data.get("financing_gov_spec") || ""}`);
+      if (financingOpts.private) financing.push(`Private: ${data.get("financing_private_spec") || ""}`);
+      if (financingOpts.carbon) financing.push(`Carbon: ${data.get("financing_carbon_spec") || ""}`);
+      if (financingOpts.others) financing.push(`Others: ${data.get("financing_others_spec") || ""}`);
+      obj.financingOptions = financing.join(" | ");
 
-    setFormData(obj);
-    setPreviewMode(true);
+      setFormData(obj);
+      setStep(2);
+    } else {
+      setPreviewMode(true);
+    }
   };
 
   const handleFinalSubmit = () => {
@@ -62,6 +72,86 @@ export default function ProposalRegistrationPage() {
     setFinancingOpts({ gggi: false, climate: false, gov: false, private: false, carbon: false, others: false });
     setPreviewMode(false);
   };
+
+const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setSupportData((prev) => {
+      const newSec = [...prev[section]];
+      newSec[index] = { ...newSec[index], file };
+      return { ...prev, [section]: newSec };
+    });
+  };
+
+  const handleSupportDescChange = (section: 'section1' | 'section2' | 'section3', index: number, value: string) => {
+    setSupportData((prev) => {
+      const newSec = [...prev[section]];
+      newSec[index] = { ...newSec[index], desc: value };
+      return { ...prev, [section]: newSec };
+    });
+  };
+
+  const addSupportItem = (section: 'section1' | 'section2' | 'section3') => {
+    if (supportData[section].length >= 3) return;
+    setSupportData((prev) => ({
+      ...prev,
+      [section]: [...prev[section], { file: null, desc: "" }]
+    }));
+  };
+
+  const removeSupportItem = (section: 'section1' | 'section2' | 'section3', index: number) => {
+    setSupportData((prev) => {
+      const newSec = [...prev[section]];
+      newSec.splice(index, 1);
+      return { ...prev, [section]: newSec };
+    });
+  };
+
+  const renderSupportSection = (
+    title: string,
+    sectionKey: 'section1' | 'section2' | 'section3',
+    subtitle?: string
+  ) => (
+    <div className="bg-white shadow-sm border border-gray-200 rounded-lg">
+      <div className="bg-primary-700 px-6 py-3 rounded-t-lg flex justify-between items-center">
+        <h3 className="text-white font-bold text-lg">{title}</h3>
+        {supportData[sectionKey].length < 3 && (
+          <button type="button" onClick={() => addSupportItem(sectionKey)} className="text-sm bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded transition-colors shadow-sm">
+            + Add Item
+          </button>
+        )}
+      </div>
+      <div className="p-6 space-y-6">
+        {subtitle && <p className="text-sm text-gray-500 font-medium">{subtitle}</p>}
+        {supportData[sectionKey].map((item, index) => (
+          <div key={index} className="p-4 border border-gray-200 rounded-lg relative bg-gray-50/50 hover:bg-gray-50 transition-colors shadow-sm">
+            {supportData[sectionKey].length > 1 && (
+              <button 
+                type="button" 
+                onClick={() => removeSupportItem(sectionKey, index)}
+                className="absolute top-2 right-2 text-red-500 hover:text-red-700 font-bold bg-white px-2 py-0.5 rounded shadow-sm border border-red-100 text-xs"
+              >
+                &times; Remove
+              </button>
+            )}
+            <div className="mb-4">
+              <label className="block text-sm font-bold text-gray-700 mb-2">Image Attachment</label>
+              <input type="file" accept="image/*" onChange={(e) => handleSupportFileChange(sectionKey, index, e)} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 transition-colors cursor-pointer" />
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
+              <textarea 
+                value={item.desc}
+                onChange={(e) => handleSupportDescChange(sectionKey, index, e.target.value)}
+                rows={2} 
+                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white resize-y" 
+                placeholder="Enter description here..."
+              ></textarea>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className="max-w-4xl mx-auto py-8">
@@ -74,7 +164,7 @@ export default function ProposalRegistrationPage() {
             </button>
           </div>
           <div className="hidden print:block mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 text-center">CTAF One-Page Proposal</h2>
+            <h2 className="text-2xl font-bold text-gray-900 text-center">CTAF One-Page Proposal ({step}/2)</h2>
           </div>
           
           <div className="space-y-8">
@@ -174,7 +264,7 @@ export default function ProposalRegistrationPage() {
               <div className="p-6 space-y-6 print:px-0">
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Selected Options</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap leading-relaxed">{formData.financingOptions ? formData.financingOptions.split(' | ').map((opt: string, i: number) => <div key={i}>✓ {opt}</div>) : 'None selected'}</div>
+                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap leading-relaxed">{formData.financingOptions ? formData.financingOptions.split(' | ').map((opt: string, i: number) => <div key={i}>??{opt}</div>) : 'None selected'}</div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities</label>
@@ -225,13 +315,15 @@ export default function ProposalRegistrationPage() {
         </div>      ) : (
         <>
       <div className="mb-10 text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900">CTAF One-Page Proposal</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900">CTAF One-Page Proposal ({step}/2)</h2>
         <p className="mt-3 text-sm text-gray-600 max-w-2xl mx-auto">
           The One-Page Proposal is intended to reduce administrative burden and encourage diverse early-stage ideas; therefore, please be concise.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-10">
+        {step === 1 && (
+          <>
         
         {/* Verification PIN */}
         <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6 border-l-4 border-l-primary-600">
@@ -346,7 +438,7 @@ export default function ProposalRegistrationPage() {
                             <span className="block truncate">{c}</span>
                             {selectedCountries.includes(c) && (
                               <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-primary-600">
-                                ✓
+                                ??
                               </span>
                             )}
                           </div>
@@ -542,6 +634,23 @@ export default function ProposalRegistrationPage() {
           </div>
         </div>
 
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <div className="bg-gray-50 border-l-4 border-l-primary-600 p-4 rounded-md mb-6 shadow-sm">
+              <p className="text-sm font-medium text-gray-700">
+                Please provide supporting materials according to the guidelines below. You can attach up to 3 images per section along with their descriptions.
+              </p>
+            </div>
+
+            {renderSupportSection("1. PROJECT PROCESS FLOW/ DIAGRAM/ IMAGES", "section1", "* Encouraging the use of AI tools such as ChatGPT and Gemini for image generation to reduce unnecessary time demands")}
+            {renderSupportSection("2. PROJECT-RELEVANT DATA AND EVIDENCE", "section2", "* Inclusion of credible key data or graphs to support and reinforce the first-page content (preferably focused on country-specific information)")}
+            {renderSupportSection("3. VISUAL REFERENCES", "section3", "* Presentation of project impacts before and after implementation, including collaboration among industry, academia, research institutes, governments, and GGGI country offices")}
+          </>
+        )}
+
         {/* Submission Info */}
         <div className="bg-gray-50 shadow-sm border border-gray-200 rounded-lg p-6 text-center">
           <p className="text-sm text-gray-700 font-medium leading-relaxed">
@@ -551,12 +660,23 @@ export default function ProposalRegistrationPage() {
           </p>
         </div>
 
-        {/* Submit Actions */}
+{/* Submit Actions */}
         <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
-          
-          <button type="submit" className="px-6 py-2.5 text-sm font-semibold text-white bg-primary-600 rounded-md hover:bg-primary-500 transition-colors shadow-sm">
-            Submit Proposal
-          </button>
+          {step === 1 && (
+            <button type="submit" className="px-6 py-2.5 text-sm font-bold text-white bg-primary-600 rounded-md hover:bg-primary-500 transition-colors shadow-sm tracking-wide">
+              NEXT (2/2)
+            </button>
+          )}
+          {step === 2 && (
+            <>
+              <button type="button" onClick={() => setStep(1)} className="px-6 py-2.5 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors shadow-sm tracking-wide">
+                PREV (1/2)
+              </button>
+              <button type="submit" className="px-6 py-2.5 text-sm font-bold text-white bg-primary-600 rounded-md hover:bg-primary-500 transition-colors shadow-sm tracking-wide">
+                Submit Proposal
+              </button>
+            </>
+          )}
         </div>
       </form>
         </>
@@ -564,3 +684,4 @@ export default function ProposalRegistrationPage() {
     </div>
   );
 }
+
