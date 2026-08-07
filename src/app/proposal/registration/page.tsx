@@ -5,10 +5,10 @@ import React, { useState } from "react";
 export default function ProposalRegistrationPage() {
   const ALL_COUNTRIES = ["South Korea", "United States", "Japan", "Vietnam", "Indonesia", "Philippines", "Fiji", "Mongolia", "Senegal", "Uganda", "Rwanda"];
 const [step, setStep] = useState<1 | 2>(1);
-  const [supportData, setSupportData] = useState<Record<'section1'|'section2'|'section3', {file: File | null; preview: string | null; desc: string}[]>>({
-    section1: [{ file: null, preview: null, desc: "" }],
-    section2: [{ file: null, preview: null, desc: "" }],
-    section3: [{ file: null, preview: null, desc: "" }]
+  const [supportData, setSupportData] = useState<Record<'section1'|'section2'|'section3', {file: File | null; preview: string | null; title: string; desc: string}[]>>({
+    section1: [{ file: null, preview: null, title: "", desc: "" }],
+    section2: [{ file: null, preview: null, title: "", desc: "" }],
+    section3: [{ file: null, preview: null, title: "", desc: "" }]
   });
   const [intlPartnership, setIntlPartnership] = useState("N");
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
@@ -86,6 +86,14 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
     });
   };
 
+  const handleSupportTitleChange = (section: 'section1' | 'section2' | 'section3', index: number, value: string) => {
+    setSupportData((prev) => {
+      const newSec = [...prev[section]];
+      newSec[index] = { ...newSec[index], title: value };
+      return { ...prev, [section]: newSec };
+    });
+  };
+
   const handleSupportDescChange = (section: 'section1' | 'section2' | 'section3', index: number, value: string) => {
     setSupportData((prev) => {
       const newSec = [...prev[section]];
@@ -98,7 +106,7 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
     if (supportData[section].length >= 3) return;
     setSupportData((prev) => ({
       ...prev,
-      [section]: [...prev[section], { file: null, preview: null, desc: "" }]
+      [section]: [...prev[section], { file: null, preview: null, title: "", desc: "" }]
     }));
   };
 
@@ -150,14 +158,26 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                   </div>
                 )}
               </div>
-              <div className="flex-1 flex flex-col">
-                <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
-                <textarea 
-                  value={item.desc}
-                  onChange={(e) => handleSupportDescChange(sectionKey, index, e.target.value)}
-                  className="block w-full flex-1 min-h-[12rem] rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white resize-none" 
-                  placeholder="Enter description here..."
-                ></textarea>
+              <div className="flex-1 flex flex-col gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Title</label>
+                  <input 
+                    type="text"
+                    value={item.title}
+                    onChange={(e) => handleSupportTitleChange(sectionKey, index, e.target.value)}
+                    className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" 
+                    placeholder="Enter title here..."
+                  />
+                </div>
+                <div className="flex-1 flex flex-col">
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
+                  <textarea 
+                    value={item.desc}
+                    onChange={(e) => handleSupportDescChange(sectionKey, index, e.target.value)}
+                    className="block w-full flex-1 min-h-[10rem] rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white resize-none" 
+                    placeholder="Enter description here..."
+                  ></textarea>
+                </div>
               </div>
             </div>
           </div>
