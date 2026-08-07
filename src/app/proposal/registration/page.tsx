@@ -127,9 +127,10 @@ export default function ProposalRegistrationPage() {
                 <h3 className="text-white font-bold text-lg print:text-gray-900">B. PROJECT RATIONALE & VALUE PROPOSITION</h3>
               </div>
               <div className="p-6 space-y-6 print:px-0">
-                <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6 print:bg-white print:border-none print:p-0">
-                  <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Problem / Gap Addressed</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Problem / Gap Addressed</label>
+                  <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6 print:bg-white print:border-none print:p-0">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">TRL</label>
                       <div className="text-sm text-gray-900">{formData.trl}</div>
@@ -143,9 +144,10 @@ export default function ProposalRegistrationPage() {
                       <div className="text-sm text-gray-900">{formData.pilot}</div>
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives</label>
-                    <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.problem}</div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives</label>
+                      <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.problem}</div>
+                    </div>
                   </div>
                 </div>
                 
@@ -367,10 +369,10 @@ export default function ProposalRegistrationPage() {
             <h3 className="text-white font-bold text-lg">B. PROJECT RATIONALE & VALUE PROPOSITION</h3>
           </div>
           <div className="p-6 space-y-6">
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6">
-              <h4 className="text-sm font-bold text-gray-900 border-b border-gray-200 pb-2">Problem / Gap Addressed</h4>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Problem / Gap Addressed</label>
+              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="flex flex-col h-full">
                   <label className="block text-sm font-bold text-gray-700 mb-2">TRL (Technology Readiness Level)<span className="text-red-500 ml-1">*</span></label>
                   <select name="trl" defaultValue={formData?.trl || ""} className="mt-auto block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none bg-white" required>
@@ -402,9 +404,10 @@ export default function ProposalRegistrationPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives if applicable.<span className="text-red-500 ml-1">*</span></label>
-                <textarea name="problem" defaultValue={formData?.problem || ""} rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives if applicable.<span className="text-red-500 ml-1">*</span></label>
+                  <textarea name="problem" defaultValue={formData?.problem || ""} rows={3} className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm outline-none" required></textarea>
+                </div>
               </div>
             </div>
 
