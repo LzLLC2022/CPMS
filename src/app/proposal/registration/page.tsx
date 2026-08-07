@@ -213,9 +213,9 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
             <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6 print:border-none print:shadow-none print:p-0">
               <h3 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 print:border-b-2 print:border-gray-800">Contact Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div><label className="block text-sm font-medium text-gray-500">Contact Person</label><span className="mt-1 block text-gray-900 font-medium">{formData.contactPerson}</span></div>
-                <div><label className="block text-sm font-medium text-gray-500">Title</label><span className="mt-1 block text-gray-900 font-medium">{formData.contactTitle}</span></div>
-                <div><label className="block text-sm font-medium text-gray-500">Email</label><span className="mt-1 block text-gray-900 font-medium">{formData.email}</span></div>
+                <div><label className="block text-sm font-medium text-gray-500">Contact Person</label><div className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-900 bg-gray-50 min-h-[38px]">{formData.contactPerson}</div></div>
+                <div><label className="block text-sm font-medium text-gray-500">Title</label><div className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-900 bg-gray-50 min-h-[38px]">{formData.contactTitle}</div></div>
+                <div><label className="block text-sm font-medium text-gray-500">Email</label><div className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-900 bg-gray-50 min-h-[38px]">{formData.email}</div></div>
               </div>
             </div>
             
@@ -227,7 +227,7 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               <div className="p-6 space-y-6 print:px-0">
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Title</label>
-                  <div className="mt-2 block w-full rounded-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 sm:text-sm bg-gray-50 print:bg-white print:ring-0 print:p-0">{formData.projectTitle}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 sm:text-sm bg-gray-50 min-h-[38px] print:bg-white print:border-none print:p-0">{formData.projectTitle}</div>
                 </div>
                 
                 <div>
@@ -235,16 +235,36 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                   <div className="mt-2 bg-gray-50 p-6 rounded-lg border border-gray-200 space-y-6 print:bg-white print:border-none print:p-0">
                     <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Window</label>
-                    <div className="text-sm text-gray-900 capitalize">{formData.window ? formData.window.replace(/,/g, ', ') : 'None'}</div>
+                    <div className="space-y-3">
+                      <label className="flex items-center gap-3">
+                        <input type="checkbox" checked={formData.window?.includes("bankable")} readOnly disabled className="h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                        <span className="text-sm text-gray-700">Bankable / Sustainable Project Development</span>
+                      </label>
+                      <label className="flex items-center gap-3">
+                        <input type="checkbox" checked={formData.window?.includes("gcf")} readOnly disabled className="h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                        <span className="text-sm text-gray-700">GCF or Equivalent Project Development</span>
+                      </label>
+                      <label className="flex items-center gap-3">
+                        <input type="checkbox" checked={formData.window?.includes("policy")} readOnly disabled className="h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                        <span className="text-sm text-gray-700">Policy / Regulatory, Capacity Building, Fund Internationalization</span>
+                      </label>
+                    </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700">International Partnerships</label>
-                    <div className="mt-1 text-sm text-gray-900">{formData.intlPartnership}</div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">International Partnerships</label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2">
+                        <input type="radio" checked={formData.intlPartnership === "Y"} readOnly disabled className="h-4 w-4 text-primary-600 opacity-70" /> <span className="text-sm text-gray-700">Yes</span>
+                      </label>
+                      <label className="flex items-center gap-2">
+                        <input type="radio" checked={formData.intlPartnership === "N"} readOnly disabled className="h-4 w-4 text-primary-600 opacity-70" /> <span className="text-sm text-gray-700">No</span>
+                      </label>
+                    </div>
                   </div>
                   {formData.intlPartnership === 'Y' && (
                     <div>
                       <label className="block text-sm font-bold text-gray-700">Applicable Country(ies)</label>
-                      <div className="mt-1 text-sm text-gray-900">{formData.selectedCountries}</div>
+                      <div className="mt-2 block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 sm:text-sm bg-gray-50 min-h-[38px]">{formData.selectedCountries}</div>
                     </div>
                   )}
                 </div>
@@ -264,35 +284,42 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">TRL</label>
-                      <div className="text-sm text-gray-900">{formData.trl}</div>
+                      <div className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-900 bg-white min-h-[38px]">{formData.trl}</div>
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">CRL</label>
-                      <div className="text-sm text-gray-900">{formData.crl}</div>
+                      <div className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-900 bg-white min-h-[38px]">{formData.crl}</div>
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">Pilot experience</label>
-                      <div className="text-sm text-gray-900">{formData.pilot}</div>
+                      <div className="flex gap-4 mt-3">
+                        <label className="flex items-center gap-2">
+                          <input type="radio" checked={formData.pilot === "Y"} readOnly disabled className="h-4 w-4 text-primary-600 opacity-70" /> <span className="text-sm text-gray-700">Yes</span>
+                        </label>
+                        <label className="flex items-center gap-2">
+                          <input type="radio" checked={formData.pilot === "N"} readOnly disabled className="h-4 w-4 text-primary-600 opacity-70" /> <span className="text-sm text-gray-700">No</span>
+                        </label>
+                      </div>
                     </div>
                   </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700">Relevant background, baseline conditions, or existing initiatives</label>
-                      <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.problem}</div>
+                      <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-white min-h-[6rem] whitespace-pre-wrap">{formData.problem}</div>
                     </div>
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Project Uniqueness / Differentiation</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.uniqueness}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[6rem] whitespace-pre-wrap">{formData.uniqueness}</div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Local Application & Expected Benefits</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.localApp}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[6rem] whitespace-pre-wrap">{formData.localApp}</div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Scale-Up / Replication Potential</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.scaleUp}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[6rem] whitespace-pre-wrap">{formData.scaleUp}</div>
                 </div>
               </div>
             </div>
@@ -304,12 +331,67 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
               </div>
               <div className="p-6 space-y-6 print:px-0">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700">Selected Options</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap leading-relaxed">{formData.financingOptions ? formData.financingOptions.split(' | ').map((opt: string, i: number) => <div key={i}>??{opt}</div>) : 'None selected'}</div>
+                  <label className="block text-sm font-bold text-gray-700 mb-3">Selected Options</label>
+                  <div className="space-y-4 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <label className="flex items-start gap-3">
+                      <input type="checkbox" checked={formData.financingOptions?.includes("GGGI")} readOnly disabled className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                      <div className="flex-1">
+                        <span className="text-sm text-gray-700 font-bold">GGGI or international cooperation programs</span>
+                        {formData.financingOptions?.includes("GGGI") && formData.financing_gggi_spec && (
+                          <div className="mt-2 block w-full rounded-md border border-gray-300 py-1.5 px-3 text-gray-900 bg-white sm:text-sm">{formData.financing_gggi_spec}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3">
+                      <input type="checkbox" checked={formData.financingOptions?.includes("Climate finance")} readOnly disabled className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                      <div className="flex-1">
+                        <span className="text-sm text-gray-700 font-bold">Climate finance or MDB/development finance opportunities</span>
+                        {formData.financingOptions?.includes("Climate finance") && formData.financing_climate_spec && (
+                          <div className="mt-2 block w-full rounded-md border border-gray-300 py-1.5 px-3 text-gray-900 bg-white sm:text-sm">{formData.financing_climate_spec}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3">
+                      <input type="checkbox" checked={formData.financingOptions?.includes("Government")} readOnly disabled className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                      <div className="flex-1">
+                        <span className="text-sm text-gray-700 font-bold">Government or ODA-supported programs</span>
+                        {formData.financingOptions?.includes("Government") && formData.financing_gov_spec && (
+                          <div className="mt-2 block w-full rounded-md border border-gray-300 py-1.5 px-3 text-gray-900 bg-white sm:text-sm">{formData.financing_gov_spec}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3">
+                      <input type="checkbox" checked={formData.financingOptions?.includes("Private investment")} readOnly disabled className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                      <div className="flex-1">
+                        <span className="text-sm text-gray-700 font-bold">Private investment or commercialization opportunities</span>
+                        {formData.financingOptions?.includes("Private investment") && formData.financing_private_spec && (
+                          <div className="mt-2 block w-full rounded-md border border-gray-300 py-1.5 px-3 text-gray-900 bg-white sm:text-sm">{formData.financing_private_spec}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3">
+                      <input type="checkbox" checked={formData.financingOptions?.includes("Carbon market")} readOnly disabled className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                      <div className="flex-1">
+                        <span className="text-sm text-gray-700 font-bold">Carbon market opportunities</span>
+                        {formData.financingOptions?.includes("Carbon market") && formData.financing_carbon_spec && (
+                          <div className="mt-2 block w-full rounded-md border border-gray-300 py-1.5 px-3 text-gray-900 bg-white sm:text-sm">{formData.financing_carbon_spec}</div>
+                        )}
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3">
+                      <input type="checkbox" checked={formData.financingOptions?.includes("Others")} readOnly disabled className="mt-1 h-4 w-4 text-primary-600 border-gray-300 rounded opacity-70" />
+                      <div className="flex-1">
+                        <span className="text-sm text-gray-700 font-bold">Others</span>
+                        {formData.financingOptions?.includes("Others") && formData.financing_others_spec && (
+                          <div className="mt-2 block w-full rounded-md border border-gray-300 py-1.5 px-3 text-gray-900 bg-white sm:text-sm">{formData.financing_others_spec}</div>
+                        )}
+                      </div>
+                    </label>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Rationale for Future Financing Opportunities</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.financingRationale}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[6rem] whitespace-pre-wrap">{formData.financingRationale}</div>
                 </div>
               </div>
             </div>
@@ -325,25 +407,66 @@ const handleSupportFileChange = (section: 'section1' | 'section2' | 'section3', 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                     <div>
                       <label className="block text-xs font-medium text-gray-700">Regulatory Risk</label>
-                      <div className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskRegulatory}</div>
+                      <div className="mt-1 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[4rem] whitespace-pre-wrap">{formData.riskRegulatory}</div>
                     </div>
                     <div>
                       <label className="block text-xs font-medium text-gray-700">Climate Risk</label>
-                      <div className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">{formData.riskClimate}</div>
+                      <div className="mt-1 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[4rem] whitespace-pre-wrap">{formData.riskClimate}</div>
                     </div>
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Utilization of existing patents & New Patent Opportunities</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.patents}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[6rem] whitespace-pre-wrap">{formData.patents}</div>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700">Communication & Visibility Strategy</label>
-                  <div className="mt-2 text-sm text-gray-900 whitespace-pre-wrap">{formData.commStrategy}</div>
+                  <div className="mt-2 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-gray-50 min-h-[6rem] whitespace-pre-wrap">{formData.commStrategy}</div>
                 </div>
               </div>
             </div>
-            
+
+            {/* SUPPORTING MATERIALS */}
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg print:border-none print:shadow-none mt-8">
+              <div className="bg-primary-700 px-6 py-3 rounded-t-lg print:bg-transparent print:text-black print:px-0 print:border-b-2 print:border-gray-800">
+                <h3 className="text-white font-bold text-lg print:text-gray-900">SUPPORTING MATERIALS (STEP 2)</h3>
+              </div>
+              <div className="p-6 space-y-8 print:px-0">
+                {['section1', 'section2', 'section3'].map((sectionKey, secIdx) => {
+                  const items = supportData[sectionKey as 'section1'|'section2'|'section3'];
+                  const secTitles = ["1. PROJECT PROCESS FLOW/ DIAGRAM/ IMAGES", "2. PROJECT-RELEVANT DATA AND EVIDENCE", "3. VISUAL REFERENCES"];
+                  return (
+                    <div key={sectionKey} className="space-y-4">
+                      <h4 className="font-bold text-gray-800 border-b pb-2">{secTitles[secIdx]}</h4>
+                      {items.map((item, idx) => (
+                        <div key={idx} className="flex flex-col md:flex-row gap-6 bg-gray-50 p-4 rounded-md border border-gray-200 print:border-none print:p-0">
+                          <div className="flex-1">
+                            {item.preview ? (
+                              <div className="w-full h-48 border border-gray-300 rounded bg-white relative">
+                                <img src={item.preview} alt="Preview" className="absolute inset-0 w-full h-full object-contain p-2" />
+                              </div>
+                            ) : (
+                              <div className="w-full h-48 border border-gray-300 rounded bg-gray-100 flex items-center justify-center text-gray-400 text-sm">No image attached</div>
+                            )}
+                          </div>
+                          <div className="flex-[2] space-y-4">
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase">Title</label>
+                              <div className="mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 text-sm text-gray-900 bg-white min-h-[38px]">{item.title || '-'}</div>
+                            </div>
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase">Description</label>
+                              <div className="mt-1 block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 bg-white min-h-[6rem] whitespace-pre-wrap">{item.desc || '-'}</div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 mt-8 print:hidden">
               <button onClick={() => setPreviewMode(false)} className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 shadow-sm">
                 Back to Edit
