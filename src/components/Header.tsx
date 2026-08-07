@@ -9,6 +9,7 @@ export default function Header() {
   const router = useRouter();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // We use useEffect to check localStorage only on the client side to prevent hydration mismatch
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center px-6 py-4 border-b border-gray-200 bg-white shadow-sm z-10 shrink-0 print:hidden">
+    <header className="relative flex items-center px-6 py-4 border-b border-gray-200 bg-white shadow-sm z-10 shrink-0 print:hidden">
       {/* Left - Logo & Title */}
       <div className="flex flex-1 items-center justify-start">
         <Link href="/" className="flex items-center gap-4">
@@ -155,7 +156,85 @@ export default function Header() {
             Login
           </Link>
         )}
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="sm:hidden p-2 ml-2 text-gray-600 hover:text-gray-900 transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg sm:hidden flex flex-col py-4 px-6 gap-4 z-50">
+          {userRole === "Regional Director" || userRole === "Secretariat" ? (
+            <Link 
+              href="/proposal-list" 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Proposal List
+            </Link>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <span className="text-[15px] font-bold text-gray-900">Proposal</span>
+              <div className="pl-4 flex flex-col gap-2">
+                <Link 
+                  href="/proposal/registration" 
+                  className="text-sm text-gray-700 hover:text-primary-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Registration
+                </Link>
+                <Link 
+                  href="/proposal/status" 
+                  className="text-sm text-gray-700 hover:text-primary-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Status
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {userRole === "Secretariat" && (
+            <button 
+              onClick={(e) => { handleComingSoon(e); setIsMobileMenuOpen(false); }} 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors text-left"
+            >
+              Classification
+            </button>
+          )}
+
+          <div className="flex flex-col gap-2">
+            <span className="text-[15px] font-bold text-gray-900">Notice</span>
+            <div className="pl-4 flex flex-col gap-2">
+              <Link 
+                href="/notice/notices" 
+                className="text-sm text-gray-700 hover:text-primary-600"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Notices
+              </Link>
+              <Link 
+                href="/notice/news" 
+                className="text-sm text-gray-700 hover:text-primary-600"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                News
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
