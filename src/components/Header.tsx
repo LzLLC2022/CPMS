@@ -48,7 +48,7 @@ export default function Header() {
       {/* Left - Logo & Title */}
       <div className="flex flex-1 items-center justify-start">
         <Link href="/" className="flex items-center gap-4">
-          <div className="relative h-12 w-32 sm:h-16 sm:w-40">
+          <div className="relative h-12 w-12 sm:h-16 sm:w-16">
             <Image
               src="/ctaf_logo2.png"
               alt="CTAF Logo"
