@@ -47,14 +47,14 @@ export default function AboutCtafPage() {
           </div>
           <div className="order-1 lg:order-2">
             <div className="relative w-full h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl bg-gray-100 flex items-center justify-center">
-              {/* Placeholder for the top right image (Signing Ceremony) */}
-              <div className="text-center text-gray-400 p-6">
-                <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <p className="text-sm font-medium">Signing Ceremony Image</p>
-                <p className="text-xs mt-1">Please replace with actual image</p>
-              </div>
+              {/* Top right image (Signing Ceremony) */}
+              <Image 
+                src="/about-ctaf-1.png" 
+                alt="Signing Ceremony"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -63,14 +63,14 @@ export default function AboutCtafPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="relative w-full h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl bg-gray-100 flex items-center justify-center">
-              {/* Placeholder for the bottom left image (Group Photo) */}
-              <div className="text-center text-gray-400 p-6">
-                <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <p className="text-sm font-medium">Group Photo Image</p>
-                <p className="text-xs mt-1">Please replace with actual image</p>
-              </div>
+              {/* Bottom left image (Group Photo) */}
+              <Image 
+                src="/about-ctaf-2.png" 
+                alt="CTAF Group Photo"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </div>
           <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
