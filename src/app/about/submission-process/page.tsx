@@ -12,7 +12,7 @@ export default function SubmissionProcessPage() {
             Submit a new proposal to the Climate Technology Accelerator Fund. Click the button below to start your application process. You will be guided through a step-by-step form.
           </p>
           <Link 
-            href="https://ctaf.lim.kr/proposal/registration" 
+            href="/proposal/registration" 
             className="inline-block w-full sm:w-auto px-6 py-3 bg-[#11B59F] hover:bg-[#0e9582] text-white text-center rounded-lg font-medium transition-colors"
           >
             Go to Submission
