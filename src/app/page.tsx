@@ -84,25 +84,20 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending Review</span>
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending</span>
               <span className="text-5xl font-extrabold text-gray-800">12</span>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Under Review</span>
+              <span className="text-5xl font-extrabold text-blue-600">5</span>
             </div>
             
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
               <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Under Revision</span>
               <span className="text-5xl font-extrabold text-orange-500">3</span>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Approved</span>
-              <span className="text-5xl font-extrabold text-teal-600">8</span>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Rejected</span>
-              <span className="text-5xl font-extrabold text-red-500">1</span>
             </div>
           </div>
           
