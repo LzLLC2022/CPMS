@@ -84,11 +84,11 @@ export default function ProposalMainPage() {
       {/* Right Side - Actions */}
       <div className="flex-1 flex flex-col gap-6 w-full max-w-xl mx-auto lg:max-w-none">
         
-        {/* Proposal Submission Section */}
+        {/* Project Submission Section */}
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col overflow-hidden">
           <div className="bg-[#f2fcf9] px-6 py-4 border-b border-gray-100">
             <h2 className="text-[1.3rem] font-bold text-[#11B59F] flex items-center">
-              <span className="text-2xl mr-2 font-normal">+</span> Proposal Submission
+              <span className="text-2xl mr-2 font-normal">+</span> Project Submission
             </h2>
           </div>
           <div className="p-8 flex flex-col">
