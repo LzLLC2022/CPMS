@@ -1,0 +1,79 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const categories = [
+  {
+    title: 'About CTAF',
+    links: [
+      { name: 'CTAF?', href: '/about/ctaf' },
+      { name: 'Organizational Structure', href: '/about/structure' },
+      { name: 'Logo & Mascot', href: '/about/logo' },
+    ]
+  },
+  {
+    title: 'Project Submission',
+    links: [
+      { name: 'Project Funding offered by CTAF', href: '/about/funding' },
+      { name: 'Climate Technologies supported by CTAF', href: '/about/technologies' },
+      { name: 'Project Proposal Submission Process', href: '/about/submission-process' },
+      { name: 'Project Proposal Eligibility', href: '/about/eligibility' },
+    ]
+  },
+  {
+    title: 'Project Selection',
+    links: [
+      { name: 'CTAF’s Selection Process', href: '/about/selection-process' },
+      { name: 'Criteria for Project Selection', href: '/about/criteria' },
+    ]
+  }
+];
+
+export default function AboutSubNav() {
+  const pathname = usePathname();
+  
+  if (pathname === '/about') return null; // Do not show on the main About page
+
+  // Find the category that contains the current pathname
+  const currentCategory = categories.find(cat => 
+    cat.links.some(link => link.href === pathname)
+  );
+
+  if (!currentCategory) return null;
+
+  return (
+    <div className="bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row items-start md:items-center py-4 gap-4 md:gap-8 overflow-x-auto">
+          
+          {/* Breadcrumb part */}
+          <div className="flex items-center text-sm text-gray-500 whitespace-nowrap">
+            <Link href="/about" className="hover:text-[#11B59F] transition-colors">About</Link>
+            <span className="mx-2">&gt;</span>
+            <span className="font-semibold text-gray-900">{currentCategory.title}</span>
+            <span className="mx-2">&gt;</span>
+          </div>
+
+          {/* Sibling Tabs */}
+          <div className="flex flex-nowrap md:flex-wrap gap-x-6 gap-y-2 text-sm font-medium whitespace-nowrap md:whitespace-normal">
+            {currentCategory.links.map(link => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={`${isActive ? "text-[#11B59F] font-bold" : "text-gray-500 hover:text-gray-900"} transition-colors`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
