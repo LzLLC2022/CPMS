@@ -18,15 +18,23 @@ const MOCK_PROPOSALS = [
   { id: 'CTAF-2026-10-0006', region: 'Africa', country: 'Senegal', title: 'Green Hydrogen Production', email: 'applicant6@gggi.org', date: '2026-10-20', status: 'Pending' },
 ];
 
-const STATUS_OPTIONS = ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected'];
+const getStatusOptions = (role: string) => {
+  if (role === 'Secretariat') {
+    return ['Pending', 'Under Review', 'Revision Requested', 'Completed (Subject to Classification)', 'Completed (Not Subject to Classification)', 'Rejected', 'Under RD Review'];
+  }
+  return ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected'];
+};
 
 const getStatusBadgeColor = (status: string) => {
   switch (status) {
     case 'Pending': return 'bg-gray-100 text-gray-800 border-gray-200';
     case 'Under Review': return 'bg-blue-50 text-blue-700 border-blue-200';
     case 'Revision Requested': return 'bg-orange-50 text-orange-700 border-orange-200';
-    case 'Completed': return 'bg-teal-50 text-teal-700 border-teal-200';
+    case 'Completed': 
+    case 'Completed (Subject to Classification)': 
+    case 'Completed (Not Subject to Classification)': return 'bg-teal-50 text-teal-700 border-teal-200';
     case 'Rejected': return 'bg-red-50 text-red-700 border-red-200';
+    case 'Under RD Review': return 'bg-purple-50 text-purple-700 border-purple-200';
     default: return 'bg-gray-100 text-gray-800 border-gray-200';
   }
 };
@@ -159,7 +167,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
           <div className="md:col-span-2 lg:col-span-3">
             <label className="block text-sm font-medium text-gray-700 mb-3">Status</label>
             <div className="flex flex-wrap gap-4">
-              {STATUS_OPTIONS.map(status => (
+              {getStatusOptions(role).map(status => (
                 <label key={status} className="flex items-center gap-2 cursor-pointer group">
                   <input 
                     type="checkbox" 
