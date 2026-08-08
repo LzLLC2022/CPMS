@@ -7,23 +7,16 @@ export default function SubmissionProcessPage() {
       num: 1,
       title: 'Submit the One-Page Proposal Form',
       desc: (
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mt-4 text-left">
-          <div className="bg-[#F4FBF9] px-4 py-3 border-b border-gray-200">
-            <h4 className="font-bold text-[#11B59F] flex items-center gap-2 text-lg">
-              <span>+</span> Proposal Submission
-            </h4>
-          </div>
-          <div className="p-5 space-y-5">
-            <p className="text-gray-600 text-base leading-relaxed">
-              Submit a new proposal to the Climate Technology Accelerator Fund. Click the button below to start your application process. You will be guided through a step-by-step form.
-            </p>
-            <Link 
-              href="/proposal" 
-              className="block w-full py-3 bg-[#11B59F] hover:bg-[#0e9582] text-white text-center rounded-lg font-medium transition-colors"
-            >
-              Go to Submission
-            </Link>
-          </div>
+        <div className="space-y-5 text-left">
+          <p>
+            Submit a new proposal to the Climate Technology Accelerator Fund. Click the button below to start your application process. You will be guided through a step-by-step form.
+          </p>
+          <Link 
+            href="/proposal" 
+            className="inline-block w-full sm:w-auto px-6 py-3 bg-[#11B59F] hover:bg-[#0e9582] text-white text-center rounded-lg font-medium transition-colors"
+          >
+            Go to Submission
+          </Link>
         </div>
       )
     },
