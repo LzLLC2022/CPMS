@@ -8,6 +8,43 @@ export default function Home() {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const homeItems = [
+    {
+      num: "1",
+      title: "CTAF Projects for the Benefit of All",
+      desc: "Every project CTAF funds delivers benefits for everyone involved: local communities, participating industry, academia and donor governments."
+    },
+    {
+      num: "2",
+      title: "Partnering with Existing Funds & Initiatives",
+      desc: "CTAF builds bridges and collaboration between existing funds and programs – including GGGI initiatives (KGNDTF, BKCF, CTF), World Bank, ADB and partner governments, turning separate efforts into a connected, collaborative network."
+    },
+    {
+      num: "3",
+      title: "Focus on Future-Oriented Climate Technology",
+      desc: "CTAF moves beyond conventional solutions and invests in frontier technologies built for lasting impact."
+    },
+    {
+      num: "4",
+      title: "Quality Guided by Two Expert Working Groups",
+      desc: "Two expert working groups review and select every project, ensuring quality and that CTAF backs the right ideas, in the right places, at the right time."
+    },
+    {
+      num: "5",
+      title: "Build to Scale: Enhancing Global Visibility & Scaling",
+      desc: "Successful projects should not stay small. CTAF showcases results globally, supports promising technologies on their path to commercialization and continuously works to grow the CTAF’s reach and impact."
+    }
+  ];
+
+  const [currentHomeSlide, setCurrentHomeSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHomeSlide((prev) => (prev + 1) % homeItems.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     const checkLoginStatus = () => {
       const role = localStorage.getItem("mockUserRole");
@@ -59,24 +96,45 @@ export default function Home() {
 
   return (
     <div className="flex flex-col lg:flex-row flex-1 w-full h-full">
-      {/* Left Side - About CTAF */}
-      <div className="flex-1 bg-[#18bc9c] flex flex-col justify-center items-start px-12 sm:px-20 xl:px-32 py-16 text-white min-h-[50vh] lg:min-h-0">
-        <h2 className="text-4xl font-extrabold mb-8 text-primary-50">
-          About CTAF
-        </h2>
-        <p className="text-lg leading-relaxed text-primary-100/90 text-justify">
-          Established in 2026, the Climate Technology Accelerator Fund (CTAF)
-          is a joint initiative between the Global Green Growth Institute (GGGI)
-          and Korea’s Ministry of Science and ICT (MSIT). The fund matches
-          South Korea’s advanced public climate technologies with global demand
-          across GGGI’s overseas network to support international demonstration
-          and localization. By bridging the gap between R&D and market entry,
-          CTAF enhances the efficiency of green investments and drives the
-          climate tech industry, directly contributing to the achievement of 2030
-          Nationally Determined Contributions (NDCs). Through a KRW 21 billion
-          commitment over seven years, the fund will support at least three
-          global projects annually to accelerate high-impact climate solutions.
-        </p>
+      {/* Left Side - CTAF Rolling Content */}
+      <div className="flex-1 bg-[#18bc9c] relative flex flex-col min-h-[50vh] lg:min-h-0 overflow-hidden">
+        <div className="absolute inset-0 flex flex-col justify-center px-12 sm:px-20 xl:px-32">
+          
+          <div className="w-full relative h-[300px] flex items-center">
+            {homeItems.map((item, idx) => (
+              <div 
+                key={idx}
+                className={`absolute inset-0 flex items-center gap-8 transition-opacity duration-1000 ${idx === currentHomeSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+              >
+                <div className="flex-shrink-0">
+                  <span className="text-[140px] font-extrabold text-white/20 leading-none" style={{ fontFamily: 'sans-serif' }}>
+                    {item.num}
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <h2 className="text-3xl font-bold mb-4 text-white">
+                    {item.title}
+                  </h2>
+                  <p className="text-[17px] leading-relaxed text-white/90 text-justify">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex gap-3 mt-12 justify-start">
+            {homeItems.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentHomeSlide(idx)}
+                className={`w-3 h-3 rounded-full transition-colors ${idx === currentHomeSlide ? 'bg-white' : 'bg-white/30 hover:bg-white/50'}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Right Side - Proposal Registration */}
