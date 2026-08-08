@@ -32,7 +32,6 @@ export default function ProposalMainPage() {
   };
 
   return (
-  return (
     <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto w-full pt-4 pb-12 px-4 sm:px-6 lg:px-8">
       
       {/* Left Side - Information Menu */}
