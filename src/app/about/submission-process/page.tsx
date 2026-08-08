@@ -5,7 +5,12 @@ export default function SubmissionProcessPage() {
     {
       num: 1,
       title: 'Submit the One-Page Proposal Form',
-      desc: 'Fill out the One-Page Proposal Form and send it to the CTAF Secretariat via email at CTAF@gggi.org with the subject line: "CTAF Idea Note - [Country] - [Project Title]". Keep it to one page, no exceptions!'
+      desc: (
+        <>
+          Fill out the One-Page Proposal Form and send it to the CTAF Secretariat via email at CTAF@gggi.org with the subject line: "CTAF Idea Note - [Country] - [Project Title]". Keep it to one page, no exceptions! <br/><br/>
+          <strong>(향후 시스템으로 진행 예정)</strong>
+        </>
+      )
     },
     {
       num: 2,
