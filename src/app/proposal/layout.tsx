@@ -12,7 +12,7 @@ export default function ProposalLayout({
 
   const tabs = [
     { name: "Main", href: "/proposal" },
-    { name: "Registration", href: "/proposal/registration" },
+    { name: "Submission", href: "/proposal/registration" },
     { name: "Status", href: "/proposal/status" },
   ];
 
