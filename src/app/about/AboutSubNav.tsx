@@ -46,32 +46,23 @@ export default function AboutSubNav() {
   return (
     <div className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center py-4 gap-4 md:gap-8 overflow-x-auto">
-          
-          {/* Breadcrumb part */}
-          <div className="flex items-center text-sm text-gray-500 whitespace-nowrap">
-            <Link href="/about" className="hover:text-[#11B59F] transition-colors">About</Link>
-            <span className="mx-2">&gt;</span>
-            <span className="font-semibold text-gray-900">{currentCategory.title}</span>
-            <span className="mx-2">&gt;</span>
-          </div>
-
-          {/* Sibling Tabs */}
-          <div className="flex flex-nowrap md:flex-wrap gap-x-6 gap-y-2 text-sm font-medium whitespace-nowrap md:whitespace-normal">
-            {currentCategory.links.map(link => {
-              const isActive = pathname === link.href;
-              return (
-                <Link 
-                  key={link.href} 
-                  href={link.href}
-                  className={`${isActive ? "text-[#11B59F] font-bold" : "text-gray-500 hover:text-gray-900"} transition-colors`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-
+        <div className="flex justify-center gap-8 pt-4 overflow-x-auto">
+          {currentCategory.links.map(link => {
+            const isActive = pathname === link.href;
+            return (
+              <Link 
+                key={link.href} 
+                href={link.href}
+                className={`pb-4 px-2 text-[15px] font-medium whitespace-nowrap transition-colors border-b-2 ${
+                  isActive 
+                    ? "border-[#11B59F] text-[#11B59F]" 
+                    : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>
