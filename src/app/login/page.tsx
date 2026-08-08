@@ -1,9 +1,47 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
+
+  const moonshotItems = [
+    {
+      title: "Mission-Oriented Climate Innovation",
+      desc: "CTAF focuses on solving urgent climate challenges with clear purpose, ambition, and measurable outcomes."
+    },
+    {
+      title: "Frontier Climate Technologies",
+      desc: "CTAF supports the application of emerging technologies such as AI, satellites, digital transformation, advanced semiconductors, NPU, CCUS, hydrogen, quantum and other future climate solutions."
+    },
+    {
+      title: "Real-World Demonstration",
+      desc: "CTAF moves beyond concepts and studies by testing technologies in real conditions, particularly through cooperation in developing countries as well as developed ones."
+    },
+    {
+      title: "Transformative Innovation",
+      desc: "CTAF seeks solutions that can go beyond small improvements and create new pathways for climate action, industry, and investment for participating countries."
+    },
+    {
+      title: "Future-Oriented Demonstration Platform",
+      desc: "CTAF connects governments, international organizations, research institutions, companies, and local partners to build scalable climate solutions for the future."
+    },
+    {
+      title: "Global Partnership & Human Capacity Development",
+      desc: "CTAF helps to advance global partnerships in future climate technologies and strengthen local country office capacity."
+    }
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = Math.ceil(moonshotItems.length / 2);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [totalSlides]);
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,25 +136,40 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right Side - Information */}
-      <div className="relative hidden w-0 flex-1 lg:block bg-[#18bc9c]">
-        <div className="absolute inset-0 flex flex-col justify-center items-start px-20 xl:px-32 bg-[#18bc9c] text-white">
-          <h2 className="text-4xl font-extrabold mb-8 text-primary-50">
-            About CTAF
+      {/* Right Side - Information Carousel */}
+      <div className="relative hidden w-0 flex-1 lg:block bg-gray-50 border-l border-gray-100 overflow-hidden">
+        <div className="absolute inset-0 flex flex-col justify-center px-12 xl:px-24">
+          <h2 className="text-3xl font-bold mb-10 text-[#11B59F]">
+            Climate Moonshot Approach
           </h2>
-          <p className="text-lg leading-relaxed text-primary-100/90 text-justify">
-            Established in 2026, the Climate Technology Accelerator Fund (CTAF)
-            is a joint initiative between the Global Green Growth Institute (GGGI)
-            and Korea’s Ministry of Science and ICT (MSIT). The fund matches
-            South Korea’s advanced public climate technologies with global demand
-            across GGGI’s overseas network to support international demonstration
-            and localization. By bridging the gap between R&D and market entry,
-            CTAF enhances the efficiency of green investments and drives the
-            climate tech industry, directly contributing to the achievement of 2030
-            Nationally Determined Contributions (NDCs). Through a KRW 21 billion
-            commitment over seven years, the fund will support at least three
-            global projects annually to accelerate high-impact climate solutions.
-          </p>
+          
+          <div className="w-full relative h-[380px]">
+            {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+              <div 
+                key={slideIndex}
+                className={`absolute inset-0 flex flex-col gap-6 transition-opacity duration-1000 ${slideIndex === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+              >
+                {moonshotItems.slice(slideIndex * 2, slideIndex * 2 + 2).map((item, idx) => (
+                  <div key={idx} className="bg-[#11B59F] p-8 rounded-xl shadow-md text-white flex-1 flex flex-col justify-center">
+                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                    <p className="text-white/90 leading-relaxed text-[15px]">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex gap-2 mt-10 justify-center">
+            {Array.from({ length: totalSlides }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`w-3 h-3 rounded-full transition-colors ${idx === currentSlide ? 'bg-[#11B59F]' : 'bg-gray-300 hover:bg-gray-400'}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
