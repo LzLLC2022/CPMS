@@ -73,14 +73,14 @@ export default function Header() {
             About
           </Link>
           
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-4 w-56 z-50">
-            <Link href="/about/ctaf" className="px-4 py-2 text-sm font-bold text-gray-500 uppercase tracking-wider hover:bg-primary-50 hover:text-primary-600 transition-colors">
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-48 z-50">
+            <Link href="/about/ctaf" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
               About CTAF
             </Link>
-            <Link href="/about/funding" className="px-4 py-2 text-sm font-bold text-gray-500 uppercase tracking-wider hover:bg-primary-50 hover:text-primary-600 transition-colors">
+            <Link href="/about/funding" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
               Project Submission
             </Link>
-            <Link href="/about/selection-process" className="px-4 py-2 text-sm font-bold text-gray-500 uppercase tracking-wider hover:bg-primary-50 hover:text-primary-600 transition-colors">
+            <Link href="/about/selection-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
               Project Selection
             </Link>
           </div>
@@ -185,14 +185,14 @@ export default function Header() {
         <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg sm:hidden flex flex-col py-4 px-6 gap-4 z-50 h-[80vh] overflow-y-auto">
           <div className="flex flex-col gap-2">
             <span className="text-[15px] font-bold text-gray-900">About</span>
-            <div className="pl-4 flex flex-col gap-4 mt-2">
-              <Link href="/about/ctaf" className="text-sm font-bold text-gray-500 uppercase tracking-wider hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="pl-4 flex flex-col gap-2">
+              <Link href="/about/ctaf" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 About CTAF
               </Link>
-              <Link href="/about/funding" className="text-sm font-bold text-gray-500 uppercase tracking-wider hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/about/funding" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 Project Submission
               </Link>
-              <Link href="/about/selection-process" className="text-sm font-bold text-gray-500 uppercase tracking-wider hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/about/selection-process" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 Project Selection
               </Link>
             </div>
