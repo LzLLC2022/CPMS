@@ -66,13 +66,14 @@ export default function SelectionProcessPage() {
         </h1>
 
         {/* Diagram Section */}
-        <div className="mb-24 bg-gray-50 rounded-2xl p-4 sm:p-8 border border-gray-100 shadow-sm flex items-center justify-center relative w-full overflow-hidden" style={{ minHeight: '400px' }}>
+        <div className="mb-24 bg-gray-50 rounded-2xl p-4 sm:p-8 border border-gray-100 shadow-sm flex items-center justify-center w-full">
           <Image 
             src="/about-selection-diagram.png" 
             alt="CTAF Secretariat support diagram"
-            fill
-            className="object-contain"
-            sizes="(max-width: 1280px) 100vw, 1200px"
+            width={1600}
+            height={1000}
+            className="w-full h-auto"
+            priority
           />
         </div>
 
