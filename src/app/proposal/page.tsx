@@ -34,30 +34,51 @@ export default function ProposalMainPage() {
   return (
     <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto w-full pt-4 pb-12 px-4 sm:px-6 lg:px-8">
       
-      {/* Left Side - About CTAF Content */}
-      <div className="flex-1 bg-[#18bc9c] rounded-2xl p-8 lg:p-12 text-white flex flex-col justify-center shadow-md">
-        <h2 className="text-3xl font-extrabold mb-6 text-white">
-          About CTAF
-        </h2>
-        <p className="text-[17px] leading-relaxed text-white/90 text-justify mb-8">
-          Established in 2026, the Climate Technology Accelerator Fund (CTAF)
-          is a joint initiative between the Global Green Growth Institute (GGGI)
-          and Korea’s Ministry of Science and ICT (MSIT). The fund matches
-          South Korea’s advanced public climate technologies with global demand
-          across GGGI’s overseas network to support international demonstration
-          and localization. By bridging the gap between R&D and market entry,
-          CTAF enhances the efficiency of green investments and drives the
-          climate tech industry, directly contributing to the achievement of 2030
-          Nationally Determined Contributions (NDCs). Through a KRW 21 billion
-          commitment over seven years, the fund will support at least three
-          global projects annually to accelerate high-impact climate solutions.
-        </p>
-        <div className="mt-auto">
-          <Link href="/about" className="inline-flex items-center font-bold text-white hover:text-white/80 transition-colors group text-lg">
-            Learn more about CTAF 
-            <span className="ml-2 transform transition-transform group-hover:translate-x-1">→</span>
-          </Link>
+      {/* Left Side - Information Content */}
+      <div className="flex-1 bg-[#18bc9c] rounded-2xl p-8 lg:p-12 text-white flex flex-col shadow-md gap-10">
+        
+        {/* Project Submission Section */}
+        <div>
+          <h2 className="text-3xl font-extrabold mb-4 text-white">
+            Project Submission
+          </h2>
+          <p className="text-[17px] leading-relaxed text-white/90 mb-6">
+            Discover funding opportunities, supported climate technologies, eligibility criteria, and submission processes.
+          </p>
+          <div className="flex flex-col gap-3">
+            <Link href="/about/funding" className="inline-flex items-center text-white/90 hover:text-white transition-colors group">
+              <span className="mr-3 opacity-60 group-hover:opacity-100 transition-opacity">→</span> Project Funding offered by CTAF
+            </Link>
+            <Link href="/about/technologies" className="inline-flex items-center text-white/90 hover:text-white transition-colors group">
+              <span className="mr-3 opacity-60 group-hover:opacity-100 transition-opacity">→</span> Climate Technologies supported by CTAF
+            </Link>
+            <Link href="/about/submission-process" className="inline-flex items-center text-white/90 hover:text-white transition-colors group">
+              <span className="mr-3 opacity-60 group-hover:opacity-100 transition-opacity">→</span> Project Proposal Submission Process
+            </Link>
+            <Link href="/about/eligibility" className="inline-flex items-center text-white/90 hover:text-white transition-colors group">
+              <span className="mr-3 opacity-60 group-hover:opacity-100 transition-opacity">→</span> Project Proposal Eligibility
+            </Link>
+          </div>
         </div>
+
+        {/* Project Selection Section */}
+        <div>
+          <h2 className="text-3xl font-extrabold mb-4 text-white">
+            Project Selection
+          </h2>
+          <p className="text-[17px] leading-relaxed text-white/90 mb-6">
+            Understand how projects are evaluated, our selection process, and the criteria we use for funding.
+          </p>
+          <div className="flex flex-col gap-3">
+            <Link href="/about/selection-process" className="inline-flex items-center text-white/90 hover:text-white transition-colors group">
+              <span className="mr-3 opacity-60 group-hover:opacity-100 transition-opacity">→</span> CTAF’s Selection Process
+            </Link>
+            <Link href="/about/criteria" className="inline-flex items-center text-white/90 hover:text-white transition-colors group">
+              <span className="mr-3 opacity-60 group-hover:opacity-100 transition-opacity">→</span> Criteria for Project Selection
+            </Link>
+          </div>
+        </div>
+
       </div>
 
       {/* Right Side - Actions */}
