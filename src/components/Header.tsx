@@ -92,14 +92,14 @@ export default function Header() {
             href="/proposal-list/regional-director" 
             className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
           >
-            Proposal List
+            Submission Check
           </Link>
         ) : userRole === "Secretariat" ? (
           <Link 
             href="/proposal-list/secretariat" 
             className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block"
           >
-            Proposal List
+            Submission Check
           </Link>
         ) : (
           <Link 
@@ -204,7 +204,7 @@ export default function Header() {
               className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Proposal List
+              Submission Check
             </Link>
           ) : userRole === "Secretariat" ? (
             <Link 
@@ -212,7 +212,7 @@ export default function Header() {
               className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Proposal List
+              Submission Check
             </Link>
           ) : (
             <Link 
