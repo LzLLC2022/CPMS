@@ -35,7 +35,6 @@ const ABOUT_SECTIONS = [
       { name: 'Climate Technologies supported by CTAF', href: '/about/technologies' },
       { name: 'Project Proposal Submission Process', href: '/about/submission-process' },
       { name: 'Project Proposal Eligibility', href: '/about/eligibility' },
-      { name: 'Key Points to consider before applying', href: '/about/key-points' },
     ]
   },
   {
@@ -58,9 +57,6 @@ export default function AboutIndexPage() {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl tracking-tight">
-            About CTAF
-          </h1>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
             Everything you need to know about the Climate Technology Accelerator Fund, from our mission to our funding processes.
           </p>

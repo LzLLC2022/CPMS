@@ -90,7 +90,6 @@ export default function Header() {
             <Link href="/about/technologies" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Climate Technologies supported by CTAF</Link>
             <Link href="/about/submission-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Project Proposal Submission Process</Link>
             <Link href="/about/eligibility" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Project Proposal Eligibility</Link>
-            <Link href="/about/key-points" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Key Points to consider before applying to CTAF</Link>
 
             {/* Project Selection */}
             <div className="px-4 pb-1 mb-2 mt-4 border-b border-gray-100">
