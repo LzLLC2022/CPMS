@@ -61,10 +61,10 @@ export default function CriteriaPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         
         {/* Top Header Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24 items-center">
-          <div className="space-y-6">
+        <div className="mb-24">
+          <div className="max-w-4xl space-y-6">
             <h1 className="text-4xl font-extrabold text-[#11B59F] sm:text-5xl tracking-tight leading-tight">
-              Criteria for<br/>Project Selection
+              Criteria for Project Selection
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed text-justify">
               CTAF gives priority to proposals that bring together a credible, advanced climate technology, 
@@ -76,16 +76,6 @@ export default function CriteriaPage() {
               The full scoring matrix and selection criteria used by the two working groups as well as the 
               Project Steering Committee, can be found in the following tables.
             </p>
-          </div>
-          
-          <div className="relative w-full h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-lg bg-gray-100 hidden lg:block">
-            <Image 
-              src="/about-criteria-hero.png" 
-              alt="Criteria for Project Selection"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
           </div>
         </div>
 
