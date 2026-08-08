@@ -48,8 +48,8 @@ export default function EligibilityPage() {
     <div className="min-h-screen bg-white">
       
       {/* Top Header Section - Teal Background */}
-      <div className="bg-[#11B59F] text-white py-16 sm:py-24" style={{ transform: 'skewY(-2deg)', transformOrigin: 'top left', paddingTop: '4rem', paddingBottom: '6rem' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ transform: 'skewY(2deg)' }}>
+      <div className="bg-[#11B59F] text-white py-16 sm:py-24" style={{ paddingTop: '4rem', paddingBottom: '6rem' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold sm:text-5xl tracking-tight mb-6">
             Project Proposal Eligibility
           </h1>
@@ -95,8 +95,8 @@ export default function EligibilityPage() {
       </div>
 
       {/* Bottom Section - Pathway (Teal Background) */}
-      <div className="bg-[#11B59F] text-white py-16 sm:py-24" style={{ transform: 'skewY(-2deg)', transformOrigin: 'bottom right' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ transform: 'skewY(2deg)' }}>
+      <div className="bg-[#11B59F] text-white py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold mb-12">
             Project proposals should demonstrate a credible pathway from:
           </h2>
