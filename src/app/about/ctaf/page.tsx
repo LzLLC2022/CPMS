@@ -49,7 +49,7 @@ export default function AboutCtafPage() {
             <div className="relative w-full h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl bg-gray-100 flex items-center justify-center">
               {/* Top right image (Signing Ceremony) */}
               <Image 
-                src="/about-ctaf-1.png" 
+                src="/about-ctaf-1.jpg" 
                 alt="Signing Ceremony"
                 fill
                 className="object-cover"
@@ -65,7 +65,7 @@ export default function AboutCtafPage() {
             <div className="relative w-full h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-xl bg-gray-100 flex items-center justify-center">
               {/* Bottom left image (Group Photo) */}
               <Image 
-                src="/about-ctaf-2.png" 
+                src="/about-ctaf-2.jpg" 
                 alt="CTAF Group Photo"
                 fill
                 className="object-cover"
