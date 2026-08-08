@@ -71,6 +71,58 @@ export default function Home() {
     return <div className="flex flex-1 w-full h-full bg-white"></div>;
   }
 
+  if (userRole === "Regional Director") {
+    return (
+      <div className="flex flex-1 flex-col w-full py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-3xl font-extrabold text-gray-900">
+                Regional Director Dashboard
+              </h2>
+              <p className="text-gray-600 mt-2">Overview of project proposal statuses in your region.</p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending Review</span>
+              <span className="text-5xl font-extrabold text-gray-800">12</span>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Under Revision</span>
+              <span className="text-5xl font-extrabold text-orange-500">3</span>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Approved</span>
+              <span className="text-5xl font-extrabold text-teal-600">8</span>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Rejected</span>
+              <span className="text-5xl font-extrabold text-red-500">1</span>
+            </div>
+          </div>
+          
+          <div className="mt-10 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-gray-900">Recent Proposals</h3>
+              <button 
+                onClick={() => router.push('/proposal-list/regional-director')}
+                className="text-sm font-medium text-teal-600 hover:text-teal-700"
+              >
+                View All →
+              </button>
+            </div>
+            <p className="text-gray-500 italic">Detailed proposal list will be integrated here.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (userRole) {
     return (
       <div className="flex flex-1 flex-col w-full items-center justify-center py-20 px-4 bg-gray-50">
