@@ -47,11 +47,9 @@ export default function AboutSubNav() {
     <div className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col pt-6">
-          {/* Parent Menu / Breadcrumb */}
-          <div className="flex items-center justify-center text-sm text-gray-500 mb-4 whitespace-nowrap">
-            <Link href="/about" className="hover:text-[#11B59F] transition-colors">About</Link>
-            <span className="mx-2">&gt;</span>
-            <span className="font-semibold text-gray-900">{currentCategory.title}</span>
+          {/* Parent Menu Title */}
+          <div className="flex items-center justify-center text-lg font-bold text-gray-900 mb-6 whitespace-nowrap">
+            {currentCategory.title}
           </div>
 
           {/* Sibling Tabs */}
