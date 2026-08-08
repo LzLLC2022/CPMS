@@ -34,50 +34,29 @@ export default function ProposalMainPage() {
   return (
     <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto w-full pt-4 pb-12 px-4 sm:px-6 lg:px-8">
       
-      {/* Left Side - Information Menu */}
-      <div className="flex-1 flex flex-col sm:flex-row lg:flex-col gap-6 lg:pr-4">
-        {/* Project Submission Card */}
-        <div className="flex-1 bg-white border border-gray-200 rounded-xl shadow-sm p-8 flex flex-col transition-shadow hover:shadow-md">
-          <div className="w-12 h-12 bg-[#E9F5F3] text-[#11B59F] rounded-lg flex items-center justify-center mb-6">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Project Submission</h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">
-            Discover funding opportunities, supported climate technologies, eligibility criteria, and submission processes.
-          </p>
-          <div className="flex flex-col gap-4 mt-auto">
-            <Link href="/about/funding" className="flex items-center text-gray-600 hover:text-[#11B59F] transition-colors group">
-              <span className="mr-3 text-gray-400 group-hover:text-[#11B59F]">→</span> Project Funding offered by CTAF
-            </Link>
-            <Link href="/about/technologies" className="flex items-center text-gray-600 hover:text-[#11B59F] transition-colors group">
-              <span className="mr-3 text-gray-400 group-hover:text-[#11B59F]">→</span> Climate Technologies supported by CTAF
-            </Link>
-            <Link href="/about/submission-process" className="flex items-center text-gray-600 hover:text-[#11B59F] transition-colors group">
-              <span className="mr-3 text-gray-400 group-hover:text-[#11B59F]">→</span> Project Proposal Submission Process
-            </Link>
-            <Link href="/about/eligibility" className="flex items-center text-gray-600 hover:text-[#11B59F] transition-colors group">
-              <span className="mr-3 text-gray-400 group-hover:text-[#11B59F]">→</span> Project Proposal Eligibility
-            </Link>
-          </div>
-        </div>
-
-        {/* Project Selection Card */}
-        <div className="flex-1 bg-white border border-gray-200 rounded-xl shadow-sm p-8 flex flex-col transition-shadow hover:shadow-md">
-          <div className="w-12 h-12 bg-[#E9F5F3] text-[#11B59F] rounded-lg flex items-center justify-center mb-6">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Project Selection</h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">
-            Understand how projects are evaluated, our selection process, and the criteria we use for funding.
-          </p>
-          <div className="flex flex-col gap-4 mt-auto">
-            <Link href="/about/selection-process" className="flex items-center text-gray-600 hover:text-[#11B59F] transition-colors group">
-              <span className="mr-3 text-gray-400 group-hover:text-[#11B59F]">→</span> CTAF’s Selection Process
-            </Link>
-            <Link href="/about/criteria" className="flex items-center text-gray-600 hover:text-[#11B59F] transition-colors group">
-              <span className="mr-3 text-gray-400 group-hover:text-[#11B59F]">→</span> Criteria for Project Selection
-            </Link>
-          </div>
+      {/* Left Side - About CTAF Content */}
+      <div className="flex-1 bg-[#18bc9c] rounded-2xl p-8 lg:p-12 text-white flex flex-col justify-center shadow-md">
+        <h2 className="text-3xl font-extrabold mb-6 text-white">
+          About CTAF
+        </h2>
+        <p className="text-[17px] leading-relaxed text-white/90 text-justify mb-8">
+          Established in 2026, the Climate Technology Accelerator Fund (CTAF)
+          is a joint initiative between the Global Green Growth Institute (GGGI)
+          and Korea’s Ministry of Science and ICT (MSIT). The fund matches
+          South Korea’s advanced public climate technologies with global demand
+          across GGGI’s overseas network to support international demonstration
+          and localization. By bridging the gap between R&D and market entry,
+          CTAF enhances the efficiency of green investments and drives the
+          climate tech industry, directly contributing to the achievement of 2030
+          Nationally Determined Contributions (NDCs). Through a KRW 21 billion
+          commitment over seven years, the fund will support at least three
+          global projects annually to accelerate high-impact climate solutions.
+        </p>
+        <div className="mt-auto">
+          <Link href="/about" className="inline-flex items-center font-bold text-white hover:text-white/80 transition-colors group text-lg">
+            Learn more about CTAF 
+            <span className="ml-2 transform transition-transform group-hover:translate-x-1">→</span>
+          </Link>
         </div>
       </div>
 
