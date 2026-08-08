@@ -73,30 +73,16 @@ export default function Header() {
             About
           </Link>
           
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-4 w-80 z-50">
-            {/* About CTAF */}
-            <div className="px-4 pb-1 mb-2 border-b border-gray-100">
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">About CTAF</span>
-            </div>
-            <Link href="/about/ctaf" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">CTAF?</Link>
-            <Link href="/about/structure" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Organizational Structure</Link>
-            <Link href="/about/logo" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Logo & Mascot</Link>
-
-            {/* Project Submission */}
-            <div className="px-4 pb-1 mb-2 mt-4 border-b border-gray-100">
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Project Submission</span>
-            </div>
-            <Link href="/about/funding" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Project Funding offered by CTAF</Link>
-            <Link href="/about/technologies" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Climate Technologies supported by CTAF</Link>
-            <Link href="/about/submission-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Project Proposal Submission Process</Link>
-            <Link href="/about/eligibility" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Project Proposal Eligibility</Link>
-
-            {/* Project Selection */}
-            <div className="px-4 pb-1 mb-2 mt-4 border-b border-gray-100">
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Project Selection</span>
-            </div>
-            <Link href="/about/selection-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">CTAF’s Selection Process</Link>
-            <Link href="/about/criteria" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Criteria for Project Selection</Link>
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-4 w-56 z-50">
+            <Link href="/about/ctaf" className="px-4 py-2 text-sm font-bold text-gray-500 uppercase tracking-wider hover:bg-primary-50 hover:text-primary-600 transition-colors">
+              About CTAF
+            </Link>
+            <Link href="/about/funding" className="px-4 py-2 text-sm font-bold text-gray-500 uppercase tracking-wider hover:bg-primary-50 hover:text-primary-600 transition-colors">
+              Project Submission
+            </Link>
+            <Link href="/about/selection-process" className="px-4 py-2 text-sm font-bold text-gray-500 uppercase tracking-wider hover:bg-primary-50 hover:text-primary-600 transition-colors">
+              Project Selection
+            </Link>
           </div>
         </div>
 
@@ -199,22 +185,16 @@ export default function Header() {
         <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg sm:hidden flex flex-col py-4 px-6 gap-4 z-50 h-[80vh] overflow-y-auto">
           <div className="flex flex-col gap-2">
             <span className="text-[15px] font-bold text-gray-900">About</span>
-            <div className="pl-4 flex flex-col gap-2">
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">About CTAF</span>
-              <Link href="/about/ctaf" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>CTAF?</Link>
-              <Link href="/about/structure" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Organizational Structure</Link>
-              <Link href="/about/logo" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Logo & Mascot</Link>
-
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-wider mt-4">Project Submission</span>
-              <Link href="/about/funding" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Project Funding offered by CTAF</Link>
-              <Link href="/about/technologies" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Climate Technologies supported by CTAF</Link>
-              <Link href="/about/submission-process" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Project Proposal Submission Process</Link>
-              <Link href="/about/eligibility" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Project Proposal Eligibility</Link>
-              <Link href="/about/key-points" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Key Points to consider before applying to CTAF</Link>
-
-              <span className="text-xs font-bold text-gray-500 uppercase tracking-wider mt-4">Project Selection</span>
-              <Link href="/about/selection-process" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>CTAF’s Selection Process</Link>
-              <Link href="/about/criteria" className="text-sm text-gray-700 hover:text-primary-600" onClick={() => setIsMobileMenuOpen(false)}>Criteria for Project Selection</Link>
+            <div className="pl-4 flex flex-col gap-4 mt-2">
+              <Link href="/about/ctaf" className="text-sm font-bold text-gray-500 uppercase tracking-wider hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                About CTAF
+              </Link>
+              <Link href="/about/funding" className="text-sm font-bold text-gray-500 uppercase tracking-wider hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                Project Submission
+              </Link>
+              <Link href="/about/selection-process" className="text-sm font-bold text-gray-500 uppercase tracking-wider hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                Project Selection
+              </Link>
             </div>
           </div>
 
