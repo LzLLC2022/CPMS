@@ -6,6 +6,7 @@ import Link from 'next/link';
 interface SubmissionListProps {
   role: 'Regional Director' | 'Secretariat';
   fixedRegion?: string;
+  listType?: 'submission' | 'classification';
 }
 
 // Mock Data
@@ -18,7 +19,10 @@ const MOCK_PROPOSALS = [
   { id: 'CTAF-2026-10-0006', region: 'Africa', country: 'Senegal', title: 'Green Hydrogen Production', email: 'applicant6@gggi.org', date: '2026-10-20', status: 'Pending' },
 ];
 
-const getStatusOptions = (role: string) => {
+const getStatusOptions = (role: string, listType?: string) => {
+  if (listType === 'classification') {
+    return ['Pending', 'Processing', 'Completed'];
+  }
   if (role === 'Secretariat') {
     return ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected', 'Under RD Review'];
   }
@@ -28,6 +32,7 @@ const getStatusOptions = (role: string) => {
 const getStatusBadgeColor = (status: string) => {
   switch (status) {
     case 'Pending': return 'bg-gray-100 text-gray-800 border-gray-200';
+    case 'Processing': return 'bg-blue-50 text-blue-700 border-blue-200';
     case 'Under Review': return 'bg-blue-50 text-blue-700 border-blue-200';
     case 'Revision Requested': return 'bg-orange-50 text-orange-700 border-orange-200';
     case 'Completed': 
@@ -39,7 +44,7 @@ const getStatusBadgeColor = (status: string) => {
   }
 };
 
-export default function SubmissionList({ role, fixedRegion }: SubmissionListProps) {
+export default function SubmissionList({ role, fixedRegion, listType = 'submission' }: SubmissionListProps) {
   // Search States
   const [region, setRegion] = useState(fixedRegion || '');
   const [countries, setCountries] = useState<string[]>([]);
@@ -47,7 +52,9 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [email, setEmail] = useState('');
   const [proposalNo, setProposalNo] = useState('');
-  const [statuses, setStatuses] = useState<string[]>(['Pending', 'Under Review', 'Revision Requested']);
+  const [statuses, setStatuses] = useState<string[]>(
+    listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested']
+  );
   const [completedSubStatus, setCompletedSubStatus] = useState('All');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -79,7 +86,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
     setCountries([]);
     setEmail('');
     setProposalNo('');
-    setStatuses(['Pending', 'Under Review', 'Revision Requested']);
+    setStatuses(listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested']);
     setCompletedSubStatus('All');
     setStartDate('');
     setEndDate('');
@@ -95,7 +102,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
     if (statuses.length > 0) {
       if (p.status.startsWith('Completed')) {
         if (!statuses.includes('Completed')) return false;
-        if (role === 'Secretariat') {
+        if (role === 'Secretariat' && listType !== 'classification') {
           if (completedSubStatus === 'Classification' && p.status !== 'Completed (Subject to Classification)') return false;
           if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Not Subject to Classification)') return false;
         }
@@ -238,7 +245,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
           <div className="md:col-span-2 lg:col-span-3">
             <label className="block text-sm font-medium text-gray-700 mb-3">Status</label>
             <div className="flex flex-wrap gap-4 items-center">
-              {getStatusOptions(role).map(status => (
+              {getStatusOptions(role, listType).map(status => (
                 <div key={status} className="flex items-center gap-2">
                   <label className="flex items-center gap-2 cursor-pointer group">
                     <input 
@@ -249,7 +256,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
                     />
                     <span className="text-gray-700 group-hover:text-gray-900">{status}</span>
                   </label>
-                  {status === 'Completed' && role === 'Secretariat' && statuses.includes('Completed') && (
+                  {status === 'Completed' && role === 'Secretariat' && listType !== 'classification' && statuses.includes('Completed') && (
                     <select
                       value={completedSubStatus}
                       onChange={(e) => setCompletedSubStatus(e.target.value)}
