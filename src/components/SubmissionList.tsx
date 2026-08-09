@@ -20,7 +20,7 @@ const MOCK_PROPOSALS = [
 
 const getStatusOptions = (role: string) => {
   if (role === 'Secretariat') {
-    return ['Pending', 'Under Review', 'Revision Requested', 'Completed (Subject to Classification)', 'Completed (Not Subject to Classification)', 'Rejected', 'Under RD Review'];
+    return ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected', 'Under RD Review'];
   }
   return ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected'];
 };
@@ -46,6 +46,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
   const [email, setEmail] = useState('');
   const [proposalNo, setProposalNo] = useState('');
   const [statuses, setStatuses] = useState<string[]>(['Pending', 'Under Review', 'Revision Requested']);
+  const [completedSubStatus, setCompletedSubStatus] = useState('All');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -61,6 +62,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
     setEmail('');
     setProposalNo('');
     setStatuses(['Pending', 'Under Review', 'Revision Requested']);
+    setCompletedSubStatus('All');
     setStartDate('');
     setEndDate('');
   };
@@ -71,7 +73,19 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
     if (country && p.country.toLowerCase() !== country.toLowerCase()) return false;
     if (email && !p.email.toLowerCase().includes(email.toLowerCase())) return false;
     if (proposalNo && !p.id.toLowerCase().includes(proposalNo.toLowerCase())) return false;
-    if (statuses.length > 0 && !statuses.includes(p.status)) return false;
+    
+    if (statuses.length > 0) {
+      if (p.status.startsWith('Completed')) {
+        if (!statuses.includes('Completed')) return false;
+        if (role === 'Secretariat') {
+          if (completedSubStatus === 'Classification' && p.status !== 'Completed (Subject to Classification)') return false;
+          if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Not Subject to Classification)') return false;
+        }
+      } else {
+        if (!statuses.includes(p.status)) return false;
+      }
+    }
+
     if (startDate && new Date(p.date) < new Date(startDate)) return false;
     if (endDate && new Date(p.date) > new Date(endDate)) return false;
     return true;
@@ -166,17 +180,30 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
           {/* Status */}
           <div className="md:col-span-2 lg:col-span-3">
             <label className="block text-sm font-medium text-gray-700 mb-3">Status</label>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 items-center">
               {getStatusOptions(role).map(status => (
-                <label key={status} className="flex items-center gap-2 cursor-pointer group">
-                  <input 
-                    type="checkbox" 
-                    checked={statuses.includes(status)}
-                    onChange={() => handleStatusToggle(status)}
-                    className="w-4 h-4 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
-                  />
-                  <span className="text-gray-700 group-hover:text-gray-900">{status}</span>
-                </label>
+                <div key={status} className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={statuses.includes(status)}
+                      onChange={() => handleStatusToggle(status)}
+                      className="w-4 h-4 text-teal-600 rounded border-gray-300 focus:ring-teal-500"
+                    />
+                    <span className="text-gray-700 group-hover:text-gray-900">{status}</span>
+                  </label>
+                  {status === 'Completed' && role === 'Secretariat' && statuses.includes('Completed') && (
+                    <select
+                      value={completedSubStatus}
+                      onChange={(e) => setCompletedSubStatus(e.target.value)}
+                      className="p-1 border border-gray-300 rounded outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-sm bg-white"
+                    >
+                      <option value="All">All</option>
+                      <option value="Classification">Classification</option>
+                      <option value="Non Classification">Non Classification</option>
+                    </select>
+                  )}
+                </div>
               ))}
             </div>
           </div>
