@@ -127,7 +127,7 @@ export default function Home() {
               <h2 className="text-3xl font-extrabold text-gray-900">
                 Secretariat Dashboard
               </h2>
-              <p className="text-gray-600 mt-2">Overview of all project proposal statuses.</p>
+              <p className="text-gray-600 mt-2">Overview of all project submission statuses.</p>
             </div>
           </div>
           
@@ -150,7 +150,7 @@ export default function Home() {
           
           <div className="mt-10 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-900">Recent Proposals</h3>
+              <h3 className="text-xl font-bold text-gray-900">Recent Submissions</h3>
               <button 
                 onClick={() => router.push('/proposal-list/secretariat')}
                 className="text-sm font-medium text-teal-600 hover:text-teal-700"
@@ -158,7 +158,7 @@ export default function Home() {
                 View All →
               </button>
             </div>
-            <p className="text-gray-500 italic">Detailed proposal list will be integrated here.</p>
+            <p className="text-gray-500 italic">Detailed submission list will be integrated here.</p>
           </div>
         </div>
       </div>
