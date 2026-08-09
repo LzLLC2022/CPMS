@@ -42,7 +42,7 @@ const getStatusBadgeColor = (status: string) => {
 export default function SubmissionList({ role, fixedRegion }: SubmissionListProps) {
   // Search States
   const [region, setRegion] = useState(fixedRegion || '');
-  const [country, setCountry] = useState('');
+  const [countries, setCountries] = useState<string[]>([]);
   const [email, setEmail] = useState('');
   const [proposalNo, setProposalNo] = useState('');
   const [statuses, setStatuses] = useState<string[]>(['Pending', 'Under Review', 'Revision Requested']);
@@ -58,7 +58,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
 
   const handleReset = () => {
     setRegion(fixedRegion || '');
-    setCountry('');
+    setCountries([]);
     setEmail('');
     setProposalNo('');
     setStatuses(['Pending', 'Under Review', 'Revision Requested']);
@@ -70,7 +70,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
   // Filter Mock Data
   const filteredProposals = MOCK_PROPOSALS.filter(p => {
     if (region && p.region !== region) return false;
-    if (country && p.country.toLowerCase() !== country.toLowerCase()) return false;
+    if (countries.length > 0 && !countries.some(c => c.toLowerCase() === p.country.toLowerCase())) return false;
     if (email && !p.email.toLowerCase().includes(email.toLowerCase())) return false;
     if (proposalNo && !p.id.toLowerCase().includes(proposalNo.toLowerCase())) return false;
     
@@ -119,11 +119,16 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
             <select 
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              className="w-full p-2.5 border border-gray-300 rounded-lg outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 bg-white"
+              multiple
+              value={countries}
+              onChange={(e) => {
+                const options = Array.from(e.target.selectedOptions, option => option.value);
+                setCountries(options);
+              }}
+              disabled={role === 'Secretariat' && !region}
+              className={`w-full p-2.5 border rounded-lg outline-none transition-colors ${role === 'Secretariat' && !region ? 'bg-gray-100 border-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white border-gray-300 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
+              size={4}
             >
-              <option value="">All Countries</option>
               <option value="Vietnam">Vietnam</option>
               <option value="Rwanda">Rwanda</option>
               <option value="Indonesia">Indonesia</option>
@@ -131,6 +136,7 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
               <option value="Philippines">Philippines</option>
               <option value="Senegal">Senegal</option>
             </select>
+            <p className="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple. Leave empty for all.</p>
           </div>
 
           {/* Proposal No */}
