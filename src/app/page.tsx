@@ -37,6 +37,7 @@ export default function Home() {
   ];
 
   const [currentHomeSlide, setCurrentHomeSlide] = useState(0);
+  const [secretariatTab, setSecretariatTab] = useState<'Submission Check' | 'Classification'>('Submission Check');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -131,34 +132,87 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending</span>
-              <span className="text-5xl font-extrabold text-gray-800">24</span>
+          {/* Stats Section with Tabs */}
+          <div className="mb-10">
+            <div className="flex border-b border-gray-300">
+              <button 
+                className={`px-4 py-2 text-sm font-medium border-t border-l border-r ${secretariatTab === 'Submission Check' ? 'border-gray-300 bg-white text-gray-900 z-10' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}
+                onClick={() => setSecretariatTab('Submission Check')}
+                style={{ marginBottom: '-1px' }}
+              >
+                Submission Check
+              </button>
+              <button 
+                className={`px-4 py-2 text-sm font-medium border-t border-l border-r ${secretariatTab === 'Classification' ? 'border-gray-300 bg-white text-gray-900 z-10' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}
+                onClick={() => setSecretariatTab('Classification')}
+                style={{ marginBottom: '-1px' }}
+              >
+                Classification
+              </button>
             </div>
             
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Under Review</span>
-              <span className="text-5xl font-extrabold text-blue-600">15</span>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Review Completed</span>
-              <span className="text-5xl font-extrabold text-green-500">8</span>
+            <div className="bg-white p-6 rounded-b-xl rounded-tr-xl shadow-sm border border-gray-300">
+              {secretariatTab === 'Submission Check' ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending</span>
+                    <span className="text-5xl font-extrabold text-gray-800">24</span>
+                  </div>
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Under Review</span>
+                    <span className="text-5xl font-extrabold text-blue-600">15</span>
+                  </div>
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Review Completed</span>
+                    <span className="text-5xl font-extrabold text-green-500">8</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending</span>
+                    <span className="text-5xl font-extrabold text-gray-800">10</span>
+                  </div>
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Processing</span>
+                    <span className="text-5xl font-extrabold text-blue-600">4</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           
-          <div className="mt-10 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-900">Recent Submissions</h3>
+          {/* Recent List Section with Tabs */}
+          <div>
+            <div className="flex border-b border-gray-300">
               <button 
-                onClick={() => router.push('/proposal-list/secretariat')}
-                className="text-sm font-medium text-teal-600 hover:text-teal-700"
+                className={`px-4 py-2 text-sm font-medium border-t border-l border-r ${secretariatTab === 'Submission Check' ? 'border-gray-300 bg-white text-gray-900 z-10' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}
+                onClick={() => setSecretariatTab('Submission Check')}
+                style={{ marginBottom: '-1px' }}
               >
-                View All →
+                Submission Check
+              </button>
+              <button 
+                className={`px-4 py-2 text-sm font-medium border-t border-l border-r ${secretariatTab === 'Classification' ? 'border-gray-300 bg-white text-gray-900 z-10' : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}
+                onClick={() => setSecretariatTab('Classification')}
+                style={{ marginBottom: '-1px' }}
+              >
+                Classification
               </button>
             </div>
-            <p className="text-gray-500 italic">Detailed submission list will be integrated here.</p>
+            
+            <div className="bg-white p-8 rounded-b-xl rounded-tr-xl shadow-sm border border-gray-300">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-gray-900">Recent Submissions</h3>
+                <button 
+                  onClick={() => router.push(secretariatTab === 'Submission Check' ? '/proposal-list/secretariat' : '/classification')}
+                  className="text-sm font-medium text-teal-600 hover:text-teal-700"
+                >
+                  View All →
+                </button>
+              </div>
+              <p className="text-gray-500 italic">Detailed submission list will be integrated here.</p>
+            </div>
           </div>
         </div>
       </div>
