@@ -43,12 +43,30 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
   // Search States
   const [region, setRegion] = useState(fixedRegion || '');
   const [countries, setCountries] = useState<string[]>([]);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [email, setEmail] = useState('');
   const [proposalNo, setProposalNo] = useState('');
   const [statuses, setStatuses] = useState<string[]>(['Pending', 'Under Review', 'Revision Requested']);
   const [completedSubStatus, setCompletedSubStatus] = useState('All');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+
+  const REGION_COUNTRIES: Record<string, string[]> = {
+    "Africa": ["Cote D'Ivoire", "Senegal", "Uganda", "Rwanda"],
+    "Asia": ["Republic of Korea", "Japan", "Vietnam", "Indonesia", "Philippines", "Mongolia", "South Korea"],
+    "Latin America": ["Colombia", "Mexico"],
+  };
+
+  const filteredCountries = region && REGION_COUNTRIES[region]
+    ? REGION_COUNTRIES[region].filter((c) => c.toLowerCase().includes(countrySearch.toLowerCase()))
+    : [];
+
+  const toggleCountry = (c: string) => {
+    setCountries(prev => 
+      prev.includes(c) ? prev.filter(item => item !== c) : [...prev, c]
+    );
+  };
 
   const handleStatusToggle = (status: string) => {
     setStatuses(prev => 
@@ -104,7 +122,10 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
             <label className="block text-sm font-medium text-gray-700 mb-2">Region</label>
             <select 
               value={region}
-              onChange={(e) => setRegion(e.target.value)}
+              onChange={(e) => {
+                setRegion(e.target.value);
+                setCountries([]);
+              }}
               disabled={role === 'Regional Director'}
               className={`w-full p-2.5 border rounded-lg outline-none transition-colors ${role === 'Regional Director' ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : 'bg-white border-gray-300 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
             >
@@ -118,25 +139,55 @@ export default function SubmissionList({ role, fixedRegion }: SubmissionListProp
           {/* Country */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
-            <select 
-              multiple
-              value={countries}
-              onChange={(e) => {
-                const options = Array.from(e.target.selectedOptions, option => option.value);
-                setCountries(options);
-              }}
-              disabled={role === 'Secretariat' && !region}
-              className={`w-full p-2.5 border rounded-lg outline-none transition-colors ${role === 'Secretariat' && !region ? 'bg-gray-100 border-gray-300 text-gray-500 cursor-not-allowed' : 'bg-white border-gray-300 focus:border-teal-500 focus:ring-1 focus:ring-teal-500'}`}
-              size={4}
-            >
-              <option value="Vietnam">Vietnam</option>
-              <option value="Rwanda">Rwanda</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Colombia">Colombia</option>
-              <option value="Philippines">Philippines</option>
-              <option value="Senegal">Senegal</option>
-            </select>
-            <p className="text-xs text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple. Leave empty for all.</p>
+            <div className="relative">
+              <div 
+                className={`min-h-[44px] w-full rounded-lg border py-2 px-3 text-gray-900 bg-white sm:text-sm flex flex-wrap gap-2 items-center ${role === 'Secretariat' && !region ? 'bg-gray-100 border-gray-300 cursor-not-allowed text-gray-500' : 'cursor-text border-gray-300 focus-within:border-teal-500 focus-within:ring-1 focus-within:ring-teal-500'}`}
+                onClick={() => {
+                  if (!(role === 'Secretariat' && !region)) setShowCountryDropdown(true);
+                }}
+              >
+                {countries.map((c) => (
+                  <span key={c} className="bg-teal-50 text-teal-700 border border-teal-200 px-2 py-0.5 rounded-md text-xs flex items-center gap-1">
+                    {c}
+                    <button type="button" onClick={(e) => { e.stopPropagation(); toggleCountry(c); }} className="hover:text-teal-900">&times;</button>
+                  </span>
+                ))}
+                <input 
+                  type="text" 
+                  className="flex-1 outline-none bg-transparent min-w-[100px] text-sm disabled:cursor-not-allowed text-gray-900" 
+                  placeholder={role === 'Secretariat' && !region ? "" : (countries.length === 0 ? "Select countries..." : "")}
+                  value={countrySearch}
+                  onChange={(e) => setCountrySearch(e.target.value)}
+                  onFocus={() => {
+                    if (!(role === 'Secretariat' && !region)) setShowCountryDropdown(true);
+                  }}
+                  onBlur={() => setTimeout(() => setShowCountryDropdown(false), 200)}
+                  disabled={role === 'Secretariat' && !region}
+                />
+              </div>
+              {showCountryDropdown && region && (
+                <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto sm:text-sm">
+                  {filteredCountries.length > 0 ? filteredCountries.map((c) => (
+                    <div 
+                      key={c} 
+                      className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-teal-50 text-gray-900"
+                      onClick={() => { toggleCountry(c); setCountrySearch(""); }}
+                    >
+                      <span className="block truncate">{c}</span>
+                      {countries.includes(c) && (
+                        <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-teal-600">
+                          ✓
+                        </span>
+                      )}
+                    </div>
+                  )) : (
+                    <div className="cursor-default select-none relative py-2 pl-3 pr-9 text-gray-500">
+                      No countries found.
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Proposal No */}
