@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface ProposalDetailProps {
   id: string;
@@ -12,6 +13,7 @@ interface ProposalDetailProps {
 type ModalType = 'None' | 'CompleteReview' | 'RequestRevision' | 'Reject' | 'Next';
 
 export default function ProposalDetail({ id, role, listType = 'submission' }: ProposalDetailProps) {
+  const router = useRouter();
   const [activeModal, setActiveModal] = useState<ModalType>('None');
 
   // Modal form states
@@ -101,12 +103,20 @@ export default function ProposalDetail({ id, role, listType = 'submission' }: Pr
       </div>
 
       <div className="flex flex-wrap gap-4 justify-between">
-        <Link 
-          href={listHref}
+        <button 
+          onClick={() => {
+            if (listType === 'classification') {
+              router.push('/classification');
+            } else if (role === 'Regional Director') {
+              router.push('/proposal-list/regional-director');
+            } else {
+              router.push('/proposal-list/secretariat');
+            }
+          }}
           className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors shadow-sm"
         >
           List
-        </Link>
+        </button>
         <div className="flex flex-wrap gap-3">
           {listType === 'classification' && proposal.status === 'Pending' ? (
             <button 
