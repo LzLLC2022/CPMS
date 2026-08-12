@@ -136,19 +136,21 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
               <h3 className="text-lg font-bold text-gray-900">Complete Review</h3>
             </div>
             <div className="p-6">
-              <div className="mb-5">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Review Completion Category *</label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="reviewTarget" value="Target" checked={reviewTarget === 'Target'} onChange={(e) => setReviewTarget(e.target.value)} className="text-teal-600 focus:ring-teal-500" />
-                    <span>Target</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="reviewTarget" value="Not Target" checked={reviewTarget === 'Not Target'} onChange={(e) => setReviewTarget(e.target.value)} className="text-teal-600 focus:ring-teal-500" />
-                    <span>Not Target</span>
-                  </label>
+              {role === 'Secretariat' && (
+                <div className="mb-5">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Review Completion Category *</label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="reviewTarget" value="Target" checked={reviewTarget === 'Target'} onChange={(e) => setReviewTarget(e.target.value)} className="text-teal-600 focus:ring-teal-500" />
+                      <span>Target</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="reviewTarget" value="Not Target" checked={reviewTarget === 'Not Target'} onChange={(e) => setReviewTarget(e.target.value)} className="text-teal-600 focus:ring-teal-500" />
+                      <span>Not Target</span>
+                    </label>
+                  </div>
                 </div>
-              </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Opinion</label>
                 <textarea 
@@ -161,7 +163,7 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
             </div>
             <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
               <button onClick={closeModal} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">Cancel</button>
-              <button onClick={() => handleSubmit('Complete Review')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm disabled:opacity-50" disabled={!reviewTarget}>Submit</button>
+              <button onClick={() => handleSubmit('Complete Review')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm disabled:opacity-50" disabled={role === 'Secretariat' && !reviewTarget}>Submit</button>
             </div>
           </div>
         </div>
