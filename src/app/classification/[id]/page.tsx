@@ -1,5 +1,5 @@
-import ProposalDetail from '@/components/ProposalDetail';
+import ClassificationDetail from '@/components/ClassificationDetail';
 
 export default function ClassificationProposalDetailPage({ params }: { params: { id: string } }) {
-  return <ProposalDetail id={params.id} role="Secretariat" listType="classification" />;
+  return <ClassificationDetail id={params.id} />;
 }

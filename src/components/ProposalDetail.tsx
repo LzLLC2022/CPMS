@@ -7,12 +7,11 @@ import { useRouter } from 'next/navigation';
 interface ProposalDetailProps {
   id: string;
   role: 'Regional Director' | 'Secretariat';
-  listType?: 'submission' | 'classification';
 }
 
-type ModalType = 'None' | 'CompleteReview' | 'RequestRevision' | 'Reject' | 'Next';
+type ModalType = 'None' | 'CompleteReview' | 'RequestRevision' | 'Reject';
 
-export default function ProposalDetail({ id, role, listType = 'submission' }: ProposalDetailProps) {
+export default function ProposalDetail({ id, role }: ProposalDetailProps) {
   const router = useRouter();
   const [activeModal, setActiveModal] = useState<ModalType>('None');
 
@@ -105,9 +104,7 @@ export default function ProposalDetail({ id, role, listType = 'submission' }: Pr
       <div className="flex flex-wrap gap-4 justify-between">
         <button 
           onClick={() => {
-            if (listType === 'classification') {
-              router.push('/classification');
-            } else if (role === 'Regional Director') {
+            if (role === 'Regional Director') {
               router.push('/proposal-list/regional-director');
             } else {
               router.push('/proposal-list/secretariat');
@@ -118,35 +115,24 @@ export default function ProposalDetail({ id, role, listType = 'submission' }: Pr
           List
         </button>
         <div className="flex flex-wrap gap-3">
-          {listType === 'classification' && proposal.status === 'Pending' ? (
-            <button 
-              onClick={() => setActiveModal('Next')}
-              className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
-            >
-              Next
-            </button>
-          ) : (
-            <>
-              <button 
-                onClick={() => setActiveModal('CompleteReview')}
-                className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
-              >
-                Complete Review
-              </button>
-              <button 
-                onClick={() => setActiveModal('RequestRevision')}
-                className="px-6 py-2.5 bg-orange-500 text-white rounded-lg hover:bg-orange-600 font-medium shadow-sm transition-colors"
-              >
-                Request Revision
-              </button>
-              <button 
-                onClick={() => setActiveModal('Reject')}
-                className="px-6 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium shadow-sm transition-colors"
-              >
-                Reject
-              </button>
-            </>
-          )}
+          <button 
+            onClick={() => setActiveModal('CompleteReview')}
+            className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
+          >
+            Complete Review
+          </button>
+          <button 
+            onClick={() => setActiveModal('RequestRevision')}
+            className="px-6 py-2.5 bg-orange-500 text-white rounded-lg hover:bg-orange-600 font-medium shadow-sm transition-colors"
+          >
+            Request Revision
+          </button>
+          <button 
+            onClick={() => setActiveModal('Reject')}
+            className="px-6 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium shadow-sm transition-colors"
+          >
+            Reject
+          </button>
         </div>
       </div>
 
@@ -238,24 +224,6 @@ export default function ProposalDetail({ id, role, listType = 'submission' }: Pr
             <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
               <button onClick={closeModal} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">Cancel</button>
               <button onClick={() => handleSubmit('Reject')} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium shadow-sm disabled:opacity-50" disabled={!opinion.trim()}>Reject Proposal</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Next Modal */}
-      {activeModal === 'Next' && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-              <h3 className="text-lg font-bold text-gray-900">Confirm Next Status</h3>
-            </div>
-            <div className="p-6">
-              <p className="text-gray-700">Are you sure you want to change the status to the next step?</p>
-            </div>
-            <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
-              <button onClick={closeModal} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">Cancel</button>
-              <button onClick={() => handleSubmit('Next')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm">Confirm</button>
             </div>
           </div>
         </div>
