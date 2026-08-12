@@ -1,5 +1,6 @@
 import ProposalDetail from '@/components/ProposalDetail';
 
-export default function RegionalDirectorProposalDetailPage({ params }: { params: { id: string } }) {
-  return <ProposalDetail id={params.id} role="Regional Director" />;
+export default async function RegionalDirectorProposalDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  return <ProposalDetail id={resolvedParams.id} role="Regional Director" />;
 }

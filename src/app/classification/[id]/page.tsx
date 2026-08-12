@@ -1,5 +1,6 @@
 import ClassificationDetail from '@/components/ClassificationDetail';
 
-export default function ClassificationProposalDetailPage({ params }: { params: { id: string } }) {
-  return <ClassificationDetail id={params.id} />;
+export default async function ClassificationProposalDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  return <ClassificationDetail id={resolvedParams.id} />;
 }
