@@ -115,6 +115,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
     if (statuses.length > 0) {
       if (p.status.startsWith('Completed')) {
         if (!statuses.includes('Completed')) return false;
+        if (listType === 'classification' && p.status === 'Completed') return false;
         if (role === 'Secretariat' && listType !== 'classification') {
           if (completedSubStatus === 'Classification' && p.status !== 'Completed (Classification)') return false;
           if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Non Classification)') return false;
