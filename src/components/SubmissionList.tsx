@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface SubmissionListProps {
   role: 'Regional Director' | 'Secretariat';
@@ -45,6 +46,7 @@ const getStatusBadgeColor = (status: string) => {
 };
 
 export default function SubmissionList({ role, fixedRegion, listType = 'submission' }: SubmissionListProps) {
+  const router = useRouter();
   // Search States
   const [region, setRegion] = useState(fixedRegion || '');
   const [countries, setCountries] = useState<string[]>([]);
@@ -311,7 +313,11 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
             <tbody className="divide-y divide-gray-100 text-sm">
               {filteredProposals.length > 0 ? (
                 filteredProposals.map((proposal, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50/50 transition-colors group cursor-pointer">
+                  <tr 
+                    key={idx} 
+                    className="hover:bg-gray-50/50 transition-colors group cursor-pointer"
+                    onClick={() => router.push(role === 'Regional Director' ? `/proposal-list/regional-director/${proposal.id}` : `/proposal-list/secretariat/${proposal.id}`)}
+                  >
                     <td className="py-4 px-6 font-medium text-gray-900">{proposal.id}</td>
                     <td className="py-4 px-6">
                       <div className="flex flex-col">
