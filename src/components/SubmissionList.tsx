@@ -18,8 +18,8 @@ const MOCK_PROPOSALS = [
   { id: 'CTAF-2026-10-0004', region: 'Latin America', country: 'Colombia', title: 'Smart Grid Implementation', email: 'applicant4@gggi.org', date: '2026-10-18', status: 'Completed' },
   { id: 'CTAF-2026-10-0005', region: 'Asia', country: 'Philippines', title: 'Coastal Flooding Early Warning', email: 'applicant5@gggi.org', date: '2026-10-19', status: 'Rejected' },
   { id: 'CTAF-2026-10-0006', region: 'Africa', country: 'Senegal', title: 'Green Hydrogen Production', email: 'applicant6@gggi.org', date: '2026-10-20', status: 'Pending' },
-  { id: 'CTAF-2026-10-0007', region: 'Asia', country: 'Vietnam', title: 'Solar PV Farm', email: 'applicant7@gggi.org', date: '2026-10-21', status: 'Completed (Subject to Classification)' },
-  { id: 'CTAF-2026-10-0008', region: 'Africa', country: 'Senegal', title: 'Wind Power Plant', email: 'applicant8@gggi.org', date: '2026-10-22', status: 'Completed (Not Subject to Classification)' },
+  { id: 'CTAF-2026-10-0007', region: 'Asia', country: 'Vietnam', title: 'Solar PV Farm', email: 'applicant7@gggi.org', date: '2026-10-21', status: 'Completed (Classification)' },
+  { id: 'CTAF-2026-10-0008', region: 'Africa', country: 'Senegal', title: 'Wind Power Plant', email: 'applicant8@gggi.org', date: '2026-10-22', status: 'Completed (Non Classification)' },
   { id: 'CTAF-2026-10-0009', region: 'Asia', country: 'Vietnam', title: 'Agri-Solar Project', email: 'applicant9@gggi.org', date: '2026-10-23', status: 'Processing (CRE WG)' },
   { id: 'CTAF-2026-10-0010', region: 'Africa', country: 'Senegal', title: 'Solar Desalination', email: 'applicant10@gggi.org', date: '2026-10-24', status: 'Processing (TPE WG)' },
   { id: 'CTAF-2026-10-0011', region: 'Latin America', country: 'Colombia', title: 'Green Transport', email: 'applicant11@gggi.org', date: '2026-10-25', status: 'Processing (PSC)' },
@@ -46,8 +46,8 @@ const getStatusBadgeColor = (status: string) => {
     case 'Under Review': return 'bg-blue-50 text-blue-700 border-blue-200';
     case 'Revision Requested': return 'bg-orange-50 text-orange-700 border-orange-200';
     case 'Completed': 
-    case 'Completed (Subject to Classification)': 
-    case 'Completed (Not Subject to Classification)': return 'bg-teal-50 text-teal-700 border-teal-200';
+    case 'Completed (Classification)': 
+    case 'Completed (Non Classification)': return 'bg-teal-50 text-teal-700 border-teal-200';
     case 'Rejected': return 'bg-red-50 text-red-700 border-red-200';
     case 'Under RD Review': return 'bg-purple-50 text-purple-700 border-purple-200';
     default: return 'bg-gray-100 text-gray-800 border-gray-200';
@@ -116,8 +116,8 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
       if (p.status.startsWith('Completed')) {
         if (!statuses.includes('Completed')) return false;
         if (role === 'Secretariat' && listType !== 'classification') {
-          if (completedSubStatus === 'Classification' && p.status !== 'Completed (Subject to Classification)') return false;
-          if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Not Subject to Classification)') return false;
+          if (completedSubStatus === 'Classification' && p.status !== 'Completed (Classification)') return false;
+          if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Non Classification)') return false;
         }
       } else if (p.status.startsWith('Processing')) {
         if (!statuses.includes('Processing')) return false;
