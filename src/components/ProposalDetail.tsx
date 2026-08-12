@@ -19,6 +19,12 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
   const [reviewTarget, setReviewTarget] = useState('');
   const [opinion, setOpinion] = useState('');
 
+  let mockStatus = 'Pending';
+  if (id === 'CTAF-2026-10-0002') mockStatus = 'Under Review';
+  if (id === 'CTAF-2026-10-0003') mockStatus = 'Revision Requested';
+  if (id === 'CTAF-2026-10-0004') mockStatus = 'Completed';
+  if (id === 'CTAF-2026-10-0005') mockStatus = 'Rejected';
+
   // Mock proposal data
   const proposal = {
     id: id,
@@ -28,7 +34,7 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
     proposer: 'John Doe',
     email: 'applicant1@gggi.org',
     date: '2026-10-15',
-    status: 'Pending',
+    status: mockStatus,
     abstract: 'This proposal aims to implement solar-powered irrigation systems to improve agricultural resilience and reduce greenhouse gas emissions in rural Vietnam. The project involves installing 50 units across 3 provinces, benefiting over 500 smallholder farmers.',
     budget: '$500,000',
     duration: '24 Months'
