@@ -115,10 +115,16 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
     if (statuses.length > 0) {
       if (p.status.startsWith('Completed')) {
         if (!statuses.includes('Completed')) return false;
-        if (listType === 'classification' && p.status === 'Completed') return false;
-        if (role === 'Secretariat' && listType !== 'classification') {
-          if (completedSubStatus === 'Classification' && p.status !== 'Completed (Classification)') return false;
-          if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Non Classification)') return false;
+        
+        if (listType === 'classification') {
+          if (p.status !== 'Completed') return false;
+        } else {
+          if (p.status === 'Completed') return false;
+          
+          if (role === 'Secretariat') {
+            if (completedSubStatus === 'Classification' && p.status !== 'Completed (Classification)') return false;
+            if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Non Classification)') return false;
+          }
         }
       } else if (p.status.startsWith('Processing')) {
         if (!statuses.includes('Processing')) return false;
