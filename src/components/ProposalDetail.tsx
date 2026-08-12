@@ -26,6 +26,9 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
   if (id === 'CTAF-2026-10-0005') mockStatus = 'Rejected';
   if (id === 'CTAF-2026-10-0007') mockStatus = 'Completed (Subject to Classification)';
   if (id === 'CTAF-2026-10-0008') mockStatus = 'Completed (Not Subject to Classification)';
+  if (id === 'CTAF-2026-10-0009') mockStatus = 'Processing (CRE WG)';
+  if (id === 'CTAF-2026-10-0010') mockStatus = 'Processing (TPE WG)';
+  if (id === 'CTAF-2026-10-0011') mockStatus = 'Processing (PSC)';
 
   // Mock proposal data
   const proposal = {

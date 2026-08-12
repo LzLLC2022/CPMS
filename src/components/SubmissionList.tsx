@@ -20,6 +20,9 @@ const MOCK_PROPOSALS = [
   { id: 'CTAF-2026-10-0006', region: 'Africa', country: 'Senegal', title: 'Green Hydrogen Production', email: 'applicant6@gggi.org', date: '2026-10-20', status: 'Pending' },
   { id: 'CTAF-2026-10-0007', region: 'Asia', country: 'Vietnam', title: 'Solar PV Farm', email: 'applicant7@gggi.org', date: '2026-10-21', status: 'Completed (Subject to Classification)' },
   { id: 'CTAF-2026-10-0008', region: 'Africa', country: 'Senegal', title: 'Wind Power Plant', email: 'applicant8@gggi.org', date: '2026-10-22', status: 'Completed (Not Subject to Classification)' },
+  { id: 'CTAF-2026-10-0009', region: 'Asia', country: 'Vietnam', title: 'Agri-Solar Project', email: 'applicant9@gggi.org', date: '2026-10-23', status: 'Processing (CRE WG)' },
+  { id: 'CTAF-2026-10-0010', region: 'Africa', country: 'Senegal', title: 'Solar Desalination', email: 'applicant10@gggi.org', date: '2026-10-24', status: 'Processing (TPE WG)' },
+  { id: 'CTAF-2026-10-0011', region: 'Latin America', country: 'Colombia', title: 'Green Transport', email: 'applicant11@gggi.org', date: '2026-10-25', status: 'Processing (PSC)' },
 ];
 
 const getStatusOptions = (role: string, listType?: string) => {
@@ -35,7 +38,10 @@ const getStatusOptions = (role: string, listType?: string) => {
 const getStatusBadgeColor = (status: string) => {
   switch (status) {
     case 'Pending': return 'bg-gray-100 text-gray-800 border-gray-200';
-    case 'Processing': return 'bg-blue-50 text-blue-700 border-blue-200';
+    case 'Processing': 
+    case 'Processing (CRE WG)':
+    case 'Processing (TPE WG)':
+    case 'Processing (PSC)': return 'bg-blue-50 text-blue-700 border-blue-200';
     case 'Under Review': return 'bg-blue-50 text-blue-700 border-blue-200';
     case 'Revision Requested': return 'bg-orange-50 text-orange-700 border-orange-200';
     case 'Completed': 
@@ -60,6 +66,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
     listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected']
   );
   const [completedSubStatus, setCompletedSubStatus] = useState('All');
+  const [processingSubStatus, setProcessingSubStatus] = useState('All');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -92,6 +99,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
     setProposalNo('');
     setStatuses(listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected']);
     setCompletedSubStatus('All');
+    setProcessingSubStatus('All');
     setStartDate('');
     setEndDate('');
   };
@@ -109,6 +117,11 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
         if (role === 'Secretariat' && listType !== 'classification') {
           if (completedSubStatus === 'Classification' && p.status !== 'Completed (Subject to Classification)') return false;
           if (completedSubStatus === 'Non Classification' && p.status !== 'Completed (Not Subject to Classification)') return false;
+        }
+      } else if (p.status.startsWith('Processing')) {
+        if (!statuses.includes('Processing')) return false;
+        if (listType === 'classification') {
+          if (processingSubStatus !== 'All' && p.status !== `Processing (${processingSubStatus})`) return false;
         }
       } else {
         if (!statuses.includes(p.status)) return false;
@@ -269,6 +282,18 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
                       <option value="All">All</option>
                       <option value="Classification">Classification</option>
                       <option value="Non Classification">Non Classification</option>
+                    </select>
+                  )}
+                  {status === 'Processing' && listType === 'classification' && statuses.includes('Processing') && (
+                    <select
+                      value={processingSubStatus}
+                      onChange={(e) => setProcessingSubStatus(e.target.value)}
+                      className="p-1 border border-gray-300 rounded outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-sm bg-white"
+                    >
+                      <option value="All">All</option>
+                      <option value="CRE WG">CRE WG</option>
+                      <option value="TPE WG">TPE WG</option>
+                      <option value="PSC">PSC</option>
                     </select>
                   )}
                 </div>
