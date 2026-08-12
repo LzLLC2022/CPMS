@@ -23,6 +23,7 @@ const MOCK_PROPOSALS = [
   { id: 'CTAF-2026-10-0009', region: 'Asia', country: 'Vietnam', title: 'Agri-Solar Project', email: 'applicant9@gggi.org', date: '2026-10-23', status: 'Processing (CRE WG)' },
   { id: 'CTAF-2026-10-0010', region: 'Africa', country: 'Senegal', title: 'Solar Desalination', email: 'applicant10@gggi.org', date: '2026-10-24', status: 'Processing (TPE WG)' },
   { id: 'CTAF-2026-10-0011', region: 'Latin America', country: 'Colombia', title: 'Green Transport', email: 'applicant11@gggi.org', date: '2026-10-25', status: 'Processing (PSC)' },
+  { id: 'CTAF-2026-10-0012', region: 'Asia', country: 'South Korea', title: 'Smart Farm Expansion', email: 'applicant12@gggi.org', date: '2026-10-26', status: 'Under Review' },
 ];
 
 const getStatusOptions = (role: string, listType?: string) => {

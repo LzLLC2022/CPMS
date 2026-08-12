@@ -23,6 +23,7 @@ export default function ClassificationDetail({ id }: ClassificationDetailProps) 
   if (id === 'CTAF-2026-10-0009') mockStatus = 'Processing (CRE WG)';
   if (id === 'CTAF-2026-10-0010') mockStatus = 'Processing (TPE WG)';
   if (id === 'CTAF-2026-10-0011') mockStatus = 'Processing (PSC)';
+  if (id === 'CTAF-2026-10-0012') mockStatus = 'Under Review';
 
   // Mock proposal data
   const proposal = {
