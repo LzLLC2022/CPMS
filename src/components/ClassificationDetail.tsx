@@ -7,7 +7,7 @@ interface ClassificationDetailProps {
   id: string;
 }
 
-type ModalType = 'None' | 'Next';
+type ModalType = 'None' | 'Next' | 'Completed';
 
 export default function ClassificationDetail({ id }: ClassificationDetailProps) {
   const router = useRouter();
@@ -118,6 +118,22 @@ export default function ClassificationDetail({ id }: ClassificationDetailProps) 
               Next
             </button>
           )}
+          {(proposal.status === 'Processing (CRE WG)' || proposal.status === 'Processing (TPE WG)') && (
+            <button 
+              onClick={() => setActiveModal('Next')}
+              className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
+            >
+              Next
+            </button>
+          )}
+          {proposal.status === 'Processing (PSC)' && (
+            <button 
+              onClick={() => setActiveModal('Completed')}
+              className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
+            >
+              Completed
+            </button>
+          )}
         </div>
       </div>
 
@@ -134,6 +150,24 @@ export default function ClassificationDetail({ id }: ClassificationDetailProps) 
             <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
               <button onClick={closeModal} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">Cancel</button>
               <button onClick={() => handleSubmit('Next')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm">Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Completed Modal */}
+      {activeModal === 'Completed' && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
+              <h3 className="text-lg font-bold text-gray-900">Complete Classification</h3>
+            </div>
+            <div className="p-6">
+              <p className="text-gray-700">Are you sure you want to mark this proposal as Completed?</p>
+            </div>
+            <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
+              <button onClick={closeModal} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">Cancel</button>
+              <button onClick={() => handleSubmit('Completed')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm">Confirm</button>
             </div>
           </div>
         </div>
