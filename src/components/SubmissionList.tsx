@@ -359,7 +359,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
                     <td className="py-4 px-6 text-gray-500 whitespace-nowrap">{proposal.date}</td>
                     <td className="py-4 px-6">
                       <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${getStatusBadgeColor(proposal.status)}`}>
-                        {proposal.status}
+                        {role === 'Regional Director' && proposal.status.startsWith('Completed') ? 'Completed' : proposal.status}
                       </span>
                     </td>
                   </tr>

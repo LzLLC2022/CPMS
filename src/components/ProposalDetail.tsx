@@ -74,7 +74,7 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
           <div>
             <span className="block text-sm font-medium text-gray-500 mb-1">Status</span>
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 border border-gray-200">
-              {proposal.status}
+              {role === 'Regional Director' && proposal.status.startsWith('Completed') ? 'Completed' : proposal.status}
             </span>
           </div>
           
