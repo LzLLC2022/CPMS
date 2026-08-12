@@ -316,7 +316,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
                   <tr 
                     key={idx} 
                     className="hover:bg-gray-50/50 transition-colors group cursor-pointer"
-                    onClick={() => router.push(role === 'Regional Director' ? `/proposal-list/regional-director/${proposal.id}` : `/proposal-list/secretariat/${proposal.id}`)}
+                    onClick={() => router.push(listType === 'classification' ? `/classification/${proposal.id}` : (role === 'Regional Director' ? `/proposal-list/regional-director/${proposal.id}` : `/proposal-list/secretariat/${proposal.id}`))}
                   >
                     <td className="py-4 px-6 font-medium text-gray-900">{proposal.id}</td>
                     <td className="py-4 px-6">
