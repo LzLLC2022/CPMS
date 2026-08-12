@@ -14,7 +14,6 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
   const [activeModal, setActiveModal] = useState<ModalType>('None');
 
   // Modal form states
-  const [classification, setClassification] = useState('');
   const [reviewTarget, setReviewTarget] = useState('');
   const [opinion, setOpinion] = useState('');
 
@@ -37,13 +36,12 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
 
   const closeModal = () => {
     setActiveModal('None');
-    setClassification('');
     setReviewTarget('');
     setOpinion('');
   };
 
   const handleSubmit = (actionType: string) => {
-    console.log(`Action: ${actionType}`, { classification, reviewTarget, opinion });
+    console.log(`Action: ${actionType}`, { reviewTarget, opinion });
     // Simulate action success
     alert(`Successfully processed action: ${actionType}`);
     closeModal();
@@ -106,26 +104,26 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
           href={listHref}
           className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors shadow-sm"
         >
-          목록으로 (List)
+          List
         </Link>
         <div className="flex flex-wrap gap-3">
           <button 
             onClick={() => setActiveModal('CompleteReview')}
             className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
           >
-            검토완료 (Complete Review)
+            Complete Review
           </button>
           <button 
             onClick={() => setActiveModal('RequestRevision')}
             className="px-6 py-2.5 bg-orange-500 text-white rounded-lg hover:bg-orange-600 font-medium shadow-sm transition-colors"
           >
-            보완요청 (Request Revision)
+            Request Revision
           </button>
           <button 
             onClick={() => setActiveModal('Reject')}
             className="px-6 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium shadow-sm transition-colors"
           >
-            반려 (Reject)
+            Reject
           </button>
         </div>
       </div>
@@ -135,37 +133,24 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-              <h3 className="text-lg font-bold text-gray-900">검토완료 (Complete Review)</h3>
+              <h3 className="text-lg font-bold text-gray-900">Complete Review</h3>
             </div>
             <div className="p-6">
               <div className="mb-5">
-                <label className="block text-sm font-medium text-gray-700 mb-2">분류 (Classification) *</label>
-                <select 
-                  value={classification} 
-                  onChange={(e) => setClassification(e.target.value)}
-                  className="w-full p-2.5 border border-gray-300 rounded-lg outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
-                >
-                  <option value="">Select classification...</option>
-                  <option value="Type A">Type A - Mitigation</option>
-                  <option value="Type B">Type B - Adaptation</option>
-                  <option value="Type C">Type C - Cross-cutting</option>
-                </select>
-              </div>
-              <div className="mb-5">
-                <label className="block text-sm font-medium text-gray-700 mb-2">검토대상 여부 (Review Target) *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Review Completion Category *</label>
                 <div className="flex gap-4">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="radio" name="reviewTarget" value="Target" checked={reviewTarget === 'Target'} onChange={(e) => setReviewTarget(e.target.value)} className="text-teal-600 focus:ring-teal-500" />
-                    <span>검토대상 (Target)</span>
+                    <span>Target</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="radio" name="reviewTarget" value="Not Target" checked={reviewTarget === 'Not Target'} onChange={(e) => setReviewTarget(e.target.value)} className="text-teal-600 focus:ring-teal-500" />
-                    <span>비대상 (Not Target)</span>
+                    <span>Not Target</span>
                   </label>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">의견 (Opinion)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Opinion</label>
                 <textarea 
                   value={opinion}
                   onChange={(e) => setOpinion(e.target.value)}
@@ -176,7 +161,7 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
             </div>
             <div className="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
               <button onClick={closeModal} className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">Cancel</button>
-              <button onClick={() => handleSubmit('Complete Review')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm disabled:opacity-50" disabled={!classification || !reviewTarget}>Submit</button>
+              <button onClick={() => handleSubmit('Complete Review')} className="px-4 py-2 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm disabled:opacity-50" disabled={!reviewTarget}>Submit</button>
             </div>
           </div>
         </div>
@@ -187,11 +172,11 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-gray-100 bg-orange-50">
-              <h3 className="text-lg font-bold text-orange-900">보완요청 (Request Revision)</h3>
+              <h3 className="text-lg font-bold text-orange-900">Request Revision</h3>
             </div>
             <div className="p-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">보완요청관련 의견 (Revision Request Opinion) *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Revision Request Opinion *</label>
                 <textarea 
                   value={opinion}
                   onChange={(e) => setOpinion(e.target.value)}
@@ -213,11 +198,11 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-gray-100 bg-red-50">
-              <h3 className="text-lg font-bold text-red-900">반려 (Reject)</h3>
+              <h3 className="text-lg font-bold text-red-900">Reject</h3>
             </div>
             <div className="p-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">반려의견 (Rejection Reason) *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Rejection Reason *</label>
                 <textarea 
                   value={opinion}
                   onChange={(e) => setOpinion(e.target.value)}
