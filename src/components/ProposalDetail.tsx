@@ -149,6 +149,22 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
               </button>
             </>
           )}
+          {proposal.status === 'Revision Requested' && (
+            <>
+              <button 
+                onClick={() => setActiveModal('CompleteReview')}
+                className="px-6 py-2.5 bg-[#11B59F] text-white rounded-lg hover:bg-[#0e9582] font-medium shadow-sm transition-colors"
+              >
+                Complete Review
+              </button>
+              <button 
+                onClick={() => setActiveModal('Reject')}
+                className="px-6 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 font-medium shadow-sm transition-colors"
+              >
+                Reject
+              </button>
+            </>
+          )}
         </div>
       </div>
 
