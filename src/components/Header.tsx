@@ -67,24 +67,26 @@ export default function Header() {
       
       {/* Center - Main Menu */}
       <nav className="hidden sm:flex flex-1 items-center justify-center gap-8">
-        {/* About Menu */}
-        <div className="relative group">
-          <Link href="/about" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
-            About
-          </Link>
-          
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-48 z-50">
-            <Link href="/about/ctaf" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
-              About CTAF
+        {/* About Menu (Not Logged In) */}
+        {!userEmail && (
+          <div className="relative group">
+            <Link href="/about" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
+              About
             </Link>
-            <Link href="/about/funding" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
-              Project Submission
-            </Link>
-            <Link href="/about/selection-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
-              Project Selection
-            </Link>
+            
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-48 z-50">
+              <Link href="/about/ctaf" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
+                About CTAF
+              </Link>
+              <Link href="/about/funding" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
+                Project Submission
+              </Link>
+              <Link href="/about/selection-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
+                Project Selection
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Proposal / Proposal List Menu */}
         {userRole === "Regional Director" ? (
@@ -140,6 +142,27 @@ export default function Header() {
             </Link>
           </div>
         </div>
+
+        {/* About Menu (Logged In) */}
+        {userEmail && (
+          <div className="relative group">
+            <Link href="/about" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
+              About
+            </Link>
+            
+            <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 hidden group-hover:flex flex-col bg-white border border-gray-100 shadow-lg rounded-md py-2 w-48 z-50">
+              <Link href="/about/ctaf" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
+                About CTAF
+              </Link>
+              <Link href="/about/funding" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
+                Project Submission
+              </Link>
+              <Link href="/about/selection-process" className="px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">
+                Project Selection
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Right - Login/Logout */}
@@ -183,20 +206,22 @@ export default function Header() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg sm:hidden flex flex-col py-4 px-6 gap-4 z-50 h-[80vh] overflow-y-auto">
-          <div className="flex flex-col gap-2">
-            <span className="text-[15px] font-bold text-gray-900">About</span>
-            <div className="pl-4 flex flex-col gap-2">
-              <Link href="/about/ctaf" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                About CTAF
-              </Link>
-              <Link href="/about/funding" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                Project Submission
-              </Link>
-              <Link href="/about/selection-process" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-                Project Selection
-              </Link>
+          {!userEmail && (
+            <div className="flex flex-col gap-2">
+              <span className="text-[15px] font-bold text-gray-900">About</span>
+              <div className="pl-4 flex flex-col gap-2">
+                <Link href="/about/ctaf" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                  About CTAF
+                </Link>
+                <Link href="/about/funding" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                  Project Submission
+                </Link>
+                <Link href="/about/selection-process" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                  Project Selection
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
 
           {userRole === "Regional Director" ? (
             <Link 
@@ -253,6 +278,23 @@ export default function Header() {
               </Link>
             </div>
           </div>
+
+          {userEmail && (
+            <div className="flex flex-col gap-2">
+              <span className="text-[15px] font-bold text-gray-900">About</span>
+              <div className="pl-4 flex flex-col gap-2">
+                <Link href="/about/ctaf" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                  About CTAF
+                </Link>
+                <Link href="/about/funding" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                  Project Submission
+                </Link>
+                <Link href="/about/selection-process" className="text-sm text-gray-700 hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                  Project Selection
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </header>
