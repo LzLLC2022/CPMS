@@ -34,8 +34,6 @@ export default function ProposalDetail({ id, role }: ProposalDetailProps) {
     duration: '24 Months'
   };
 
-  const listHref = listType === 'classification' ? '/classification' : (role === 'Regional Director' ? '/proposal-list/regional-director' : '/proposal-list/secretariat');
-
   const closeModal = () => {
     setActiveModal('None');
     setReviewTarget('');
