@@ -18,6 +18,8 @@ const MOCK_PROPOSALS = [
   { id: 'CTAF-2026-10-0004', region: 'Latin America', country: 'Colombia', title: 'Smart Grid Implementation', email: 'applicant4@gggi.org', date: '2026-10-18', status: 'Completed' },
   { id: 'CTAF-2026-10-0005', region: 'Asia', country: 'Philippines', title: 'Coastal Flooding Early Warning', email: 'applicant5@gggi.org', date: '2026-10-19', status: 'Rejected' },
   { id: 'CTAF-2026-10-0006', region: 'Africa', country: 'Senegal', title: 'Green Hydrogen Production', email: 'applicant6@gggi.org', date: '2026-10-20', status: 'Pending' },
+  { id: 'CTAF-2026-10-0007', region: 'Asia', country: 'Vietnam', title: 'Solar PV Farm', email: 'applicant7@gggi.org', date: '2026-10-21', status: 'Completed (Subject to Classification)' },
+  { id: 'CTAF-2026-10-0008', region: 'Africa', country: 'Senegal', title: 'Wind Power Plant', email: 'applicant8@gggi.org', date: '2026-10-22', status: 'Completed (Not Subject to Classification)' },
 ];
 
 const getStatusOptions = (role: string, listType?: string) => {
@@ -55,7 +57,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
   const [email, setEmail] = useState('');
   const [proposalNo, setProposalNo] = useState('');
   const [statuses, setStatuses] = useState<string[]>(
-    listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested']
+    listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected']
   );
   const [completedSubStatus, setCompletedSubStatus] = useState('All');
   const [startDate, setStartDate] = useState('');
@@ -88,7 +90,7 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
     setCountries([]);
     setEmail('');
     setProposalNo('');
-    setStatuses(listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested']);
+    setStatuses(listType === 'classification' ? ['Pending', 'Processing'] : ['Pending', 'Under Review', 'Revision Requested', 'Completed', 'Rejected']);
     setCompletedSubStatus('All');
     setStartDate('');
     setEndDate('');

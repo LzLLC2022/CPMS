@@ -18,6 +18,8 @@ export default function ClassificationDetail({ id }: ClassificationDetailProps) 
   if (id === 'CTAF-2026-10-0003') mockStatus = 'Revision Requested';
   if (id === 'CTAF-2026-10-0004') mockStatus = 'Completed';
   if (id === 'CTAF-2026-10-0005') mockStatus = 'Rejected';
+  if (id === 'CTAF-2026-10-0007') mockStatus = 'Completed (Subject to Classification)';
+  if (id === 'CTAF-2026-10-0008') mockStatus = 'Completed (Not Subject to Classification)';
 
   // Mock proposal data
   const proposal = {
