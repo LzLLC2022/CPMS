@@ -163,8 +163,8 @@ export default function Home() {
                     <span className="text-5xl font-extrabold text-blue-600">15</span>
                   </div>
                   <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
-                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Review Completed</span>
-                    <span className="text-5xl font-extrabold text-green-500">8</span>
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Revision Requested</span>
+                    <span className="text-5xl font-extrabold text-orange-500">8</span>
                   </div>
                 </div>
               ) : (
