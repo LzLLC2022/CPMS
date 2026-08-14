@@ -97,7 +97,7 @@ export default function Home() {
             </div>
             
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center items-center hover:shadow-md transition-shadow">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Under Revision</span>
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Revision Requested</span>
               <span className="text-5xl font-extrabold text-orange-500">3</span>
             </div>
           </div>
