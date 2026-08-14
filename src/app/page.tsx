@@ -175,21 +175,20 @@ export default function Home() {
                   </div>
                   
                   <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
-                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Processing</span>
-                    <span className="text-5xl font-extrabold text-blue-600 mb-6">4</span>
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-6 text-center border-b border-gray-200 pb-2 w-full">Processing</span>
                     
-                    <div className="flex w-full justify-around pt-4 border-t border-gray-100">
-                      <div className="flex flex-col items-center">
-                        <span className="text-xs font-semibold text-gray-400 uppercase mb-1">CRE WG</span>
-                        <span className="text-2xl font-bold text-blue-500">1</span>
+                    <div className="flex w-full justify-around">
+                      <div className="flex flex-col justify-center items-center">
+                        <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">CRE WG</span>
+                        <span className="text-5xl font-extrabold text-blue-600">1</span>
                       </div>
-                      <div className="flex flex-col items-center">
-                        <span className="text-xs font-semibold text-gray-400 uppercase mb-1">TPE WG</span>
-                        <span className="text-2xl font-bold text-blue-500">2</span>
+                      <div className="flex flex-col justify-center items-center">
+                        <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">TPE WG</span>
+                        <span className="text-5xl font-extrabold text-blue-600">2</span>
                       </div>
-                      <div className="flex flex-col items-center">
-                        <span className="text-xs font-semibold text-gray-400 uppercase mb-1">PSC</span>
-                        <span className="text-2xl font-bold text-blue-500">1</span>
+                      <div className="flex flex-col justify-center items-center">
+                        <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">PSC</span>
+                        <span className="text-5xl font-extrabold text-blue-600">1</span>
                       </div>
                     </div>
                   </div>
