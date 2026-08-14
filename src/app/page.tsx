@@ -168,14 +168,22 @@ export default function Home() {
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
                     <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Pending</span>
                     <span className="text-5xl font-extrabold text-gray-800">10</span>
                   </div>
                   <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
-                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">Processing</span>
-                    <span className="text-5xl font-extrabold text-blue-600">4</span>
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">CRE WG</span>
+                    <span className="text-5xl font-extrabold text-blue-600">1</span>
+                  </div>
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">TPE WG</span>
+                    <span className="text-5xl font-extrabold text-blue-600">2</span>
+                  </div>
+                  <div className="p-6 rounded-xl border border-gray-200 flex flex-col justify-center items-center">
+                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2 text-center">PSC</span>
+                    <span className="text-5xl font-extrabold text-blue-600">1</span>
                   </div>
                 </div>
               )}
