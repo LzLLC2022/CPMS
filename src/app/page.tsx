@@ -47,6 +47,14 @@ export default function Home() {
     { id: "CTAF-2026-001", title: "Wind Farm Feasibility", country: "Malaysia", status: "Pending", date: "2026-08-10" },
   ];
 
+  const recentSubmissionsClassification = [
+    { id: "CTAF-2026-015", title: "Geothermal Expansion", country: "Kenya", status: "CRE WG", date: "2026-08-18" },
+    { id: "CTAF-2026-014", title: "Ocean Wave Energy", country: "Fiji", status: "Pending", date: "2026-08-16" },
+    { id: "CTAF-2026-013", title: "Carbon Capture Storage", country: "India", status: "TPE WG", date: "2026-08-15" },
+    { id: "CTAF-2026-012", title: "Green Hydrogen Plant", country: "Chile", status: "PSC", date: "2026-08-12" },
+    { id: "CTAF-2026-011", title: "Sustainable Forestry", country: "Brazil", status: "Pending", date: "2026-08-10" },
+  ];
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentHomeSlide((prev) => (prev + 1) % homeItems.length);
@@ -273,13 +281,18 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody>
-                    {recentSubmissions.map((sub, idx) => (
+                    {(secretariatTab === 'Classification' ? recentSubmissionsClassification : recentSubmissions).map((sub, idx) => (
                       <tr key={idx} className="bg-white border-b hover:bg-gray-50">
                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{sub.id}</td>
                         <td className="px-6 py-4 text-gray-900">{sub.title}</td>
                         <td className="px-6 py-4">{sub.country}</td>
                         <td className="px-6 py-4">
-                          <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${sub.status === 'Pending' ? 'bg-gray-100 text-gray-800' : sub.status === 'Under Review' ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'}`}>
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                            sub.status === 'Pending' ? 'bg-gray-100 text-gray-800' : 
+                            sub.status === 'Under Review' ? 'bg-blue-100 text-blue-800' : 
+                            sub.status === 'Revision Requested' ? 'bg-orange-100 text-orange-800' : 
+                            'bg-purple-100 text-purple-800'
+                          }`}>
                             {sub.status}
                           </span>
                         </td>
