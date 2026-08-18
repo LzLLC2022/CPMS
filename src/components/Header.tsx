@@ -163,6 +163,13 @@ export default function Header() {
             </div>
           </div>
         )}
+
+        {/* Admin Menu */}
+        {userRole === "Admin" && (
+          <Link href="/admin" className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors py-2 block">
+            Admin
+          </Link>
+        )}
       </nav>
 
       {/* Right - Login/Logout */}
@@ -170,7 +177,7 @@ export default function Header() {
         {userEmail ? (
           <>
             <span className="text-sm text-gray-600 font-medium hidden sm:block">
-              {userEmail}
+              {userEmail.split('@')[0]} [{userRole}]
             </span>
             <button 
               onClick={handleLogout}
@@ -294,6 +301,16 @@ export default function Header() {
                 </Link>
               </div>
             </div>
+          )}
+
+          {userRole === "Admin" && (
+            <Link 
+              href="/admin" 
+              className="text-[15px] font-bold text-gray-900 hover:text-primary-600 transition-colors block"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Admin
+            </Link>
           )}
         </div>
       )}
