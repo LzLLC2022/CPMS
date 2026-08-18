@@ -48,10 +48,10 @@ export default function Home() {
   ];
 
   const recentSubmissionsClassification = [
-    { id: "CTAF-2026-015", title: "Geothermal Expansion", country: "Kenya", status: "CRE WG", date: "2026-08-18" },
+    { id: "CTAF-2026-015", title: "Geothermal Expansion", country: "Kenya", status: "Processing (CRE WG)", date: "2026-08-18" },
     { id: "CTAF-2026-014", title: "Ocean Wave Energy", country: "Fiji", status: "Pending", date: "2026-08-16" },
-    { id: "CTAF-2026-013", title: "Carbon Capture Storage", country: "India", status: "TPE WG", date: "2026-08-15" },
-    { id: "CTAF-2026-012", title: "Green Hydrogen Plant", country: "Chile", status: "PSC", date: "2026-08-12" },
+    { id: "CTAF-2026-013", title: "Carbon Capture Storage", country: "India", status: "Processing (TPE WG)", date: "2026-08-15" },
+    { id: "CTAF-2026-012", title: "Green Hydrogen Plant", country: "Chile", status: "Processing (PSC)", date: "2026-08-12" },
     { id: "CTAF-2026-011", title: "Sustainable Forestry", country: "Brazil", status: "Pending", date: "2026-08-10" },
   ];
 
@@ -287,14 +287,24 @@ export default function Home() {
                         <td className="px-6 py-4 text-gray-900">{sub.title}</td>
                         <td className="px-6 py-4">{sub.country}</td>
                         <td className="px-6 py-4">
-                          <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-                            sub.status === 'Pending' ? 'bg-gray-100 text-gray-800' : 
-                            sub.status === 'Under Review' ? 'bg-blue-100 text-blue-800' : 
-                            sub.status === 'Revision Requested' ? 'bg-orange-100 text-orange-800' : 
-                            'bg-purple-100 text-purple-800'
-                          }`}>
-                            {sub.status}
-                          </span>
+                          {sub.status === 'Pending' ? (
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                              Pending
+                            </span>
+                          ) : sub.status.startsWith('Processing') ? (
+                            <span className="py-1 px-3 rounded-2xl text-xs font-medium bg-blue-50 text-blue-600 border border-blue-200 inline-flex flex-col items-center justify-center min-w-[90px] leading-tight">
+                              <span>Processing</span>
+                              <span>{sub.status.replace('Processing ', '')}</span>
+                            </span>
+                          ) : (
+                            <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                              sub.status === 'Under Review' ? 'bg-blue-100 text-blue-800' : 
+                              sub.status === 'Revision Requested' ? 'bg-orange-100 text-orange-800' : 
+                              'bg-purple-100 text-purple-800'
+                            }`}>
+                              {sub.status}
+                            </span>
+                          )}
                         </td>
                         <td className="px-6 py-4">{sub.date}</td>
                       </tr>
