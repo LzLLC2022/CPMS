@@ -39,6 +39,14 @@ export default function Home() {
   const [currentHomeSlide, setCurrentHomeSlide] = useState(0);
   const [secretariatTab, setSecretariatTab] = useState<'Submission Check' | 'Classification'>('Submission Check');
 
+  const recentSubmissions = [
+    { id: "CTAF-2026-005", title: "Solar Microgrid Initiative", country: "Indonesia", status: "Under Review", date: "2026-08-18" },
+    { id: "CTAF-2026-004", title: "Clean Water Tech Deployment", country: "Vietnam", status: "Pending", date: "2026-08-16" },
+    { id: "CTAF-2026-003", title: "Urban Waste to Energy", country: "Philippines", status: "Revision Requested", date: "2026-08-15" },
+    { id: "CTAF-2026-002", title: "Smart Agriculture Sensors", country: "Thailand", status: "Under Review", date: "2026-08-12" },
+    { id: "CTAF-2026-001", title: "Wind Farm Feasibility", country: "Malaysia", status: "Pending", date: "2026-08-10" },
+  ];
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentHomeSlide((prev) => (prev + 1) % homeItems.length);
@@ -112,7 +120,34 @@ export default function Home() {
                 View All →
               </button>
             </div>
-            <p className="text-gray-500 italic">Detailed proposal list will be integrated here.</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left text-gray-500">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">Proposal ID</th>
+                    <th scope="col" className="px-6 py-3">Title</th>
+                    <th scope="col" className="px-6 py-3">Country</th>
+                    <th scope="col" className="px-6 py-3">Status</th>
+                    <th scope="col" className="px-6 py-3">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentSubmissions.map((sub, idx) => (
+                    <tr key={idx} className="bg-white border-b hover:bg-gray-50">
+                      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{sub.id}</td>
+                      <td className="px-6 py-4 text-gray-900">{sub.title}</td>
+                      <td className="px-6 py-4">{sub.country}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${sub.status === 'Pending' ? 'bg-gray-100 text-gray-800' : sub.status === 'Under Review' ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'}`}>
+                          {sub.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">{sub.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -226,7 +261,34 @@ export default function Home() {
                   View All →
                 </button>
               </div>
-              <p className="text-gray-500 italic">Detailed submission list will be integrated here.</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left text-gray-500">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                      <th scope="col" className="px-6 py-3">Proposal ID</th>
+                      <th scope="col" className="px-6 py-3">Title</th>
+                      <th scope="col" className="px-6 py-3">Country</th>
+                      <th scope="col" className="px-6 py-3">Status</th>
+                      <th scope="col" className="px-6 py-3">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recentSubmissions.map((sub, idx) => (
+                      <tr key={idx} className="bg-white border-b hover:bg-gray-50">
+                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{sub.id}</td>
+                        <td className="px-6 py-4 text-gray-900">{sub.title}</td>
+                        <td className="px-6 py-4">{sub.country}</td>
+                        <td className="px-6 py-4">
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${sub.status === 'Pending' ? 'bg-gray-100 text-gray-800' : sub.status === 'Under Review' ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'}`}>
+                            {sub.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">{sub.date}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
