@@ -52,6 +52,7 @@ export default function Login() {
     let role = "User";
     if (prefix === "test_rd") role = "Regional Director";
     if (prefix === "test_sec") role = "Secretariat";
+    if (prefix === "test_admin") role = "Admin";
     
     // Set mock login state and role
     localStorage.setItem("mockUserEmail", email);
