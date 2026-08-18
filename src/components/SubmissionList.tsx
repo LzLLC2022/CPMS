@@ -70,6 +70,10 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
   const [processingSubStatus, setProcessingSubStatus] = useState('All');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const REGION_COUNTRIES: Record<string, string[]> = {
     "Africa": ["Cote D'Ivoire", "Senegal", "Uganda", "Rwanda"],
@@ -140,6 +144,11 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
     if (endDate && new Date(p.date) > new Date(endDate)) return false;
     return true;
   });
+
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredProposals.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedProposals = filteredProposals.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="flex flex-col gap-8">
@@ -330,7 +339,21 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
           <h3 className="text-lg font-bold text-gray-900">Search Results</h3>
-          <span className="text-sm font-medium text-gray-500">Total {filteredProposals.length} item(s)</span>
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-medium text-gray-500">Total {filteredProposals.length} item(s)</span>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => {
+                setItemsPerPage(Number(e.target.value));
+                setCurrentPage(1); // reset to first page
+              }}
+              className="text-sm border-gray-300 rounded-md focus:ring-teal-500 focus:border-teal-500 py-1 pl-2 pr-8 bg-white cursor-pointer"
+            >
+              <option value={10}>10 per page</option>
+              <option value={20}>20 per page</option>
+              <option value={50}>50 per page</option>
+            </select>
+          </div>
         </div>
         
         <div className="overflow-x-auto">
@@ -346,8 +369,8 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 text-sm">
-              {filteredProposals.length > 0 ? (
-                filteredProposals.map((proposal, idx) => (
+              {paginatedProposals.length > 0 ? (
+                paginatedProposals.map((proposal, idx) => (
                   <tr 
                     key={idx} 
                     className="hover:bg-gray-50/50 transition-colors group cursor-pointer"
@@ -381,6 +404,37 @@ export default function SubmissionList({ role, fixedRegion, listType = 'submissi
               )}
             </tbody>
           </table>
+        </div>
+        
+        {/* Pagination Controls */}
+        <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-center bg-white">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            
+            {Array.from({ length: Math.max(1, totalPages) }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`w-8 h-8 rounded text-sm font-medium transition-colors ${currentPage === i + 1 ? 'bg-teal-600 text-white' : 'text-gray-700 hover:bg-gray-100'}`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages || totalPages === 0}
+              className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
         </div>
       </div>
       
